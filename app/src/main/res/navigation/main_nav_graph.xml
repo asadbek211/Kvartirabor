@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph2"
+    app:startDestination="@id/elonlarFragmentItem">
+    <fragment
+        android:id="@+id/elonlarFragmentItem"
+        android:name="com.bizmiz.kvartirabor.ui.elon.ElonlarFragment"
+        android:label="ElonlarFragment"
+        tools:layout="@layout/fragment_elonlar" />
+    <fragment
+        android:id="@+id/saralanganlarFragment"
+        android:name="com.bizmiz.kvartirabor.ui.favourite.SaralanganlarFragment"
+        android:label="SaralanganlarFragment"
+        tools:layout="@layout/fragment_saralanganlar" />
+    <fragment
+        android:id="@+id/elonBerishFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.ElonBerishFragment"
+        android:label="ElonBerishFragment" />
+    <fragment
+        android:id="@+id/profilFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.ProfilFragment"
+        android:label="ProfilFragment" />
+    <fragment
+        android:id="@+id/authRegFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.AuthRegFragment"
+        android:label="AuthRegFragment" />
+    <fragment
+        android:id="@+id/authUserFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.AuthUserFragment"
+        android:label="AuthUserFragment" />
+</navigation>

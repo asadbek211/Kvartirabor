@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.bizmiz.kvartirabor.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_SMSFragment"
+            app:destination="@id/SMSFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.bizmiz.kvartirabor.ui.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_nav_graph2"
+            app:destination="@id/nav_graph2" />
+    </fragment>
+    <fragment
+        android:id="@+id/SMSFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.SMSFragment"
+        android:label="fragment_s_m_s"
+        tools:layout="@layout/fragment_s_m_s" />
+    <include app:graph="@navigation/main_nav_graph" />
+</navigation>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">
+            50%
+        </item>
+    </style>
+    <style name="Widget.MaterialComponents.BottomNavigationView.ActiveItemTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="indicatorColor">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="Widget.MaterialComponents.BottomNavigationView.InActiveItemTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#12FA01</item>
+        <item name="indicatorColor">#03F8DE</item>
+    </style>
+</resources>
