@@ -1,14 +1,15 @@
 package com.bizmiz.kvartirabor.ui.auth
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import com.bizmiz.kvartirabor.ContainerActivity
+import com.bizmiz.kvartirabor.MainActivity
 import com.bizmiz.kvartirabor.R
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +25,7 @@ class SMSFragment : Fragment() {
     lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -57,7 +59,7 @@ class SMSFragment : Fragment() {
     private fun initiateotp() {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
             phonenumber,  // Phone number to verify
-            60,  // Timeout duration
+            5,  // Timeout duration
             TimeUnit.SECONDS,  // Unit of timeout
             requireActivity(),  // Activity (for callback binding)
             object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -78,9 +80,6 @@ class SMSFragment : Fragment() {
         mAuth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    val navController: NavController =
-                        Navigation.findNavController(requireActivity(), R.id.appFragmentContener)
-                    navController.navigate(R.id.mainFragment)
                     requireActivity().finish()
                 } else {
                     Toast.makeText(

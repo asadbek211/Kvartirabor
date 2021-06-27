@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/elonlarFragmentItem"
+        android:id="@+id/elonlarFragment"
         android:icon="@drawable/ic_home"
         android:title="E'lonlar" />
     <item
@@ -14,7 +14,7 @@
         android:icon="@drawable/qoshish"
         android:title="E'lon berish" />
     <item
-        android:id="@+id/profilFragment"
+        android:id="@+id/profil"
         android:icon="@drawable/profil"
         android:title="Profilim" />
 
