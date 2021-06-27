@@ -29,9 +29,8 @@ class LoginFragment : Fragment() {
             val number = telefon_kodi.text.toString()+tel_nomer.text.toString()
             val bundle = bundleOf(
                 "number" to number )
-            val smsFragment = SMSFragment()
-            smsFragment.arguments = bundle
-           requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frameContainer,smsFragment).commit()
+            val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)
+            navController.navigate(R.id.action_loginFragment_to_SMSFragment,bundle)
 
         }
     }

@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.bizmiz.kvartirabor.ContainerActivity
 import com.bizmiz.kvartirabor.MainActivity
 import com.bizmiz.kvartirabor.R
@@ -59,7 +61,7 @@ class SMSFragment : Fragment() {
     private fun initiateotp() {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
             phonenumber,  // Phone number to verify
-            5,  // Timeout duration
+            0,  // Timeout duration
             TimeUnit.SECONDS,  // Unit of timeout
             requireActivity(),  // Activity (for callback binding)
             object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -80,7 +82,8 @@ class SMSFragment : Fragment() {
         mAuth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    requireActivity().finish()
+                    val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)
+                    navController.navigate(R.id.action_SMSFragment_to_elonlarFragment)
                 } else {
                     Toast.makeText(
                         requireContext(),

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph2"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/elonlarFragment">
     <fragment
         android:id="@+id/elonlarFragment"
@@ -15,14 +15,25 @@
         android:label="SaralanganlarFragment"
         tools:layout="@layout/fragment_saralanganlar" />
     <fragment
+        tools:layout="@layout/fragment_elon_berish"
         android:id="@+id/elonBerishFragment"
         android:name="com.bizmiz.kvartirabor.ui.elon.ElonBerishFragment"
-        android:label="ElonBerishFragment" />
+        android:label="ElonBerishFragment" >
+        <action
+            android:id="@+id/action_elonBerishFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
     <fragment
+        tools:layout="@layout/fragment_auth_reg"
         android:id="@+id/authRegFragment"
         android:name="com.bizmiz.kvartirabor.ui.auth.AuthRegFragment"
-        android:label="AuthRegFragment" />
+        android:label="AuthRegFragment" >
+        <action
+            android:id="@+id/action_authRegFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
+        tools:layout="@layout/fragment_auth_user"
         android:id="@+id/authUserFragment"
         android:name="com.bizmiz.kvartirabor.ui.auth.AuthUserFragment"
         android:label="AuthUserFragment" >
@@ -32,7 +43,33 @@
             app:popUpTo="@id/authRegFragment"
             app:popUpToInclusive="true" />
     </fragment>
-
+    <fragment
+        tools:layout="@layout/fragment_login"
+        android:id="@+id/loginFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_SMSFragment"
+            app:destination="@id/SMSFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_map"
+        android:id="@+id/mapFragment"
+        android:name="com.bizmiz.kvartirabor.ui.map.MapFragment"
+        android:label="MapFragment" >
+        <action
+            android:id="@+id/action_mapFragment_to_elonBerishFragment"
+            app:destination="@id/elonBerishFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_s_m_s"
+        android:id="@+id/SMSFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.SMSFragment"
+        android:label="SMSFragment" >
+        <action
+            android:id="@+id/action_SMSFragment_to_elonlarFragment"
+            app:destination="@id/elonlarFragment" />
+    </fragment>
 
 
 </navigation>
