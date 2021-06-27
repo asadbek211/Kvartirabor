@@ -1,22 +1,23 @@
 package com.bizmiz.kvartirabor.ui.map
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.location.Geocoder
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.bizmiz.kvartirabor.MainActivity
 import com.bizmiz.kvartirabor.R
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_map.*
+import java.util.*
+
 
 class MapFragment : Fragment() {
     private lateinit var mapFragment: SupportMapFragment
@@ -26,6 +27,7 @@ class MapFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
@@ -40,6 +42,8 @@ class MapFragment : Fragment() {
             mMap = googleMap
             mMap.isMyLocationEnabled = true
             mMap.uiSettings.isMyLocationButtonEnabled = true
+            mMap.uiSettings.isZoomControlsEnabled
+            mMap.uiSettings.isMapToolbarEnabled
             mMap.setOnMapClickListener {
                 val markerOptions = MarkerOptions()
                 markerOptions.position(it)
@@ -52,17 +56,16 @@ class MapFragment : Fragment() {
                 mMap.clear()
                 mMap.addMarker(markerOptions)
 
+                 mMap.snapshot { bitmap ->
+
+                    avatar.setImageBitmap(bitmap)
+                }
             }
-            val markerOptions = MarkerOptions()
-            val pos1 = prefs.getFloat("position1",46.3434f)
-            val pos2 = prefs.getFloat("position2",46.3434f)
-            markerOptions.position(LatLng(pos1.toDouble(), pos2.toDouble()))
-            mMap.addMarker(markerOptions)
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(pos1.toDouble(), pos2.toDouble()), 15f))
+
         }
         MapLoc.setOnClickListener {
             val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)
-            navController.navigate(R.id.elonBerishFragment)
+            navController.popBackStack()
         }
     }
 }

@@ -22,4 +22,11 @@
         android:layout_marginEnd="10dp"
         android:layout_width="match_parent"
         android:layout_height="55dp"/>
+
+    <ImageView
+        android:scaleType="center"
+        android:id="@+id/avatar"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+         />
 </RelativeLayout>

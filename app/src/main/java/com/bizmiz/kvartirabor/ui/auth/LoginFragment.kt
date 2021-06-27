@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.bizmiz.kvartirabor.MainActivity
 import com.bizmiz.kvartirabor.R
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
@@ -28,7 +29,7 @@ class LoginFragment : Fragment() {
             val number = telefon_kodi.text.toString()+tel_nomer.text.toString()
             val bundle = bundleOf(
                 "number" to number )
-            val navController: NavController = Navigation.findNavController(requireActivity(),R.id.appFragmentContener)
+            val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)
             navController.navigate(R.id.action_loginFragment_to_SMSFragment,bundle)
 
         }

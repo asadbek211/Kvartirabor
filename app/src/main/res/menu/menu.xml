@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/elonlarFragmentItem"
+        android:id="@+id/elonlarFragment"
         android:icon="@drawable/ic_home"
         android:title="E'lonlar" />
     <item
@@ -10,9 +10,9 @@
         android:icon="@drawable/saralangan"
         android:title="Saralanganlar" />
     <item
-        android:id="@+id/elonBerishFragment"
-        android:icon="@drawable/qoshish"
-        android:title="E'lon berish" />
+        android:id="@+id/meningElonlarimFragment"
+        android:icon="@drawable/ic_elonlarim"
+        android:title="E'lonlarim" />
     <item
         android:id="@+id/profilFragment"
         android:icon="@drawable/profil"

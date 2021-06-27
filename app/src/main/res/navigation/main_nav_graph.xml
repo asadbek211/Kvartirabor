@@ -2,10 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph2"
-    app:startDestination="@id/elonlarFragmentItem">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/elonlarFragment">
     <fragment
-        android:id="@+id/elonlarFragmentItem"
+        android:id="@+id/elonlarFragment"
         android:name="com.bizmiz.kvartirabor.ui.elon.ElonlarFragment"
         android:label="ElonlarFragment"
         tools:layout="@layout/fragment_elonlar" />
@@ -15,19 +15,58 @@
         android:label="SaralanganlarFragment"
         tools:layout="@layout/fragment_saralanganlar" />
     <fragment
+        tools:layout="@layout/fragment_elon_berish"
         android:id="@+id/elonBerishFragment"
         android:name="com.bizmiz.kvartirabor.ui.elon.ElonBerishFragment"
-        android:label="ElonBerishFragment" />
+        android:label="ElonBerishFragment" >
+        <action
+            android:id="@+id/action_elonBerishFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
     <fragment
+        tools:layout="@layout/fragment_login"
+        android:id="@+id/loginFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_SMSFragment"
+            app:destination="@id/SMSFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_map"
+        android:id="@+id/mapFragment"
+        android:name="com.bizmiz.kvartirabor.ui.map.MapFragment"
+        android:label="MapFragment" >
+        <action
+            android:id="@+id/action_mapFragment_to_elonBerishFragment"
+            app:destination="@id/elonBerishFragment"
+            app:popUpTo="@id/elonBerishFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_s_m_s"
+        android:id="@+id/SMSFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.SMSFragment"
+        android:label="SMSFragment" >
+        <action
+            android:id="@+id/action_SMSFragment_to_elonlarFragment"
+            app:destination="@id/elonlarFragment"
+            app:popUpTo="@id/elonlarFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_profil"
         android:id="@+id/profilFragment"
         android:name="com.bizmiz.kvartirabor.ui.auth.ProfilFragment"
-        android:label="ProfilFragment" />
+        android:label="ProfilFragment" >
+        <action
+            android:id="@+id/action_profilFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/authRegFragment"
-        android:name="com.bizmiz.kvartirabor.ui.auth.AuthRegFragment"
-        android:label="AuthRegFragment" />
-    <fragment
-        android:id="@+id/authUserFragment"
-        android:name="com.bizmiz.kvartirabor.ui.auth.AuthUserFragment"
-        android:label="AuthUserFragment" />
+        tools:layout="@layout/fragment_mening_elonlarim"
+        android:id="@+id/meningElonlarimFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.MeningElonlarimFragment"
+        android:label="MeningElonlarimFragment" />
+
+
 </navigation>
