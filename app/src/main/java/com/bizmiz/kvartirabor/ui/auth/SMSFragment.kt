@@ -1,7 +1,6 @@
 package com.bizmiz.kvartirabor.ui.auth
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.bizmiz.kvartirabor.ContainerActivity
 import com.bizmiz.kvartirabor.MainActivity
 import com.bizmiz.kvartirabor.R
 import com.google.firebase.FirebaseException
@@ -84,6 +82,7 @@ class SMSFragment : Fragment() {
                 if (task.isSuccessful) {
                     val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)
                     navController.navigate(R.id.action_SMSFragment_to_elonlarFragment)
+                    (activity as MainActivity).visibility(false)
                 } else {
                     Toast.makeText(
                         requireContext(),

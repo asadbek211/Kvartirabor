@@ -10,11 +10,11 @@
         android:icon="@drawable/saralangan"
         android:title="Saralanganlar" />
     <item
-        android:id="@+id/elonBerishFragment"
-        android:icon="@drawable/qoshish"
-        android:title="E'lon berish" />
+        android:id="@+id/meningElonlarimFragment"
+        android:icon="@drawable/ic_elonlarim"
+        android:title="E'lonlarim" />
     <item
-        android:id="@+id/profil"
+        android:id="@+id/profilFragment"
         android:icon="@drawable/profil"
         android:title="Profilim" />
 

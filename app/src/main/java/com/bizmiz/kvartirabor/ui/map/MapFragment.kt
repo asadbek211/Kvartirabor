@@ -64,7 +64,8 @@ class MapFragment : Fragment() {
 
         }
         MapLoc.setOnClickListener {
-            requireActivity().finish()
+            val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)
+            navController.popBackStack()
         }
     }
 }

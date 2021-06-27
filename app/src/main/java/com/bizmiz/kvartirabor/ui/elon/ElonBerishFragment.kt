@@ -20,7 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.bizmiz.kvartirabor.ContainerActivity
+import com.bizmiz.kvartirabor.MainActivity
 import com.bizmiz.kvartirabor.R
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
@@ -44,6 +44,10 @@ class ElonBerishFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        exit.setOnClickListener {
+            val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)
+            navController.popBackStack()
+        }
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
         val prefs: SharedPreferences =
@@ -120,18 +124,15 @@ class ElonBerishFragment : Fragment() {
         ijaradagilarSoni.adapter = adapter(ijarachiSoni)
         btn_map.setOnClickListener {
             getLastLocation()
-            val intent = Intent(requireContext(), ContainerActivity::class.java)
-            intent.putExtra("num",2)
-            startActivity(intent)
-
+            val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)
+            navController.navigate(R.id.action_elonBerishFragment_to_mapFragment)
 
         }
         elonJoylash.setOnClickListener {
             val fayl = rdbKopQavat.isChecked
             val fayl2 = rdbYerJoy.isChecked
             Toast.makeText(
-                requireContext(), "Ko'p qavatli: $fayl\nYer joy: $fayl2\n" +
-                        "Manzil: ${et_manzil.text}\nNomer: ${et_tel.text}", Toast.LENGTH_SHORT
+                requireContext(), "Buning ustida hali ishlanyabdi", Toast.LENGTH_SHORT
             ).show()
         }
 

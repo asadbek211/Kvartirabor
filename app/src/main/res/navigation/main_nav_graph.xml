@@ -24,26 +24,6 @@
             app:destination="@id/mapFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_auth_reg"
-        android:id="@+id/authRegFragment"
-        android:name="com.bizmiz.kvartirabor.ui.auth.AuthRegFragment"
-        android:label="AuthRegFragment" >
-        <action
-            android:id="@+id/action_authRegFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-    <fragment
-        tools:layout="@layout/fragment_auth_user"
-        android:id="@+id/authUserFragment"
-        android:name="com.bizmiz.kvartirabor.ui.auth.AuthUserFragment"
-        android:label="AuthUserFragment" >
-        <action
-            android:id="@+id/action_authUserFragment_to_authRegFragment"
-            app:destination="@id/authRegFragment"
-            app:popUpTo="@id/authRegFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
         tools:layout="@layout/fragment_login"
         android:id="@+id/loginFragment"
         android:name="com.bizmiz.kvartirabor.ui.auth.LoginFragment"
@@ -59,7 +39,9 @@
         android:label="MapFragment" >
         <action
             android:id="@+id/action_mapFragment_to_elonBerishFragment"
-            app:destination="@id/elonBerishFragment" />
+            app:destination="@id/elonBerishFragment"
+            app:popUpTo="@id/elonBerishFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_s_m_s"
@@ -68,8 +50,23 @@
         android:label="SMSFragment" >
         <action
             android:id="@+id/action_SMSFragment_to_elonlarFragment"
-            app:destination="@id/elonlarFragment" />
+            app:destination="@id/elonlarFragment"
+            app:popUpTo="@id/elonlarFragment" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_profil"
+        android:id="@+id/profilFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.ProfilFragment"
+        android:label="ProfilFragment" >
+        <action
+            android:id="@+id/action_profilFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_mening_elonlarim"
+        android:id="@+id/meningElonlarimFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.MeningElonlarimFragment"
+        android:label="MeningElonlarimFragment" />
 
 
 </navigation>

@@ -19,34 +19,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navControl: NavController =
             Navigation.findNavController(this, R.id.mainFragmentContener)
-        bottom_navigation.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.elonlarFragment -> {
-                    navControl.navigate(R.id.elonlarFragment)
-                }
-                R.id.saralanganlarFragment -> {
-                    navControl.navigate(R.id.saralanganlarFragment)
-                }
-                R.id.elonBerishFragment -> {
-                    navControl.navigate(R.id.elonBerishFragment)
-                }
-                R.id.profil -> {
-                    val mAuth = FirebaseAuth.getInstance()
-                    if (mAuth.currentUser != null) {
-                        navControl.navigate(R.id.authUserFragment)
-                    } else {
-                        val intent = Intent(this,ContainerActivity::class.java)
-                        intent.putExtra("num",1)
-                        startActivity(intent)
-                        bottom_navigation.menu.findItem(R.id.profil).isCheckable = false
-
-                    }}
-            }
-            return@setOnNavigationItemSelectedListener true
-        }
-
+          bottom_navigation.setupWithNavController(navControl)
+        visibility(false)
     }
-    override fun onBackPressed() {
-            finish()
-
-    }}
+    fun visibility(boolean: Boolean){
+        if (boolean){
+            bottom_navigation.visibility = View.GONE
+        }else{
+            bottom_navigation.visibility = View.VISIBLE
+        }
+    }
+}
