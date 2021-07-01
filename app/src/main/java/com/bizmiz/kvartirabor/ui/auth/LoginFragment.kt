@@ -11,11 +11,11 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bizmiz.kvartirabor.MainActivity
 import com.bizmiz.kvartirabor.R
+import com.hbb20.CountryCodePicker
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,7 +26,9 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.next.setOnClickListener {
-            val number = telefon_kodi.text.toString()+tel_nomer.text.toString()
+            countryCode.registerCarrierNumberEditText(tel_nomer)
+            val number = countryCode.fullNumberWithPlus
+            Toast.makeText(requireContext(), number.toString(), Toast.LENGTH_SHORT).show()
             val bundle = bundleOf(
                 "number" to number )
             val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)

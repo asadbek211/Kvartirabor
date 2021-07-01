@@ -12,21 +12,22 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.RadioButton
-import android.widget.SpinnerAdapter
-import android.widget.Toast
+import android.widget.*
 import androidx.core.app.ActivityCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.bizmiz.kvartirabor.MainActivity
 import com.bizmiz.kvartirabor.R
+import com.bizmiz.kvartirabor.checkIsEmpty
+import com.bizmiz.kvartirabor.showError
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_elon_berish.*
 
 class ElonBerishFragment : Fragment() {
+    private val db = FirebaseFirestore.getInstance()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private var qoshimcha = true
@@ -45,21 +46,22 @@ class ElonBerishFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         exit.setOnClickListener {
-            val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)
+            val navController: NavController =
+                Navigation.findNavController(requireActivity(), R.id.mainFragmentContener)
             navController.popBackStack()
         }
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
         val prefs: SharedPreferences =
             requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-        val pos1 = prefs.getFloat("position1", 46.3434f)
-        val pos2 = prefs.getFloat("position2", 46.3434f)
         if (mAuth.currentUser != null) {
             et_tel.setText(mAuth.currentUser?.phoneNumber)
         }
 
         qoshimchaMalumot.setOnClickListener {
+
             if (qoshimcha) {
+                Toast.makeText(requireContext(), "Kechirasiz bu bo'lim hali tayyor emas", Toast.LENGTH_SHORT).show()
                 AsosiyConsLayout.visibility = View.VISIBLE
                 qoshimcha = false
             } else {
@@ -124,16 +126,41 @@ class ElonBerishFragment : Fragment() {
         ijaradagilarSoni.adapter = adapter(ijarachiSoni)
         btn_map.setOnClickListener {
             getLastLocation()
-            val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)
-            navController.navigate(R.id.action_elonBerishFragment_to_mapFragment)
 
         }
         elonJoylash.setOnClickListener {
-            val fayl = rdbKopQavat.isChecked
-            val fayl2 = rdbYerJoy.isChecked
-            Toast.makeText(
-                requireContext(), "Buning ustida hali ishlanyabdi", Toast.LENGTH_SHORT
-            ).show()
+            if (validate()){
+                if (loading!=null){
+                    loading.visibility = View.VISIBLE
+                }
+                val fayl = rdbKopQavat.isChecked
+                val fayl2 = rdbYerJoy.isChecked
+                val map: MutableMap<String, Any?> = mutableMapOf()
+                map["uid"] = mAuth.currentUser?.uid.toString()
+                map["manzil"] = et_manzil.text.toString()
+                map["telefon_raqam"] = et_tel.text.toString()
+                map["narxi"] = etNarx.text.toString()
+                map["type"] = pulBirligi.selectedItem
+                map["latitude"] = prefs.getFloat("position1", 46.3434f)
+                map["longitude"] = prefs.getFloat("position2", 46.3434f)
+                db.collection("elonlar").document().set(map)
+                    .addOnSuccessListener {
+                        if (loading!=null){
+                            loading.visibility = View.VISIBLE
+                        }
+                        Toast.makeText(requireActivity(), "E'lon berildi", Toast.LENGTH_SHORT).show()
+                        val navController: NavController = Navigation.findNavController(
+                            requireActivity(),
+                            R.id.mainFragmentContener
+                        )
+                        navController.popBackStack()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT).show()
+                    }
+            }
+
+
         }
 
     }
@@ -160,6 +187,12 @@ class ElonBerishFragment : Fragment() {
                     val location: Location? = task.result
                     if (location == null) {
                         newLocationData()
+                    } else {
+                        val navController: NavController = Navigation.findNavController(
+                            requireActivity(),
+                            R.id.mainFragmentContener
+                        )
+                        navController.navigate(R.id.action_elonBerishFragment_to_mapFragment)
                     }
                 }
             } else {
@@ -225,4 +258,23 @@ class ElonBerishFragment : Fragment() {
         requireContext().getLocationManager().isProviderEnabled(LocationManager.GPS_PROVIDER)
 
     fun Context.getLocationManager() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+    private fun validate(): Boolean {
+        return when {
+            et_manzil.checkIsEmpty() -> {
+                et_manzil.showError("Field Required")
+                false
+            }
+            et_tel.checkIsEmpty() -> {
+                et_tel.showError("Field Required")
+                false
+            }
+            etNarx.checkIsEmpty() -> {
+                etNarx.showError("Field Required")
+                false
+            }
+            else -> true
+
+        }
+    }
 }

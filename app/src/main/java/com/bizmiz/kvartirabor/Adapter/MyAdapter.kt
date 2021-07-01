@@ -3,20 +3,27 @@ package com.bizmiz.kvartirabor.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bizmiz.kvartirabor.R
-import com.bizmiz.kvartirabor.data.data
+import com.bizmiz.kvartirabor.data.ElonData
 import kotlinx.android.synthetic.main.elonlar_item.view.*
 
 class MyAdapter:RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     inner class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
-        fun funksiya(data: data){
+        fun funksiya(data: ElonData){
             itemView.txt_manzil.text = data.manzil
+            itemView.txt_nomer.text = data.telefon_raqam
             itemView.txt_narxi.text = data.narxi
-            itemView.txt_nomer.text = data.nomer
+            itemView.txt_type.text = data.type
+            itemView.txt_lat.text = data.latitude.toString()
+            itemView.txt_long.text = data.longitude.toString()
+            itemView.setOnClickListener {
+
+            }
         }
     }
-     var models:ArrayList<data> = arrayListOf()
+     var models:MutableList<ElonData> = mutableListOf()
      set(value) {
          field = value
          notifyDataSetChanged()

@@ -7,7 +7,6 @@
     android:background="#0230BC"
     >
 
-
     <ImageView
         android:id="@+id/logo1"
         android:layout_width="wrap_content"
@@ -43,13 +42,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo1" />
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/shape2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,52 +58,51 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.51">
 
-        <EditText
-            android:paddingStart="10dp"
-            android:id="@+id/tel_nomer"
-            android:layout_width="143dp"
+        <LinearLayout
+            android:id="@+id/LinerLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Raqam kiriting"
-            android:inputType="number"
-            android:maxLength="9"
-            android:textColor="@color/white"
-            android:textColorHint="#AAA7A7"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/telefon_kodi"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.233" />
-
-        <EditText
-            android:id="@+id/telefon_kodi"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:enabled="false"
-            android:gravity="start"
-            android:inputType="phone"
-            android:maxLength="16"
-            android:text="+998"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.205"
+            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.233" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/countryCode"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                app:ccpDialog_showCloseIcon="false"
+                app:ccp_contentColor="@color/white"
+                app:ccp_defaultNameCode="uz"
+                app:ccp_showArrow="false"
+                app:ccp_textSize="16dp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/tel_nomer"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:ems="10"
+                android:hint="Raqam kiriting"
+                android:inputType="number"
+                android:maxLength="13"
+                android:paddingStart="5dp"
+                android:textColor="@color/white"
+                android:textColorHint="#F8DAD9D9"
+                android:textSize="16dp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/next"
             android:layout_width="191dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/shape3"
             android:drawableEnd="@drawable/onga2"
             android:paddingEnd="5dp"
@@ -112,10 +111,10 @@
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tel_nomer"
+            app:layout_constraintTop_toBottomOf="@+id/LinerLayout"
             tools:ignore="RtlSymmetry" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

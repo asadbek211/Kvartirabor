@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/shape_bootom_nav"
+        android:background="#0FF3F3"
         app:itemTextAppearanceActive="@style/Widget.MaterialComponents.BottomNavigationView.ActiveItemTextAppearance"
         app:itemTextAppearanceInactive="@style/Widget.MaterialComponents.BottomNavigationView.InActiveItemTextAppearance"
         app:labelVisibilityMode="labeled"
