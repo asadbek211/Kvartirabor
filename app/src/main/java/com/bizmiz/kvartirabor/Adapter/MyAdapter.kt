@@ -19,7 +19,7 @@ class MyAdapter:RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
             itemView.txt_lat.text = data.latitude.toString()
             itemView.txt_long.text = data.longitude.toString()
             itemView.setOnClickListener {
-
+                Toast.makeText(itemView.context, "Buning ustida hali ishlanyabdi", Toast.LENGTH_SHORT).show()
             }
         }
     }

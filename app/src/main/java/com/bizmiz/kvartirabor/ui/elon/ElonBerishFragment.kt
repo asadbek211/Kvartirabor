@@ -1,32 +1,43 @@
 package com.bizmiz.kvartirabor.ui.elon
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.RadioButton
+import android.widget.SpinnerAdapter
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.bizmiz.kvartirabor.Adapter.ImageAdapter
 import com.bizmiz.kvartirabor.R
 import com.bizmiz.kvartirabor.checkIsEmpty
 import com.bizmiz.kvartirabor.showError
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_elon_berish.*
+import java.util.*
+import kotlin.collections.MutableMap
+import kotlin.collections.mutableMapOf
+import kotlin.collections.set
 
 class ElonBerishFragment : Fragment() {
+    private lateinit var adapter:ImageAdapter
     private val db = FirebaseFirestore.getInstance()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
@@ -45,6 +56,8 @@ class ElonBerishFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = ImageAdapter()
+        imageRecView.adapter = adapter
         exit.setOnClickListener {
             val navController: NavController =
                 Navigation.findNavController(requireActivity(), R.id.mainFragmentContener)
@@ -61,7 +74,11 @@ class ElonBerishFragment : Fragment() {
         qoshimchaMalumot.setOnClickListener {
 
             if (qoshimcha) {
-                Toast.makeText(requireContext(), "Kechirasiz bu bo'lim hali tayyor emas", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Kechirasiz bu bo'lim hali tayyor emas",
+                    Toast.LENGTH_SHORT
+                ).show()
                 AsosiyConsLayout.visibility = View.VISIBLE
                 qoshimcha = false
             } else {
@@ -128,14 +145,23 @@ class ElonBerishFragment : Fragment() {
             getLastLocation()
 
         }
+        ImageAdd.setOnClickListener {
+            adapter.models.clear()
+            picImageIntent()
+        }
+        rasmlar.setOnClickListener {
+            adapter.models.clear()
+            picImageIntent()
+        }
         elonJoylash.setOnClickListener {
-            if (validate()){
-                if (loading!=null){
+            if (validate()) {
+                if (loading != null) {
                     loading.visibility = View.VISIBLE
                 }
                 val fayl = rdbKopQavat.isChecked
                 val fayl2 = rdbYerJoy.isChecked
                 val map: MutableMap<String, Any?> = mutableMapOf()
+                map["id"] = UUID.randomUUID().toString()
                 map["uid"] = mAuth.currentUser?.uid.toString()
                 map["manzil"] = et_manzil.text.toString()
                 map["telefon_raqam"] = et_tel.text.toString()
@@ -143,12 +169,13 @@ class ElonBerishFragment : Fragment() {
                 map["type"] = pulBirligi.selectedItem
                 map["latitude"] = prefs.getFloat("position1", 46.3434f)
                 map["longitude"] = prefs.getFloat("position2", 46.3434f)
-                db.collection("elonlar").document().set(map)
+                db.collection("elonlar").document(map["id"].toString()).set(map)
                     .addOnSuccessListener {
-                        if (loading!=null){
+                        if (loading != null) {
                             loading.visibility = View.VISIBLE
                         }
-                        Toast.makeText(requireActivity(), "E'lon berildi", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), "E'lon berildi", Toast.LENGTH_SHORT)
+                            .show()
                         val navController: NavController = Navigation.findNavController(
                             requireActivity(),
                             R.id.mainFragmentContener
@@ -156,7 +183,16 @@ class ElonBerishFragment : Fragment() {
                         navController.popBackStack()
                     }
                     .addOnFailureListener { e ->
-                        Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                val storeRef = FirebaseStorage.getInstance().reference.child("images/rasm.jpg")
+                storeRef.putFile(adapter.models[0]!!)
+                    .addOnSuccessListener {
+                        Toast.makeText(requireActivity(), "Rasm Saqlandi", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
             }
 
@@ -257,7 +293,7 @@ class ElonBerishFragment : Fragment() {
     private fun Fragment.isGPSEnable(): Boolean =
         requireContext().getLocationManager().isProviderEnabled(LocationManager.GPS_PROVIDER)
 
-    fun Context.getLocationManager() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    private fun Context.getLocationManager() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
     private fun validate(): Boolean {
         return when {
@@ -275,6 +311,46 @@ class ElonBerishFragment : Fragment() {
             }
             else -> true
 
+        }
+    }
+    private fun picImageIntent(){
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true)
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent,"Select image(s)"),1)
+
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode==1){
+            if (resultCode== Activity.RESULT_OK){
+                if (data!!.clipData != null){
+                    val image: ArrayList<Uri?> = arrayListOf()
+                    val cout = data.clipData!!.itemCount
+                    for (i in 0 until cout ){
+                        val imageUrl = data.clipData!!.getItemAt(i).uri
+                        image.add(imageUrl)
+                    }
+                    adapter.models.clear()
+                    adapter.notifyDataSetChanged()
+                    adapter.models = image
+                    ImageAdd.visibility = View.GONE
+                    ImageLinear.visibility = View.VISIBLE
+                }
+                else{
+                    val image: ArrayList<Uri?> = arrayListOf()
+                    val imageUrl = data.data
+                    ImageAdd.visibility = View.GONE
+                    ImageLinear.visibility = View.VISIBLE
+                    image.add(imageUrl)
+                    adapter.models.clear()
+                    adapter.notifyDataSetChanged()
+                    adapter.models = image
+
+                }
+            }
         }
     }
 }
