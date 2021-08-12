@@ -28,7 +28,6 @@ class LoginFragment : Fragment() {
         view.next.setOnClickListener {
             countryCode.registerCarrierNumberEditText(tel_nomer)
             val number = countryCode.fullNumberWithPlus
-            Toast.makeText(requireContext(), number.toString(), Toast.LENGTH_SHORT).show()
             val bundle = bundleOf(
                 "number" to number )
             val navController: NavController = Navigation.findNavController(requireActivity(),R.id.mainFragmentContener)

@@ -45,6 +45,7 @@ class ElonlarFragment : Fragment() {
                    if (model!=null) list.add(model)
                }
                adapter.models = list
+               adapter.notifyDataSetChanged()
                if (loading!=null){
                loading.visibility = View.GONE}
            }

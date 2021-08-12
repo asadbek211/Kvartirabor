@@ -5,12 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,12 +33,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_elon_berish.*
+import java.io.ByteArrayOutputStream
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.MutableMap
 import kotlin.collections.mutableMapOf
 import kotlin.collections.set
 
 class ElonBerishFragment : Fragment() {
+    private   var imgUrl:ArrayList<String> = arrayListOf()
     private lateinit var adapter:ImageAdapter
     private val db = FirebaseFirestore.getInstance()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -154,46 +159,62 @@ class ElonBerishFragment : Fragment() {
             picImageIntent()
         }
         elonJoylash.setOnClickListener {
+           val  uuid = UUID.randomUUID().toString()
             if (validate()) {
                 if (loading != null) {
                     loading.visibility = View.VISIBLE
                 }
                 val fayl = rdbKopQavat.isChecked
                 val fayl2 = rdbYerJoy.isChecked
-                val map: MutableMap<String, Any?> = mutableMapOf()
-                map["id"] = UUID.randomUUID().toString()
-                map["uid"] = mAuth.currentUser?.uid.toString()
-                map["manzil"] = et_manzil.text.toString()
-                map["telefon_raqam"] = et_tel.text.toString()
-                map["narxi"] = etNarx.text.toString()
-                map["type"] = pulBirligi.selectedItem
-                map["latitude"] = prefs.getFloat("position1", 46.3434f)
-                map["longitude"] = prefs.getFloat("position2", 46.3434f)
-                db.collection("elonlar").document(map["id"].toString()).set(map)
-                    .addOnSuccessListener {
-                        if (loading != null) {
-                            loading.visibility = View.VISIBLE
+                for (i in 0 until adapter.models.size){
+                    val storeRef = FirebaseStorage.getInstance().reference.child("${uuid}/image$i")
+                    storeRef.putFile(adapter.models[i]!!)
+                        .addOnCompleteListener {
+                           if (it.isSuccessful){
+                               it.result.metadata?.reference?.downloadUrl?.addOnSuccessListener {uri->
+                                   imgUrl.add(uri.toString())
+                               }
+                           }
+
                         }
-                        Toast.makeText(requireActivity(), "E'lon berildi", Toast.LENGTH_SHORT)
-                            .show()
-                        val navController: NavController = Navigation.findNavController(
-                            requireActivity(),
-                            R.id.mainFragmentContener
-                        )
-                        navController.popBackStack()
-                    }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                val storeRef = FirebaseStorage.getInstance().reference.child("images/rasm.jpg")
-                storeRef.putFile(adapter.models[0]!!)
-                    .addOnSuccessListener {
-                        Toast.makeText(requireActivity(), "Rasm Saqlandi", Toast.LENGTH_SHORT).show()
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                    }
+                        .addOnFailureListener {
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        }
+
+                }
+                if (imgUrl.size == adapter.models.size || adapter.models.size ==0 ){
+                    Log.d("image",imgUrl.toString())
+                    val map: MutableMap<String, Any?> = mutableMapOf()
+                    map["id"] = uuid
+                    map["imageUrlList"] = imgUrl
+                    map["uid"] = mAuth.currentUser?.uid.toString()
+                    map["manzil"] = et_manzil.text.toString()
+                    map["telefon_raqam"] = et_tel.text.toString()
+                    map["narxi"] = etNarx.text.toString()
+                    map["type"] = pulBirligi.selectedItem
+                    map["latitude"] = prefs.getFloat("position1", 46.3434f)
+                    map["longitude"] = prefs.getFloat("position2", 46.3434f)
+                    db.collection("elonlar").document(map["id"].toString()).set(map)
+                        .addOnSuccessListener {
+                            if (loading != null) {
+                                loading.visibility = View.VISIBLE
+                            }
+
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    Toast.makeText(requireActivity(), "E'lon berildi", Toast.LENGTH_SHORT)
+                        .show()
+                    val navController: NavController = Navigation.findNavController(
+                        requireActivity(),
+                        R.id.mainFragmentContener
+                    )
+                    navController.popBackStack()
+                }
+
+
             }
 
 
