@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="#FAF9F9"
     android:layout_height="match_parent">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -48,17 +48,17 @@
         app:layout_constraintTop_toBottomOf="@+id/title1"
         app:layout_constraintVertical_bias="0.085" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:textAllCaps="false"
         android:id="@+id/kirish_ochish"
         android:layout_width="0dp"
-        android:layout_height="47dp"
+        android:layout_height="60dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/shape1"
         android:text="Kiring yoki profil oching"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,4 +104,50 @@
         app:layout_constraintTop_toBottomOf="@+id/sozlama"
         app:layout_constraintVertical_bias="0.109"
         tools:ignore="Deprecated" />
+    <RelativeLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7C050505"
+        android:visibility="gone">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/white"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:backgroundTintMode="src_atop"
+                    android:indeterminateTint="@color/black"
+                    android:indeterminateTintMode="src_atop" />
+
+                <TextView
+                    android:id="@+id/tv_progress_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:text="Loading..."
+                    android:textColor="@color/design_default_color_primary_dark"
+                    tools:ignore="MissingPrefix" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

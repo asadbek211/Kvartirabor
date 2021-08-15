@@ -2,57 +2,99 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimaryDark"
+    android:background="#FAF9F9"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
- <EditText
-     android:id="@+id/et_search"
+ <androidx.cardview.widget.CardView
+     android:id="@+id/etLiner"
      android:layout_width="0dp"
      android:layout_height="50dp"
-     android:layout_marginStart="30dp"
+     app:cardCornerRadius="5dp"
+     android:layout_marginStart="15dp"
      android:layout_marginTop="10dp"
-     android:layout_marginEnd="30dp"
-     android:background="@drawable/shape_search"
-     android:drawableEnd="@drawable/ic_baseline_search_24"
-     android:hint="Qidirish..."
-     android:paddingStart="20dp"
-     android:paddingEnd="10dp"
-     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintEnd_toStartOf="@+id/imgFilter"
      app:layout_constraintHorizontal_bias="0.0"
      app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toTopOf="parent">
+
+  <androidx.appcompat.widget.SearchView
+      android:id="@+id/et_search"
+      app:queryBackground="@color/transparent"
+      android:theme="@style/SearchViewStyle"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:iconifiedByDefault="false"
+      app:layout_constraintEnd_toStartOf="@+id/imgFilter"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:queryHint="qidirish..."
+      app:searchIcon="@drawable/ic_baseline_search_24" />
+ </androidx.cardview.widget.CardView>
+
+ <ImageView
+     android:id="@+id/imgFilter"
+     android:layout_width="50dp"
+     android:layout_height="50dp"
+     android:layout_marginTop="10dp"
+     android:layout_marginEnd="10dp"
+     android:padding="9dp"
+     android:rotation="90"
+     android:src="@drawable/ic_filter"
+     app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintTop_toTopOf="parent" />
 
- <androidx.recyclerview.widget.RecyclerView
-     android:id="@+id/recView"
+ <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+     android:id="@+id/swipeContainer"
      android:layout_width="0dp"
      android:layout_height="0dp"
-     android:layout_marginStart="20dp"
      android:layout_marginTop="20dp"
-     android:layout_marginEnd="20dp"
-     android:orientation="vertical"
-     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toBottomOf="@+id/et_search"
-     app:layout_constraintVertical_bias="0.0" />
+     app:layout_constraintTop_toBottomOf="@+id/etLiner">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/recView"
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       android:layout_marginStart="10dp"
+       android:layout_marginEnd="10dp"
+       android:orientation="vertical"
+       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.0" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+ </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
  <RelativeLayout
-     android:background="#7C050505"
      android:id="@+id/loading"
+     android:layout_width="0dp"
+     android:layout_height="0dp"
+     android:background="#7C050505"
      android:visibility="visible"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent">
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toTopOf="parent">
+
   <androidx.cardview.widget.CardView
-      android:layout_centerInParent="true"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
       android:layout_gravity="center"
       android:orientation="vertical"
       app:cardCornerRadius="10dp"
       app:cardElevation="5dp"
-      app:cardUseCompatPadding="true"
-      >
+      app:cardUseCompatPadding="true">
 
    <LinearLayout
        android:layout_width="wrap_content"

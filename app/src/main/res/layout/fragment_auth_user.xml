@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
-
+    android:background="#FAF9F9">
 
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -36,30 +35,56 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.021" />
 
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:padding="5dp"
-        android:drawableEnd="@drawable/fon12"
-        android:drawableStart="@drawable/fon11"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/kirish_ochish"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/shape1"
-        android:contentDescription="TODO"
-        android:scaleType="fitXY"
-        android:text="E'lon joylashtirish"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title1"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.06">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:src="@drawable/fon1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="E'lon joylashtirish"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView8"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:src="@drawable/fon2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
         android:id="@+id/raqam"
@@ -96,6 +121,7 @@
         app:layout_constraintStart_toStartOf="@+id/kirish_ochish"
         app:layout_constraintTop_toBottomOf="@+id/raqam"
         app:layout_constraintVertical_bias="0.163" />
+
     <EditText
         android:id="@+id/tema"
         android:layout_width="0dp"
@@ -132,22 +158,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tema"
         app:layout_constraintVertical_bias="0.307" />
+
     <RelativeLayout
-        android:background="#7C050505"
         android:id="@+id/loading"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#7C050505"
+        android:visibility="gone">
+
         <androidx.cardview.widget.CardView
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:orientation="vertical"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
-            app:cardUseCompatPadding="true"
-            >
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="wrap_content"

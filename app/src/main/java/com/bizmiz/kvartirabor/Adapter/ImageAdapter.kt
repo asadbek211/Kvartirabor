@@ -2,27 +2,29 @@ package com.bizmiz.kvartirabor.Adapter
 
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bizmiz.kvartirabor.R
+import com.bizmiz.kvartirabor.databinding.ImageItemBinding
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.image_item.view.*
 
-class ImageAdapter:RecyclerView.Adapter<ImageAdapter.Myholder>() {
-    inner class Myholder(itemView:View):RecyclerView.ViewHolder(itemView) {
-       fun populateModel(position: Int){
-           Glide.with(itemView).load(models[position]).into(itemView.image)
-       }
+class ImageAdapter : RecyclerView.Adapter<ImageAdapter.Myholder>() {
+    inner class Myholder(private val binding: ImageItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun populateModel(position: Int) {
+            Glide.with(itemView).load(models[position]).into(binding.image)
+        }
     }
-    var models:ArrayList<Uri?> = arrayListOf()
+
+    var models: ArrayList<Uri?> = arrayListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Myholder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.image_item,parent,false)
-        return Myholder(view)
+        val itemBinding =
+            ImageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return Myholder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: Myholder, position: Int) {

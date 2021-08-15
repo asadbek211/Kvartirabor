@@ -1,32 +1,37 @@
 package com.bizmiz.kvartirabor
 
-import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.contains
-import androidx.core.view.get
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
+import com.bizmiz.kvartirabor.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window.statusBarColor = ContextCompat.getColor(this,R.color.colorPrimaryDark)
         val navControl: NavController =
             Navigation.findNavController(this, R.id.mainFragmentContener)
-          bottom_navigation.setupWithNavController(navControl)
+       binding.btnNav.setupWithNavController(navControl)
         visibility(false)
     }
-    fun visibility(boolean: Boolean){
-        if (boolean){
-            bottom_navigation.visibility = View.GONE
-        }else{
-            bottom_navigation.visibility = View.VISIBLE
+
+    fun visibility(boolean: Boolean) {
+        if (boolean) {
+            binding.btnNav.visibility = View.GONE
+        } else {
+           binding.btnNav.visibility = View.VISIBLE
         }
     }
 }

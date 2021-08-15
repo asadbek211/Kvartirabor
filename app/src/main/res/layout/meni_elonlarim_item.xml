@@ -39,11 +39,12 @@
                 android:id="@+id/txtManzil"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:padding="10dp"
                 android:text="Nukus 21 mkr 1/8 dom"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/imgFavourite"
+                app:layout_constraintEnd_toStartOf="@+id/cardAdd"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image" />
@@ -99,16 +100,48 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imgFavourite"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/saralangan"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/cardDelete"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image" />
+                app:layout_constraintTop_toBottomOf="@+id/image">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_baseline_edit_note_24" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardEdit">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_baseline_delete_24" />
+            </com.google.android.material.card.MaterialCardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

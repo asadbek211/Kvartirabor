@@ -5,17 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.SpinnerAdapter
@@ -25,45 +21,38 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bizmiz.kvartirabor.Adapter.ImageAdapter
+import com.bizmiz.kvartirabor.MainActivity
 import com.bizmiz.kvartirabor.R
 import com.bizmiz.kvartirabor.checkIsEmpty
+import com.bizmiz.kvartirabor.databinding.FragmentElonBerishBinding
 import com.bizmiz.kvartirabor.showError
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.fragment_elon_berish.*
-import java.io.ByteArrayOutputStream
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.MutableMap
-import kotlin.collections.mutableMapOf
 import kotlin.collections.set
 
-class ElonBerishFragment : Fragment() {
-    private   var imgUrl:ArrayList<String> = arrayListOf()
-    private lateinit var adapter:ImageAdapter
+class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish) {
+    var check = true
+    private var imgUrl: ArrayList<String> = arrayListOf()
+    private lateinit var adapter: ImageAdapter
     private val db = FirebaseFirestore.getInstance()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private var qoshimcha = true
     private val mAuth = FirebaseAuth.getInstance()
-    private val pulBirlik: Array<String> = arrayOf("So'm", "$")
+    private val pulBirlik: Array<String> = arrayOf("so'm", "$")
     private val xonaSoni: Array<String> = arrayOf("1", "2", "3", "4", "5", "5+")
     private val ijarachiSoni: Array<String> = arrayOf("0", "1", "2", "3", "4", "5", "5+")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_elon_berish, container, false)
-    }
-
+    lateinit var binding: FragmentElonBerishBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).visibility(true)
+        binding = FragmentElonBerishBinding.bind(view)
         adapter = ImageAdapter()
-        imageRecView.adapter = adapter
-        exit.setOnClickListener {
+        binding.imageRecView.adapter = adapter
+        binding.exit.setOnClickListener {
             val navController: NavController =
                 Navigation.findNavController(requireActivity(), R.id.mainFragmentContener)
             navController.popBackStack()
@@ -73,10 +62,10 @@ class ElonBerishFragment : Fragment() {
         val prefs: SharedPreferences =
             requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         if (mAuth.currentUser != null) {
-            et_tel.setText(mAuth.currentUser?.phoneNumber)
+            binding.etTel.setText(mAuth.currentUser?.phoneNumber)
         }
 
-        qoshimchaMalumot.setOnClickListener {
+        binding.qoshimchaMalumot.setOnClickListener {
 
             if (qoshimcha) {
                 Toast.makeText(
@@ -84,97 +73,106 @@ class ElonBerishFragment : Fragment() {
                     "Kechirasiz bu bo'lim hali tayyor emas",
                     Toast.LENGTH_SHORT
                 ).show()
-                AsosiyConsLayout.visibility = View.VISIBLE
+                binding.AsosiyConsLayout.visibility = View.VISIBLE
                 qoshimcha = false
             } else {
-                AsosiyConsLayout.visibility = View.GONE
+                binding.AsosiyConsLayout.visibility = View.GONE
                 qoshimcha = true
             }
         }
-        rdbSotiladi.setOnClickListener {
-            radioButton(rdbIjaraBerish)
-            lay2.visibility = View.GONE
-            lay3.visibility = View.GONE
-            lay5.visibility = View.GONE
-            lay7.visibility = View.GONE
-            lay9.visibility = View.GONE
-            consa.visibility = View.GONE
-            textInputLayout6.visibility = View.VISIBLE
+        binding.rdbSotiladi.setOnClickListener {
+            radioButton(binding.rdbIjaraBerish)
+            binding.lay2.visibility = View.GONE
+            binding.lay3.visibility = View.GONE
+            binding.lay5.visibility = View.GONE
+            binding.lay7.visibility = View.GONE
+            binding.lay9.visibility = View.GONE
+            binding.consa.visibility = View.GONE
+            binding.textInputLayout6.visibility = View.VISIBLE
         }
-        rdbIjaraBerish.setOnClickListener {
-            radioButton(rdbSotiladi)
-            lay2.visibility = View.VISIBLE
-            lay3.visibility = View.VISIBLE
-            lay5.visibility = View.VISIBLE
-            lay7.visibility = View.VISIBLE
-            lay9.visibility = View.VISIBLE
-            consa.visibility = View.VISIBLE
-            textInputLayout6.visibility = View.GONE
+        binding.rdbIjaraBerish.setOnClickListener {
+            radioButton(binding.rdbSotiladi)
+            binding.lay2.visibility = View.VISIBLE
+            binding.lay3.visibility = View.VISIBLE
+            binding.lay5.visibility = View.VISIBLE
+            binding.lay7.visibility = View.VISIBLE
+            binding.lay9.visibility = View.VISIBLE
+            binding.consa.visibility = View.VISIBLE
+            binding.textInputLayout6.visibility = View.GONE
         }
-        rdbKopQavat.setOnClickListener {
-            radioButton(rdbYerJoy)
+        binding.rdbKopQavat.setOnClickListener {
+            radioButton(binding.rdbYerJoy)
         }
-        rdbYerJoy.setOnClickListener {
-            radioButton(rdbKopQavat)
+        binding.rdbYerJoy.setOnClickListener {
+            radioButton(binding.rdbKopQavat)
         }
-        rdbYakkaTolash.setOnClickListener {
-            radioButton(rdbUmumiyTolash)
+        binding.rdbYakkaTolash.setOnClickListener {
+            radioButton(binding.rdbUmumiyTolash)
         }
-        rdbUmumiyTolash.setOnClickListener {
-            radioButton(rdbYakkaTolash)
+        binding.rdbUmumiyTolash.setOnClickListener {
+            radioButton(binding.rdbYakkaTolash)
         }
 
-        rdbDoimiy.setOnClickListener {
-            radioButton1(rdbKelishimli, rdbKunlik)
+        binding.rdbDoimiy.setOnClickListener {
+            radioButton1(binding.rdbKelishimli, binding.rdbKunlik)
         }
-        rdbKelishimli.setOnClickListener {
-            radioButton1(rdbDoimiy, rdbKunlik)
+        binding.rdbKelishimli.setOnClickListener {
+            radioButton1(binding.rdbDoimiy, binding.rdbKunlik)
         }
-        rdbKunlik.setOnClickListener {
-            radioButton1(rdbDoimiy, rdbKelishimli)
+        binding.rdbKunlik.setOnClickListener {
+            radioButton1(binding.rdbDoimiy, binding.rdbKelishimli)
         }
-        rdbNarxIchida.setOnClickListener {
-            radioButton1(rdbNarxTashqari, rdbKelishiladi)
+        binding.rdbNarxIchida.setOnClickListener {
+            radioButton1(binding.rdbNarxTashqari, binding.rdbKelishiladi)
         }
-        rdbNarxTashqari.setOnClickListener {
-            radioButton1(rdbNarxIchida, rdbKelishiladi)
+        binding.rdbNarxTashqari.setOnClickListener {
+            radioButton1(binding.rdbNarxIchida, binding.rdbKelishiladi)
         }
-        rdbKelishiladi.setOnClickListener {
-            radioButton1(rdbNarxTashqari, rdbNarxIchida)
+        binding.rdbKelishiladi.setOnClickListener {
+            radioButton1(binding.rdbNarxTashqari, binding.rdbNarxIchida)
         }
-        pulBirligi.adapter = adapter(pulBirlik)
-        xonalarSoni.adapter = adapter(xonaSoni)
-        yangiIjarachilarSoni.adapter = adapter(xonaSoni)
-        ijaradagilarSoni.adapter = adapter(ijarachiSoni)
-        btn_map.setOnClickListener {
+        binding.pulBirligi.adapter = adapter(pulBirlik)
+        binding.xonalarSoni.adapter = adapter(xonaSoni)
+        binding.yangiIjarachilarSoni.adapter = adapter(xonaSoni)
+        binding.ijaradagilarSoni.adapter = adapter(ijarachiSoni)
+        binding.btnMap.setOnClickListener {
             getLastLocation()
 
         }
-        ImageAdd.setOnClickListener {
+        binding.ImageAdd.setOnClickListener {
             adapter.models.clear()
             picImageIntent()
         }
-        rasmlar.setOnClickListener {
+        binding.rasmlar.setOnClickListener {
             adapter.models.clear()
             picImageIntent()
         }
-        elonJoylash.setOnClickListener {
-           val  uuid = UUID.randomUUID().toString()
+        binding.elonJoylash.setOnClickListener {
+            val uuid = UUID.randomUUID().toString()
             if (validate()) {
-                if (loading != null) {
-                    loading.visibility = View.VISIBLE
+                if (binding.loading != null) {
+                    binding.loading.visibility = View.VISIBLE
                 }
-                val fayl = rdbKopQavat.isChecked
-                val fayl2 = rdbYerJoy.isChecked
-                for (i in 0 until adapter.models.size){
+                val fayl = binding.rdbKopQavat.isChecked
+                val fayl2 = binding.rdbYerJoy.isChecked
+
+                if (adapter.models.isNullOrEmpty()) {
+                    setData(imgUrl, uuid, prefs)
+                }
+                for (i in 0 until adapter.models.size) {
                     val storeRef = FirebaseStorage.getInstance().reference.child("${uuid}/image$i")
                     storeRef.putFile(adapter.models[i]!!)
                         .addOnCompleteListener {
-                           if (it.isSuccessful){
-                               it.result.metadata?.reference?.downloadUrl?.addOnSuccessListener {uri->
-                                   imgUrl.add(uri.toString())
-                               }
-                           }
+                            if (it.isSuccessful) {
+                                it.result.metadata?.reference?.downloadUrl?.addOnSuccessListener { uri ->
+                                    imgUrl.add(uri.toString())
+                                    //map
+                                    if (i == adapter.models.size - 1) {
+                                        setData(imgUrl, uuid, prefs)
+                                    }
+                                    //map
+                                }
+                            }
 
                         }
                         .addOnFailureListener {
@@ -182,45 +180,46 @@ class ElonBerishFragment : Fragment() {
                         }
 
                 }
-                if (imgUrl.size == adapter.models.size || adapter.models.size ==0 ){
-                    Log.d("image",imgUrl.toString())
-                    val map: MutableMap<String, Any?> = mutableMapOf()
-                    map["id"] = uuid
-                    map["imageUrlList"] = imgUrl
-                    map["uid"] = mAuth.currentUser?.uid.toString()
-                    map["manzil"] = et_manzil.text.toString()
-                    map["telefon_raqam"] = et_tel.text.toString()
-                    map["narxi"] = etNarx.text.toString()
-                    map["type"] = pulBirligi.selectedItem
-                    map["latitude"] = prefs.getFloat("position1", 46.3434f)
-                    map["longitude"] = prefs.getFloat("position2", 46.3434f)
-                    db.collection("elonlar").document(map["id"].toString()).set(map)
-                        .addOnSuccessListener {
-                            if (loading != null) {
-                                loading.visibility = View.VISIBLE
-                            }
-
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    Toast.makeText(requireActivity(), "E'lon berildi", Toast.LENGTH_SHORT)
-                        .show()
-                    val navController: NavController = Navigation.findNavController(
-                        requireActivity(),
-                        R.id.mainFragmentContener
-                    )
-                    navController.popBackStack()
-                }
-
-
             }
 
 
         }
 
     }
+
+    private fun setData(imgUrl: ArrayList<String>, uuid: String, prefs: SharedPreferences) {
+
+        val map: MutableMap<String, Any?> = mutableMapOf()
+        map["id"] = uuid
+        map["imageUrlList"] = imgUrl
+        map["uid"] = mAuth.currentUser?.uid.toString()
+        map["manzil"] = binding.etManzil.text.toString()
+        map["telefon_raqam"] = binding.etTel.text.toString()
+        map["narxi"] = binding.etNarx.text.toString()
+        map["createdDate"] = System.currentTimeMillis()
+        map["type"] = binding.pulBirligi.selectedItem
+        map["latitude"] = prefs.getFloat("position1", 46.3434f)
+        map["longitude"] = prefs.getFloat("position2", 46.3434f)
+        db.collection("elonlar").document(map["id"].toString()).set(map)
+            .addOnSuccessListener {
+                if (binding.loading != null) {
+                    binding.loading.visibility = View.VISIBLE
+                }
+
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        Toast.makeText(requireActivity(), "E'lon berildi", Toast.LENGTH_SHORT)
+            .show()
+        val navController: NavController = Navigation.findNavController(
+            requireActivity(),
+            R.id.mainFragmentContener
+        )
+        navController.popBackStack()
+    }
+
 
     private fun adapter(ItemList: Array<String>): SpinnerAdapter {
         val adapter = ArrayAdapter(requireActivity(), R.layout.spinner_item, ItemList)
@@ -314,57 +313,59 @@ class ElonBerishFragment : Fragment() {
     private fun Fragment.isGPSEnable(): Boolean =
         requireContext().getLocationManager().isProviderEnabled(LocationManager.GPS_PROVIDER)
 
-    private fun Context.getLocationManager() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    private fun Context.getLocationManager() =
+        getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
     private fun validate(): Boolean {
         return when {
-            et_manzil.checkIsEmpty() -> {
-                et_manzil.showError("Field Required")
+            binding.etManzil.checkIsEmpty() -> {
+                binding.etManzil.showError("Field Required")
                 false
             }
-            et_tel.checkIsEmpty() -> {
-                et_tel.showError("Field Required")
+            binding.etTel.checkIsEmpty() -> {
+                binding.etTel.showError("Field Required")
                 false
             }
-            etNarx.checkIsEmpty() -> {
-                etNarx.showError("Field Required")
+            binding.etNarx.checkIsEmpty() -> {
+                binding.etNarx.showError("Field Required")
                 false
             }
             else -> true
 
         }
     }
-    private fun picImageIntent(){
+
+    private fun picImageIntent() {
         val intent = Intent()
         intent.type = "image/*"
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true)
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent,"Select image(s)"),1)
+        startActivityForResult(Intent.createChooser(intent, "Select image(s)"), 1)
 
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode==1){
-            if (resultCode== Activity.RESULT_OK){
-                if (data!!.clipData != null){
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data!!.clipData != null) {
                     val image: ArrayList<Uri?> = arrayListOf()
                     val cout = data.clipData!!.itemCount
-                    for (i in 0 until cout ){
+                    for (i in 0 until cout) {
                         val imageUrl = data.clipData!!.getItemAt(i).uri
                         image.add(imageUrl)
                     }
                     adapter.models.clear()
                     adapter.notifyDataSetChanged()
                     adapter.models = image
-                    ImageAdd.visibility = View.GONE
-                    ImageLinear.visibility = View.VISIBLE
-                }
-                else{
+                    binding.ImageAdd.visibility = View.GONE
+                    binding.ImageLinear.visibility = View.VISIBLE
+                } else {
                     val image: ArrayList<Uri?> = arrayListOf()
                     val imageUrl = data.data
-                    ImageAdd.visibility = View.GONE
-                    ImageLinear.visibility = View.VISIBLE
+                    binding.ImageAdd.visibility = View.GONE
+                    binding.ImageLinear.visibility = View.VISIBLE
                     image.add(imageUrl)
                     adapter.models.clear()
                     adapter.notifyDataSetChanged()

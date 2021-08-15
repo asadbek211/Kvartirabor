@@ -5,22 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bizmiz.kvartirabor.MainActivity
 import com.bizmiz.kvartirabor.R
+import com.bizmiz.kvartirabor.databinding.FragmentMapBinding
+import com.bizmiz.kvartirabor.databinding.FragmentSaralanganlarBinding
 
-class SaralanganlarFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_saralanganlar, container, false)
-    }
+class SaralanganlarFragment : Fragment(R.layout.fragment_saralanganlar) {
+    lateinit var binding: FragmentSaralanganlarBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).visibility(false)
+        binding = FragmentSaralanganlarBinding.bind(view)
     }
 }

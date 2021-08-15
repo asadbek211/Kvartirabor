@@ -3,21 +3,60 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_search.xml" value="0.21614583333333334" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/cursor.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/drop_down.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/elon_logatip.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/elon_matn.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/elonberish.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_edit_note_24.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_navigate_next_24.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.21614583333333334" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_bulut.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_elonlarim.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_filter.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_home.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_kvartira_bor__2.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/image_add.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/local_phone.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/login_gradient.xml" value="0.15" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/login_shape.xml" value="0.21614583333333334" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/logoqism1.xml" value="0.22" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/onga.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/onga2.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/person.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/profil.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/qoshish.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/saralangan.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape1.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape2.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape3.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_bootom_nav.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_edittext.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_liner.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_number.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_search.xml" value="0.12" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_stroke.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_white.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/tema.xml" value="0.13651315789473684" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/elonlar_item.xml" value="0.18981481481481483" />
-        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_auth_reg.xml" value="0.2" />
-        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_auth_user.xml" value="0.2" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/elonlar_item.xml" value="0.14" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_auth_reg.xml" value="0.14" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_auth_user.xml" value="0.14" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_elon_berish.xml" value="0.2" />
-        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_elonlar.xml" value="0.2" />
-        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_elonlar.xml" value="0.14" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_login.xml" value="0.15" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_map.xml" value="0.2" />
-        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_mening_elonlarim.xml" value="0.2" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_mening_elonlarim.xml" value="0.12" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_profil.xml" value="0.2" />
-        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_s_m_s.xml" value="0.2" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_s_m_s.xml" value="0.14" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/fragment_saralanganlar.xml" value="0.2" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/image_item.xml" value="0.2" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/meni_elonlarim_item.xml" value="0.2" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/spinner_item.xml" value="0.2" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/menu/menu.xml" value="0.2" />
       </map>
     </option>
   </component>

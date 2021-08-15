@@ -30,7 +30,11 @@
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_SMSFragment"
-            app:destination="@id/SMSFragment" />
+            app:destination="@id/SMSFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_wait"
+            app:popEnterAnim="@anim/slide_wait"
+            app:popExitAnim="@anim/slide_right"/>
     </fragment>
     <fragment
         tools:layout="@layout/fragment_map"
@@ -60,7 +64,11 @@
         android:label="ProfilFragment" >
         <action
             android:id="@+id/action_profilFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_wait"
+            app:popEnterAnim="@anim/slide_wait"
+            app:popExitAnim="@anim/slide_right"/>
     </fragment>
     <fragment
         tools:layout="@layout/fragment_mening_elonlarim"
