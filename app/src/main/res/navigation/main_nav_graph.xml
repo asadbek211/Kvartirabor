@@ -6,7 +6,7 @@
     app:startDestination="@id/elonlarFragment">
     <fragment
         android:id="@+id/elonlarFragment"
-        android:name="com.bizmiz.kvartirabor.ui.elon.ElonlarFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.Elonlar.ElonlarFragment"
         android:label="ElonlarFragment"
         tools:layout="@layout/fragment_elonlar" />
     <fragment
@@ -17,7 +17,7 @@
     <fragment
         tools:layout="@layout/fragment_elon_berish"
         android:id="@+id/elonBerishFragment"
-        android:name="com.bizmiz.kvartirabor.ui.elon.ElonBerishFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.ElonBerish.ElonBerishFragment"
         android:label="ElonBerishFragment" >
         <action
             android:id="@+id/action_elonBerishFragment_to_mapFragment"
@@ -26,7 +26,7 @@
     <fragment
         tools:layout="@layout/fragment_login"
         android:id="@+id/loginFragment"
-        android:name="com.bizmiz.kvartirabor.ui.auth.LoginFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_SMSFragment"
@@ -50,7 +50,7 @@
     <fragment
         tools:layout="@layout/fragment_s_m_s"
         android:id="@+id/SMSFragment"
-        android:name="com.bizmiz.kvartirabor.ui.auth.SMSFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.smsOtp.SMSFragment"
         android:label="SMSFragment" >
         <action
             android:id="@+id/action_SMSFragment_to_elonlarFragment"
@@ -60,7 +60,7 @@
     <fragment
         tools:layout="@layout/fragment_profil"
         android:id="@+id/profilFragment"
-        android:name="com.bizmiz.kvartirabor.ui.auth.ProfilFragment"
+        android:name="com.bizmiz.kvartirabor.ui.auth.profil.ProfilFragment"
         android:label="ProfilFragment" >
         <action
             android:id="@+id/action_profilFragment_to_loginFragment"
@@ -73,7 +73,7 @@
     <fragment
         tools:layout="@layout/fragment_mening_elonlarim"
         android:id="@+id/meningElonlarimFragment"
-        android:name="com.bizmiz.kvartirabor.ui.elon.MeningElonlarimFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.MeniElonlarim.MeningElonlarimFragment"
         android:label="MeningElonlarimFragment" />
 
 

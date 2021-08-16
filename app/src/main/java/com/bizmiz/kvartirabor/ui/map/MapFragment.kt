@@ -8,7 +8,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.bizmiz.kvartirabor.MainActivity
+import com.bizmiz.kvartirabor.ui.MainActivity
 import com.bizmiz.kvartirabor.R
 import com.bizmiz.kvartirabor.databinding.FragmentMapBinding
 import com.google.android.gms.maps.GoogleMap
