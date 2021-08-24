@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import java.text.SimpleDateFormat
 
-class MeniElonlarimAdapter() :
+class MeniElonlarimAdapter :
     RecyclerView.Adapter<MeniElonlarimAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(private val binding: MeniElonlarimItemBinding) :
@@ -18,7 +18,7 @@ class MeniElonlarimAdapter() :
 
         fun funksiya(data: ElonlarimData, position: Int) {
             binding.apply {
-                txtManzil.text = data.manzil
+                txtSarlavha.text = data.sarlavha
                 txtNarxi.text = data.narxi
                 txtType.text = data.type
             }

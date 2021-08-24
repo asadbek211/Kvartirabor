@@ -8,7 +8,14 @@
         android:id="@+id/elonlarFragment"
         android:name="com.bizmiz.kvartirabor.ui.elon.Elonlar.ElonlarFragment"
         android:label="ElonlarFragment"
-        tools:layout="@layout/fragment_elonlar" />
+        tools:layout="@layout/fragment_elonlar" >
+        <action
+            android:id="@+id/action_elonlarFragment_to_elonFullFragment"
+            app:destination="@id/elonFullFragment" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/saralanganlarFragment"
         android:name="com.bizmiz.kvartirabor.ui.favourite.SaralanganlarFragment"
@@ -74,7 +81,16 @@
         tools:layout="@layout/fragment_mening_elonlarim"
         android:id="@+id/meningElonlarimFragment"
         android:name="com.bizmiz.kvartirabor.ui.elon.MeniElonlarim.MeningElonlarimFragment"
-        android:label="MeningElonlarimFragment" />
+        android:label="MeningElonlarimFragment" >
+        <action
+            android:id="@+id/action_meningElonlarimFragment_to_elonFullFragment"
+            app:destination="@id/elonFullFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/elonFullFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.ElonFull.ElonFullFragment"
+        android:label="fragment_elon_full"
+        tools:layout="@layout/fragment_elon_full" />
 
 
 </navigation>

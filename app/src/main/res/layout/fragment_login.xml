@@ -46,29 +46,26 @@
             app:ccpDialog_showCloseIcon="false"
             app:ccp_contentColor="@color/standart_rang"
             app:ccp_defaultNameCode="uz"
-            app:ccp_showArrow="false"
+            app:ccp_showArrow="true"
             app:ccp_showFlag="false"
             app:ccp_textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/etTelNumber"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="0.5"
+            app:layout_constraintHorizontal_weight="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <EditText
             android:id="@+id/etTelNumber"
+            android:theme="@style/editTextStyle"
             android:layout_width="0dp"
+            android:background="@color/transparent"
             android:layout_height="0dp"
             android:layout_gravity="center_vertical"
-            android:background="#00000000"
             android:hint="Raqam kiriting..."
             android:inputType="number"
-            android:maxLength="13"
-            android:paddingEnd="10dp"
             android:textColor="@color/standart_rang"
-            android:textColorHint="#F8757474"
-            android:textCursorDrawable="@color/standart_rang"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,30 +74,22 @@
             app:layout_constraintStart_toEndOf="@+id/countryCode"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
         <TextView
             android:id="@+id/btnNext"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:background="@color/colorAccent"
+            android:background="@drawable/sms_shape"
             android:gravity="center"
             android:text="Keyingi"
             android:textColor="#FFFF"
             android:textSize="17dp"
             android:textStyle="bold"
-            tools:ignore="TextContrastCheck" />
-    </androidx.cardview.widget.CardView>
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
     <ImageView
         android:id="@+id/logo2"
         android:layout_width="wrap_content"

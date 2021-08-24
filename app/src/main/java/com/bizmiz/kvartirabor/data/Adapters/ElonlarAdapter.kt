@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bizmiz.kvartirabor.data.model.ElonData
 import com.bizmiz.kvartirabor.databinding.ElonlarItemBinding
@@ -27,11 +26,12 @@ class ElonlarAdapter(var models: ArrayList<ElonData>, var filterType: Boolean) :
     inner class MyViewHolder(private val binding: ElonlarItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun funksiya(data: ElonData) {
+        fun funksiya(data: ElonData, position: Int) {
             binding.apply {
-                txtManzil.text = data.manzil
+                txtSarlavha.text = data.sarlavha
                 txtNarxi.text = data.narxi
                 txtType.text = data.type
+
             }
             if (data.imageUrlList.isNotEmpty()) {
                 val options: RequestOptions = RequestOptions()
@@ -57,13 +57,18 @@ class ElonlarAdapter(var models: ArrayList<ElonData>, var filterType: Boolean) :
 
 
             binding.layTouch.setOnClickListener {
-                Toast.makeText(
-                    itemView.context,
-                    "Buning ustida hali ishlanyabdi",
-                    Toast.LENGTH_SHORT
-                ).show()
+               onClick.invoke(position,data)
+
             }
         }
+    }
+    var onClick:(position:Int,data:ElonData)->Unit = {position: Int, data: ElonData ->  }
+    fun setOnClickListener(onClick:(position:Int,data:ElonData)->Unit){
+        this.onClick = onClick
+    }
+    var dataElon:(data:ElonData)->Unit = {}
+    fun getData(data:(data:ElonData)->Unit){
+        this.dataElon = data
     }
 
     @ExperimentalStdlibApi
@@ -77,7 +82,7 @@ class ElonlarAdapter(var models: ArrayList<ElonData>, var filterType: Boolean) :
                     val resultList = ArrayList<ElonData>()
                     for (row in models) {
                         if (filterType) {
-                            if (row.manzil.lowercase(Locale.ROOT)
+                            if (row.sarlavha.lowercase(Locale.ROOT)
                                     .contains(charSearch.lowercase(Locale.ROOT))
                             ) {
                                 resultList.add(row)
@@ -113,7 +118,7 @@ class ElonlarAdapter(var models: ArrayList<ElonData>, var filterType: Boolean) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.funksiya(filterList[position])
+        holder.funksiya(filterList[position],position)
     }
 
     override fun getItemCount(): Int = filterList.size

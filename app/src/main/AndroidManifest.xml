@@ -18,8 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kvartirabor">
-        <activity android:name=".ui.SplashScreen.SplashScreen" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.SplashScreen.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

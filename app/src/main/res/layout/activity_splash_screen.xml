@@ -3,16 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/splashColor"
     android:layout_height="match_parent"
     tools:context=".ui.SplashScreen.SplashScreen">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/splashTexnoPOS"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        app:lottie_autoPlay="false"
-        app:lottie_loop="false"
-        app:lottie_fileName="lotlleanim.json" />
+    <ImageView
+        android:id="@+id/logo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logoqism1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/logo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_kvartira_bor__2"
+        app:layout_constraintBottom_toBottomOf="@+id/logo1"
+        app:layout_constraintEnd_toEndOf="@+id/logo1"
+        app:layout_constraintHorizontal_bias="0.645"
+        app:layout_constraintStart_toStartOf="@+id/logo1"
+        app:layout_constraintTop_toTopOf="@+id/logo1"
+        app:layout_constraintVertical_bias="0.532" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

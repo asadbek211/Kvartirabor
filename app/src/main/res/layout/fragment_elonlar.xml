@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FAF9F9"
+    android:background="#F6F5F5"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,9 +19,10 @@
      app:layout_constraintTop_toTopOf="parent">
 
   <androidx.appcompat.widget.SearchView
+      android:background="#8A8989"
       android:id="@+id/et_search"
       app:queryBackground="@color/transparent"
-      android:theme="@style/SearchViewStyle"
+      android:theme="@style/editTextStyle"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:iconifiedByDefault="false"
@@ -49,30 +50,87 @@
      android:id="@+id/swipeContainer"
      android:layout_width="0dp"
      android:layout_height="0dp"
-     android:layout_marginTop="20dp"
+     android:layout_marginTop="15dp"
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
      app:layout_constraintTop_toBottomOf="@+id/etLiner">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
+  <androidx.core.widget.NestedScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/recView"
-       android:layout_width="0dp"
-       android:layout_height="0dp"
-       android:layout_marginStart="10dp"
-       android:layout_marginEnd="10dp"
-       android:orientation="vertical"
-       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintVertical_bias="0.0" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bolimlar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+     <TextView
+         android:id="@+id/bolimTitle"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="20dp"
+         android:layout_marginTop="20dp"
+         android:text="Bo'limlar"
+         android:textColor="@color/standart_rang"
+         android:textSize="20dp"
+         android:textStyle="bold"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.0"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+
+     <ImageView
+         android:id="@+id/imageView9"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="15dp"
+         android:layout_marginEnd="20dp"
+         android:src="@drawable/ic_line"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="@+id/bolimTitle"
+         app:layout_constraintTop_toBottomOf="@+id/bolimTitle" />
+
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/rvBolim"
+         android:layout_width="0dp"
+         android:layout_height="160dp"
+         android:layout_marginStart="20dp"
+         android:layout_marginTop="10dp"
+         android:layout_marginEnd="20dp"
+         android:layout_marginBottom="10dp"
+         android:orientation="horizontal"
+         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/imageView9"
+         app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bolimlar"
+        app:layout_constraintVertical_bias="0.0" />
+   </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.core.widget.NestedScrollView>
  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
  <RelativeLayout

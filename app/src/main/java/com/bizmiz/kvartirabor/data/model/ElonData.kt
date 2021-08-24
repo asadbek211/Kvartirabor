@@ -4,6 +4,7 @@ data class ElonData(
      val id:String="",
      val uid:String="",
      val imageUrlList:ArrayList<String> = arrayListOf(),
+     val sarlavha:String="",
      val manzil:String="",
      val createdDate: Long = 0,
      val telefon_raqam:String="",

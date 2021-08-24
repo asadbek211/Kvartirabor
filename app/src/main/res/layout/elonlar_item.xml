@@ -36,7 +36,7 @@
             app:layout_constraintVertical_bias="1.0">
 
             <TextView
-                android:id="@+id/txtManzil"
+                android:id="@+id/txtSarlavha"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -73,7 +73,7 @@
                 android:textStyle="bold"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtManzil" />
+                app:layout_constraintTop_toBottomOf="@+id/txtSarlavha" />
 
             <TextView
                 android:id="@+id/txtType"

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#03D5D5</color>
+    <color name="colorPrimary">#FF03D5D5</color>
     <color name="colorPrimaryDark">#FAF9F9</color>
-    <color name="colorAccent">#03D5D5</color>
+    <color name="colorAccent">#FF03D5D5</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="trans">#FFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="standart_rang">#474747</color>
     <color name="statusBarColor">#FF0FF3F3</color>
+    <color name="splashColor">#F6F5F5</color>
 </resources>

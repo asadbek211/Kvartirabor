@@ -36,7 +36,7 @@
             app:layout_constraintVertical_bias="1.0">
 
             <TextView
-                android:id="@+id/txtManzil"
+                android:id="@+id/txtSarlavha"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -44,7 +44,7 @@
                 android:text="Nukus 21 mkr 1/8 dom"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardAdd"
+                app:layout_constraintEnd_toStartOf="@+id/cardEdit"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image" />
@@ -74,7 +74,7 @@
                 android:textStyle="bold"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtManzil" />
+                app:layout_constraintTop_toBottomOf="@+id/txtSarlavha" />
 
             <TextView
                 android:id="@+id/txtType"
