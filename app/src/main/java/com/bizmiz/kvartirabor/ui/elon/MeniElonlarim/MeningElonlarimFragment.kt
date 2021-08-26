@@ -1,5 +1,7 @@
 package com.bizmiz.kvartirabor.ui.elon.MeniElonlarim
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -25,6 +27,7 @@ class MeningElonlarimFragment : Fragment(R.layout.fragment_mening_elonlarim) {
         binding.recView.adapter = adapter
         setObserves()
         elonlarimViewModel.getElonlarimData()
+        if (!isNetworkAvialable())Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT).show()
     }
 
     fun setObserves() {
@@ -52,11 +55,11 @@ class MeningElonlarimFragment : Fragment(R.layout.fragment_mening_elonlarim) {
         })
 
     }
+    fun isNetworkAvialable():Boolean {
+        val conManager =
+            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val internetInfo = conManager.activeNetworkInfo
+
+        return internetInfo != null && internetInfo.isConnected
+    }
 }
-//adapter.models = list
-//binding.loading.visibility = View.GONE
-//binding.notReg.visibility = View.VISIBLE
-//binding.notReg.text = "Siz e'lon bermagansiz"
-//else {
-//
-//}

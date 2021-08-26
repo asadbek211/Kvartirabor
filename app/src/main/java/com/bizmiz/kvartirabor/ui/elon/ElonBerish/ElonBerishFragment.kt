@@ -8,6 +8,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
@@ -19,20 +20,20 @@ import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bizmiz.kvartirabor.R
+import com.bizmiz.kvartirabor.data.*
 import com.bizmiz.kvartirabor.data.Adapters.ImageAdapter
 import com.bizmiz.kvartirabor.databinding.FragmentElonBerishBinding
 import com.bizmiz.kvartirabor.ui.MainActivity
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import androidx.lifecycle.Observer
-import com.bizmiz.kvartirabor.data.*
 import java.util.*
 
-class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish),View.OnClickListener {
+class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClickListener {
     private val elonBerishViewModel: ElonBerishViewModel by viewModel()
     private lateinit var adapter: ImageAdapter
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -107,13 +108,13 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish),View.OnClickL
             }
 
             rdbDoimiy.setOnClickListener {
-                threeCheckRadioButton(rdbDoimiy,rdbKelishimli,rdbKunlik)
+                threeCheckRadioButton(rdbDoimiy, rdbKelishimli, rdbKunlik)
             }
             rdbKelishimli.setOnClickListener {
-                threeCheckRadioButton(rdbKelishimli,rdbDoimiy,rdbKunlik)
+                threeCheckRadioButton(rdbKelishimli, rdbDoimiy, rdbKunlik)
             }
             rdbKunlik.setOnClickListener {
-                threeCheckRadioButton(rdbKunlik,rdbDoimiy,rdbKelishimli)
+                threeCheckRadioButton(rdbKunlik, rdbDoimiy, rdbKelishimli)
             }
             rdbNarxIchida.setOnClickListener {
                 radioButton1(rdbNarxTashqari, rdbKelishiladi)
@@ -143,45 +144,51 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish),View.OnClickL
                 picImageIntent()
             }
             elonJoylash.setOnClickListener {
-                elonBerishViewModel.setElonData(
-                    adapter,
-                    etSarlavha,
-                    etManzil,
-                    etTel,
-                    etNarx,
-                    pulBirligi.selectedItem.toString(),
-                    prefs
-                )
+                if (isNetworkAvialable()){
+                    elonBerishViewModel.setElonData(
+                        adapter,
+                        etSarlavha,
+                        etManzil,
+                        etTel,
+                        etNarx,
+                        pulBirligi.selectedItem.toString(),
+                        prefs
+                    )
+                }else{
+                    Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT).show()
+                }
+
 
             }
-            elonBerishViewModel.elonList.observe(viewLifecycleOwner,Observer{
-                when(it.status){
-                    ResourceState.SUCCESS->{
-                        if (it.data =="success")
-                        loading.visibility = View.VISIBLE
+            elonBerishViewModel.elonList.observe(viewLifecycleOwner, Observer {
+                when (it.status) {
+                    ResourceState.SUCCESS -> {
+                        if (it.data == "success")
+                            loading.visibility = View.VISIBLE
                     }
-                    ResourceState.ERROR->{
-                        Toast.makeText(requireActivity(),it.message, Toast.LENGTH_SHORT).show()
+                    ResourceState.ERROR -> {
+                        Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                        loading.visibility = View.GONE
                     }
-                    ResourceState.CHECK->{
-                     if (it.check=="check"){
-                         val message = AlertDialog.Builder(requireActivity())
-                         message.setTitle("Kvartirabor")
-                             .setMessage("E'loningiz saqlandi\nE'lonlarim bo'limida e'loningizni tahrirlashingiz yoki o'chirishingiz mumkin.")
-                             .setCancelable(false)
-                             .setPositiveButton("OK") { message, _ ->
-                                 message.dismiss()
-                             }
-                             .create().show()
+                    ResourceState.CHECK -> {
+                        if (it.check == "check") {
+                            val message = AlertDialog.Builder(requireActivity())
+                            message.setTitle("Kvartirabor")
+                                .setMessage("E'loningiz saqlandi\nE'lonlarim bo'limida e'loningizni tahrirlashingiz yoki o'chirishingiz mumkin.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK") { message, _ ->
+                                    message.dismiss()
+                                }
+                                .create().show()
 
-                         val navController: NavController = Navigation.findNavController(
-                             requireActivity(),
-                             R.id.mainFragmentContener
-                         )
-                         navController.popBackStack()
-                     }else if (it.check=="validate"){
-                         loading.visibility = View.VISIBLE
-                     }
+                            val navController: NavController = Navigation.findNavController(
+                                requireActivity(),
+                                R.id.mainFragmentContener
+                            )
+                            navController.popBackStack()
+                        } else if (it.check == "validate") {
+                            loading.visibility = View.VISIBLE
+                        }
                     }
                 }
             })
@@ -376,7 +383,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish),View.OnClickL
                 R.id.rdbGilam -> {
                 }
                 R.id.rdbIjaraBerish -> {
-                    twoCheckRadioButton(rdbIjaraBerish,rdbSotiladi)
+                    twoCheckRadioButton(rdbIjaraBerish, rdbSotiladi)
                     lay2.visibility = View.VISIBLE
                     lay3.visibility = View.VISIBLE
                     lay5.visibility = View.VISIBLE
@@ -415,7 +422,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish),View.OnClickL
                 R.id.rdbQoshimchaXona -> {
                 }
                 R.id.rdbSotiladi -> {
-                    twoCheckRadioButton(rdbSotiladi,rdbIjaraBerish)
+                    twoCheckRadioButton(rdbSotiladi, rdbIjaraBerish)
                     lay2.visibility = View.GONE
                     lay3.visibility = View.GONE
                     lay5.visibility = View.GONE
@@ -440,4 +447,13 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish),View.OnClickL
             }
         }
     }
-}
+
+
+        fun isNetworkAvialable():Boolean {
+            val conManager =
+                context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val internetInfo = conManager.activeNetworkInfo
+
+            return internetInfo != null && internetInfo.isConnected
+        }
+    }

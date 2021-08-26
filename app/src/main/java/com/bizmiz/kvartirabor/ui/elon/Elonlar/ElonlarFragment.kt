@@ -1,5 +1,7 @@
 package com.bizmiz.kvartirabor.ui.elon.Elonlar
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -34,7 +36,7 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
         binding.etSearch.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                binding.etSearch.clearFocus();
+//                binding.etSearch.clearFocus();
                 return true
             }
 
@@ -45,13 +47,19 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
 
         })
         binding.swipeContainer.setOnRefreshListener {
-            setObservers()
+            if (isNetworkAvialable()){
+                setObservers()
+            }else{
+                binding.swipeContainer.isRefreshing = false
+                Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
 
     }
     private fun setData(){
-        val listBolim:ArrayList<String> = arrayListOf("Barcha ruknlar","Sotish","Ijaraga berish")
+        val listBolim:ArrayList<String> = arrayListOf("Barcha e'lonlar","Sotish","Ijaraga berish","Ayirboshlash")
         val list:ArrayList<BolimModel> = arrayListOf()
         for (i in 0 until listBolim.size){
             list.add(BolimModel(listBolim[i]))
@@ -66,6 +74,7 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
                 ResourceState.LOADING -> {
                     (activity as MainActivity).visibility(false)
                     binding.swipeContainer.isRefreshing = false
+
                 }
                 ResourceState.SUCCESS -> {
                     adapter = ElonlarAdapter(it.data!!, true)
@@ -87,11 +96,21 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
                             Navigation.findNavController(requireActivity(), R.id.mainFragmentContener)
                         navController.navigate(R.id.action_elonlarFragment_to_elonFullFragment,bundle)
                     }
+                    if (!isNetworkAvialable()){
+                        Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 ResourceState.ERROR -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         })
+    }
+    fun isNetworkAvialable():Boolean {
+        val conManager =
+            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val internetInfo = conManager.activeNetworkInfo
+
+        return internetInfo != null && internetInfo.isConnected
     }
 }
