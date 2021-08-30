@@ -47,21 +47,24 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
 
         })
         binding.swipeContainer.setOnRefreshListener {
-            if (isNetworkAvialable()){
+            if (isNetworkAvialable()) {
                 setObservers()
-            }else{
+            } else {
                 binding.swipeContainer.isRefreshing = false
-                Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT)
+                    .show()
             }
 
         }
 
 
     }
-    private fun setData(){
-        val listBolim:ArrayList<String> = arrayListOf("Barcha e'lonlar","Sotish","Ijaraga berish","Ayirboshlash")
-        val list:ArrayList<BolimModel> = arrayListOf()
-        for (i in 0 until listBolim.size){
+
+    private fun setData() {
+        val listBolim: ArrayList<String> =
+            arrayListOf("Barcha e'lonlar", "Ijaraga berish", "Sotish", "Ayirboshlash")
+        val list: ArrayList<BolimModel> = arrayListOf()
+        for (i in 0 until listBolim.size) {
             list.add(BolimModel(listBolim[i]))
         }
         bolimAdapter.models = list
@@ -82,22 +85,46 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
                     binding.loading.visibility = View.GONE
                     binding.etSearch.setBackgroundResource(R.color.colorPrimaryDark)
                     binding.swipeContainer.isRefreshing = false
-                    adapter.setOnClickListener { _, data->
+                    adapter.setOnClickListener { _, data ->
                         val bundle = bundleOf(
-                            "image" to data.imageUrlList,
                             "sarlavha" to data.sarlavha,
-                            "manzil" to data.manzil,
-                            "telefon_raqam" to data.telefon_raqam,
-                            "createdDate" to data.createdDate,
+                            "bolim" to data.bolim,
+                            "uyQavatliligi" to data.uyQavatliligi,
+                            "umumiyMaydon" to data.umumiyMaydon,
+                            "oshxonaMaydoni" to data.oshxonaMaydoni,
+                            "uyTamiri" to data.uyTamiri,
+                            "yashashMaydoni" to data.yashashMaydoni,
                             "narxi" to data.narxi,
-                            "type" to data.type
+                            "yashashQavati" to data.yashashQavati,
+                            "xonaSoni" to data.xonaSoni,
+                            "tavsif" to data.tavsif,
+                            "telRaqam" to data.telRaqam,
+                            "type" to data.type,
+                            "mebel" to data.mebel,
+                            "kelishuv" to data.kelishuv,
+                            "sharoitlari" to data.sharoitlari,
+                            "qurilishTuri" to data.qurilishTuri,
+                            "imageUrlList" to data.imageUrlList,
+                            "createdDate" to data.createdDate,
+                            "latitude" to data.latitude,
+                            "longitude" to data.longitude
                         )
                         val navController: NavController =
-                            Navigation.findNavController(requireActivity(), R.id.mainFragmentContener)
-                        navController.navigate(R.id.action_elonlarFragment_to_elonFullFragment,bundle)
+                            Navigation.findNavController(
+                                requireActivity(),
+                                R.id.mainFragmentContener
+                            )
+                        navController.navigate(
+                            R.id.action_elonlarFragment_to_elonFullFragment,
+                            bundle
+                        )
                     }
-                    if (!isNetworkAvialable()){
-                        Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT).show()
+                    if (!isNetworkAvialable()) {
+                        Toast.makeText(
+                            requireActivity(),
+                            "Not Internet Connection",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
                 ResourceState.ERROR -> {
@@ -106,7 +133,8 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
             }
         })
     }
-    fun isNetworkAvialable():Boolean {
+
+    fun isNetworkAvialable(): Boolean {
         val conManager =
             context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val internetInfo = conManager.activeNetworkInfo

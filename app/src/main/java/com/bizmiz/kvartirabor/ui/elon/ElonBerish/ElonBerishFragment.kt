@@ -1,11 +1,12 @@
 package com.bizmiz.kvartirabor.ui.elon.ElonBerish
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.net.ConnectivityManager
@@ -24,25 +25,46 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bizmiz.kvartirabor.R
-import com.bizmiz.kvartirabor.data.*
 import com.bizmiz.kvartirabor.data.Adapters.ImageAdapter
+import com.bizmiz.kvartirabor.data.ResourceState
+import com.bizmiz.kvartirabor.data.fiveCheckRadioButton
 import com.bizmiz.kvartirabor.databinding.FragmentElonBerishBinding
 import com.bizmiz.kvartirabor.ui.MainActivity
 import com.google.android.gms.location.*
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClickListener {
+    private lateinit var mapFragment: SupportMapFragment
+    private var isCheck: ArrayList<Int> = arrayListOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    private var lat: Double = 0.0
+    private var long: Double = 0.0
+    private lateinit var mMap: GoogleMap
     private val elonBerishViewModel: ElonBerishViewModel by viewModel()
     private lateinit var adapter: ImageAdapter
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
-    private var qoshimcha = true
     private val mAuth = FirebaseAuth.getInstance()
-    private val pulBirlik: Array<String> = arrayOf("so'm", "$")
-    private val xonaSoni: Array<String> = arrayOf("1", "2", "3", "4", "5", "5+")
-    private val ijarachiSoni: Array<String> = arrayOf("0", "1", "2", "3", "4", "5", "5+")
+    private val pulBirlik: Array<String> = arrayOf("So'm", "$")
+    private val mebel: Array<String> = arrayOf("Ha", "Yo'q")
+    private var sharoitlari: ArrayList<String> = arrayListOf()
+    private var qurilishTuri = "G'ishtli"
+    private val bolimlar: Array<String> =
+        arrayOf("Bo'lim tanlang", "Ijaraga berish", "Sotish", "Ayirboshlash")
+    private val tamiri: Array<String> = arrayOf(
+        "Ta'miri",
+        "Mualliflik loyixasi",
+        "Evrota'mir",
+        "O'rtacha",
+        "Ta'mir talab",
+        "Qora suvoq",
+        "Tozalashdan avvalgi pardoz"
+    )
     lateinit var binding: FragmentElonBerishBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,88 +73,57 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
         adapter = ImageAdapter()
         binding.apply {
             imageRecView.adapter = adapter
+            rdbGishtli.setOnClickListener(this@ElonBerishFragment)
+            rdbPanelli.setOnClickListener(this@ElonBerishFragment)
+            rdbBlokli.setOnClickListener(this@ElonBerishFragment)
+            rdbMonolitli.setOnClickListener(this@ElonBerishFragment)
+            rdbYogoch.setOnClickListener(this@ElonBerishFragment)
+            rdbGilam.setOnClickListener(this@ElonBerishFragment)
+            rdbKirMashina.setOnClickListener(this@ElonBerishFragment)
+            rdbOshxona.setOnClickListener(this@ElonBerishFragment)
+            rdbBalkon.setOnClickListener(this@ElonBerishFragment)
+            rdbKonditsioner.setOnClickListener(this@ElonBerishFragment)
+            rdbVanna.setOnClickListener(this@ElonBerishFragment)
+            rdbWiFi.setOnClickListener(this@ElonBerishFragment)
+            rdbMuzlatgich.setOnClickListener(this@ElonBerishFragment)
+            rdbAriston.setOnClickListener(this@ElonBerishFragment)
+            rdbTelevizor.setOnClickListener(this@ElonBerishFragment)
+            rdbKatyol.setOnClickListener(this@ElonBerishFragment)
+            rdbTitan.setOnClickListener(this@ElonBerishFragment)
             exit.setOnClickListener {
                 val navController: NavController =
                     Navigation.findNavController(requireActivity(), R.id.mainFragmentContener)
                 navController.popBackStack()
+            }
+            MapLoc.setOnClickListener {
+                MapContainer.visibility = View.GONE
+                mapImage.visibility = View.VISIBLE
+                nextBack.visibility = View.VISIBLE
+            }
+            nextBack.setOnClickListener {
+                mapImage.visibility = View.GONE
+                nextBack.visibility = View.GONE
+                txtMap.text = "Joylashish manzili"
             }
             imgClear.setOnClickListener {
                 ImageLinear.visibility = View.GONE
                 ImageAdd.visibility = View.VISIBLE
                 adapter.models.clear()
                 adapter.notifyDataSetChanged()
-
             }
             fusedLocationProviderClient =
                 LocationServices.getFusedLocationProviderClient(requireContext())
-            val prefs: SharedPreferences =
-                requireActivity().getSharedPreferences(Constant.PREF, Context.MODE_PRIVATE)
             if (mAuth.currentUser != null) {
                 etTel.setText(mAuth.currentUser?.phoneNumber)
             }
-
-            qoshimchaMalumot.setOnClickListener {
-
-                if (qoshimcha) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Kechirasiz bu bo'lim hali tayyor emas",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    AsosiyConsLayout.visibility = View.VISIBLE
-                    qoshimcha = false
-                } else {
-                    AsosiyConsLayout.visibility = View.GONE
-                    qoshimcha = true
-                }
-            }
-            rdbSotiladi.setOnClickListener {
-                radioButton(rdbIjaraBerish)
-
-            }
-            rdbIjaraBerish.setOnClickListener {
-                radioButton(rdbSotiladi)
-
-            }
-            rdbKopQavat.setOnClickListener {
-                radioButton(rdbYerJoy)
-            }
-            rdbYerJoy.setOnClickListener {
-                radioButton(rdbKopQavat)
-            }
-            rdbYakkaTolash.setOnClickListener {
-                radioButton(rdbUmumiyTolash)
-            }
-            rdbUmumiyTolash.setOnClickListener {
-                radioButton(rdbYakkaTolash)
-            }
-
-            rdbDoimiy.setOnClickListener {
-                threeCheckRadioButton(rdbDoimiy, rdbKelishimli, rdbKunlik)
-            }
-            rdbKelishimli.setOnClickListener {
-                threeCheckRadioButton(rdbKelishimli, rdbDoimiy, rdbKunlik)
-            }
-            rdbKunlik.setOnClickListener {
-                threeCheckRadioButton(rdbKunlik, rdbDoimiy, rdbKelishimli)
-            }
-            rdbNarxIchida.setOnClickListener {
-                radioButton1(rdbNarxTashqari, rdbKelishiladi)
-            }
-            rdbNarxTashqari.setOnClickListener {
-                radioButton1(rdbNarxIchida, rdbKelishiladi)
-            }
-            rdbKelishiladi.setOnClickListener {
-                radioButton1(rdbNarxTashqari, rdbNarxIchida)
-            }
             pulBirligi.adapter = adapter(pulBirlik)
-            xonalarSoni.adapter = adapter(xonaSoni)
-            yangiIjarachilarSoni.adapter = adapter(xonaSoni)
-            ijaradagilarSoni.adapter = adapter(ijarachiSoni)
-            uyQavatliligi.adapter = adapter(xonaSoni)
-            sizniQavat.adapter = adapter(xonaSoni)
-            btnMap.setOnClickListener {
+            spBolimlar.adapter = adapter(bolimlar)
+            spUyTamiri.adapter = adapter(tamiri)
+            spMebel.adapter = adapter(mebel)
+            spNarxKelishish.adapter = adapter(mebel)
+            txtMap.setOnClickListener {
                 getLastLocation()
+
 
             }
             ImageAdd.setOnClickListener {
@@ -144,18 +135,42 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                 picImageIntent()
             }
             elonJoylash.setOnClickListener {
-                if (isNetworkAvialable()){
+                if (spBolimlar.selectedItemPosition != 0) {
+                    spBolimlar.setBackgroundResource(R.drawable.shape_stroke)
+                }
+                if (spUyTamiri.selectedItemPosition != 0) {
+                    spUyTamiri.setBackgroundResource(R.drawable.shape_stroke)
+                }
+                if (txtMap.text == "Joylashish manzili") {
+                    txtMap.setBackgroundResource(R.drawable.shape_stroke)
+                }
+                if (isNetworkAvialable()) {
                     elonBerishViewModel.setElonData(
                         adapter,
                         etSarlavha,
-                        etManzil,
-                        etTel,
+                        spBolimlar,
+                        etQavatliligi,
+                        etMaydoni,
+                        etOshxonaMaydoni,
+                        spUyTamiri,
+                        etYashashMaydoni,
                         etNarx,
-                        pulBirligi.selectedItem.toString(),
-                        prefs
+                        etQavati,
+                        etXonaSoni,
+                        etTavsif,
+                        txtMap,
+                        etTel,
+                        pulBirligi,
+                        spMebel,
+                        spNarxKelishish,
+                        sharoitlari,
+                        qurilishTuri,
+                        lat,
+                        long,
                     )
-                }else{
-                    Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
 
@@ -167,7 +182,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                             loading.visibility = View.VISIBLE
                     }
                     ResourceState.ERROR -> {
-                        Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                        Snackbar.make(view, it.message.toString(), Snackbar.LENGTH_SHORT).show()
                         loading.visibility = View.GONE
                     }
                     ResourceState.CHECK -> {
@@ -192,60 +207,15 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     }
                 }
             })
-            setOnClick()
         }
 
     }
-
-    private fun setOnClick() {
-        binding.apply {
-            rdbAbiturient.setOnClickListener(this@ElonBerishFragment)
-            rdbAriston.setOnClickListener(this@ElonBerishFragment)
-            rdbBalkon.setOnClickListener(this@ElonBerishFragment)
-            rdbDoimiy.setOnClickListener(this@ElonBerishFragment)
-            rdbGilam.setOnClickListener(this@ElonBerishFragment)
-            rdbIjaraBerish.setOnClickListener(this@ElonBerishFragment)
-            rdbIshchi.setOnClickListener(this@ElonBerishFragment)
-            rdbKelishiladi.setOnClickListener(this@ElonBerishFragment)
-            rdbKelishimli.setOnClickListener(this@ElonBerishFragment)
-            rdbKirMashina.setOnClickListener(this@ElonBerishFragment)
-            rdbKopQavat.setOnClickListener(this@ElonBerishFragment)
-            rdbKunlik.setOnClickListener(this@ElonBerishFragment)
-            rdbMuzlatgich.setOnClickListener(this@ElonBerishFragment)
-            rdbNarxIchida.setOnClickListener(this@ElonBerishFragment)
-            rdbNarxTashqari.setOnClickListener(this@ElonBerishFragment)
-            rdbOgilBola.setOnClickListener(this@ElonBerishFragment)
-            rdbOilaviy.setOnClickListener(this@ElonBerishFragment)
-            rdbOshxona.setOnClickListener(this@ElonBerishFragment)
-            rdbQizBola.setOnClickListener(this@ElonBerishFragment)
-            rdbQoshimchaXona.setOnClickListener(this@ElonBerishFragment)
-            rdbSotiladi.setOnClickListener(this@ElonBerishFragment)
-            rdbStudent.setOnClickListener(this@ElonBerishFragment)
-            rdbTelevizor.setOnClickListener(this@ElonBerishFragment)
-            rdbUmumiyTolash.setOnClickListener(this@ElonBerishFragment)
-            rdbWiFi.setOnClickListener(this@ElonBerishFragment)
-            rdbYakkaTolash.setOnClickListener(this@ElonBerishFragment)
-            rdbYerJoy.setOnClickListener(this@ElonBerishFragment)
-        }
-
-    }
-
 
     private fun adapter(ItemList: Array<String>): SpinnerAdapter {
         val adapter = ArrayAdapter(requireActivity(), R.layout.spinner_item, ItemList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         return adapter
     }
-
-    private fun radioButton(radioButtonChecked: RadioButton) {
-        radioButtonChecked.isChecked = false
-    }
-
-    private fun radioButton1(radioButton2: RadioButton, radioButton3: RadioButton) {
-        radioButton2.isChecked = false
-        radioButton3.isChecked = false
-    }
-
     private fun getLastLocation() {
         if (checkPermission()) {
             if (isGPSEnable()) {
@@ -254,11 +224,8 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (location == null) {
                         newLocationData()
                     } else {
-                        val navController: NavController = Navigation.findNavController(
-                            requireActivity(),
-                            R.id.mainFragmentContener
-                        )
-                        navController.navigate(R.id.action_elonBerishFragment_to_mapFragment)
+                        binding.MapContainer.visibility = View.VISIBLE
+                        map()
                     }
                 }
             } else {
@@ -266,6 +233,38 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
             }
         } else {
             requestPermission()
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun map() {
+        mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
+        mapFragment.getMapAsync { googleMap ->
+            mMap = googleMap
+            mMap.uiSettings.isMyLocationButtonEnabled = true
+            mMap.uiSettings.isZoomControlsEnabled
+            mMap.uiSettings.isMapToolbarEnabled
+            mMap.setOnMapClickListener {
+                val markerOptions = MarkerOptions()
+                markerOptions.position(it)
+                lat = it.latitude
+                long = it.longitude
+                markerOptions.title("$lat : $long")
+                mMap.clear()
+                mMap.addMarker(markerOptions)
+                val geoCoder = Geocoder(requireContext(), Locale.getDefault())
+                try {
+                    val address = geoCoder.getFromLocation(lat, long, 1)
+                    binding.txtMap.text = "${address[0].adminArea},${address[0].subAdminArea}"
+                    mMap.snapshot { bitmap ->
+                        binding.mapImage.setImageBitmap(bitmap)
+                    }
+                } catch (e: NumberFormatException) {
+                    Toast.makeText(requireActivity(), e.localizedMessage, Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
         }
     }
 
@@ -333,7 +332,6 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select image(s)"), 1)
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -368,92 +366,179 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
         }
     }
 
+    fun isNetworkAvialable(): Boolean {
+        val conManager =
+            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val internetInfo = conManager.activeNetworkInfo
+
+        return internetInfo != null && internetInfo.isConnected
+    }
+
     override fun onClick(v: View?) {
         binding.apply {
             when (v!!.id) {
-                R.id.rdbAbiturient -> {
-                    radioButtonOnClick(rdbAbiturient)
+                R.id.rdbGishtli -> {
+                    fiveCheckRadioButton(rdbGishtli, rdbPanelli, rdbBlokli, rdbMonolitli, rdbYogoch)
+                    isChecked(rdbGishtli)
                 }
-                R.id.rdbAriston -> {
+                R.id.rdbPanelli -> {
+                    fiveCheckRadioButton(rdbPanelli, rdbGishtli, rdbBlokli, rdbMonolitli, rdbYogoch)
+                    isChecked(rdbPanelli)
                 }
-                R.id.rdbBalkon -> {
+                R.id.rdbBlokli -> {
+                    fiveCheckRadioButton(rdbBlokli, rdbPanelli, rdbGishtli, rdbMonolitli, rdbYogoch)
+                    isChecked(rdbBlokli)
                 }
-                R.id.rdbDoimiy -> {
+                R.id.rdbMonolitli -> {
+                    fiveCheckRadioButton(rdbMonolitli, rdbPanelli, rdbBlokli, rdbGishtli, rdbYogoch)
+                    isChecked(rdbMonolitli)
+                }
+                R.id.rdbYogoch -> {
+                    fiveCheckRadioButton(rdbYogoch, rdbPanelli, rdbBlokli, rdbMonolitli, rdbGishtli)
+                    isChecked(rdbYogoch)
                 }
                 R.id.rdbGilam -> {
-                }
-                R.id.rdbIjaraBerish -> {
-                    twoCheckRadioButton(rdbIjaraBerish, rdbSotiladi)
-                    lay2.visibility = View.VISIBLE
-                    lay3.visibility = View.VISIBLE
-                    lay5.visibility = View.VISIBLE
-                    lay7.visibility = View.VISIBLE
-                    lay9.visibility = View.VISIBLE
-                    consa.visibility = View.VISIBLE
-                    consa2.visibility = View.VISIBLE
-                    textInputLayout6.visibility = View.GONE
-                }
-                R.id.rdbIshchi -> {
-                }
-                R.id.rdbKelishiladi -> {
-                }
-                R.id.rdbKelishimli -> {
+                    if (isCheck[0] == 0) {
+                        rdbGilam.isChecked = true
+                        isCheck[0] = 1
+                    } else{
+                        rdbGilam.isChecked = false
+                        isCheck[0] = 0
+                    }
+                    isCheckedSharoit(rdbGilam)
                 }
                 R.id.rdbKirMashina -> {
-                }
-                R.id.rdbKopQavat -> {
-                }
-                R.id.rdbKunlik -> {
-                }
-                R.id.rdbMuzlatgich -> {
-                }
-                R.id.rdbNarxIchida -> {
-                }
-                R.id.rdbNarxTashqari -> {
-                }
-                R.id.rdbOgilBola -> {
-                }
-                R.id.rdbOilaviy -> {
+                    if (isCheck[1] == 0) {
+                        rdbKirMashina.isChecked = true
+                        isCheck[1] = 1
+                    } else{
+                        rdbKirMashina.isChecked = false
+                        isCheck[1] = 0
+                    }
+                    isCheckedSharoit(rdbKirMashina)
                 }
                 R.id.rdbOshxona -> {
+                    if (isCheck[2] == 0) {
+                        rdbOshxona.isChecked = true
+                        isCheck[2] = 1
+                    } else{
+                        rdbOshxona.isChecked = false
+                        isCheck[2] = 0
+                    }
+                    isCheckedSharoit(rdbOshxona)
                 }
-                R.id.rdbQizBola -> {
-                }
-                R.id.rdbQoshimchaXona -> {
-                }
-                R.id.rdbSotiladi -> {
-                    twoCheckRadioButton(rdbSotiladi, rdbIjaraBerish)
-                    lay2.visibility = View.GONE
-                    lay3.visibility = View.GONE
-                    lay5.visibility = View.GONE
-                    lay7.visibility = View.GONE
-                    lay9.visibility = View.GONE
-                    consa.visibility = View.GONE
-                    consa2.visibility = View.GONE
-                    textInputLayout6.visibility = View.VISIBLE
-                }
-                R.id.rdbStudent -> {
-                }
-                R.id.rdbTelevizor -> {
-                }
-                R.id.rdbUmumiyTolash -> {
+                R.id.rdbBalkon -> {
+                    if (isCheck[3] == 0) {
+                        rdbBalkon.isChecked = true
+                        isCheck[3] = 1
+                    } else{
+                        rdbBalkon.isChecked = false
+                        isCheck[3] = 0
+                    }
+                    isCheckedSharoit(rdbBalkon)
                 }
                 R.id.rdbWiFi -> {
+                    if (isCheck[4] == 0) {
+                        rdbWiFi.isChecked = true
+                        isCheck[4] = 1
+                    } else{
+                        rdbWiFi.isChecked = false
+                        isCheck[4] = 0
+                    }
+                    isCheckedSharoit(rdbWiFi)
                 }
-                R.id.rdbYakkaTolash -> {
+                R.id.rdbMuzlatgich -> {
+                    if (isCheck[5] == 0) {
+                        rdbMuzlatgich.isChecked = true
+                        isCheck[5] = 1
+                    } else{
+                        rdbMuzlatgich.isChecked = false
+                        isCheck[5] = 0
+                    }
+                    isCheckedSharoit(rdbMuzlatgich)
                 }
-                R.id.rdbYerJoy -> {
+                R.id.rdbAriston -> {
+                    if (isCheck[6] == 0) {
+                        rdbAriston.isChecked = true
+                        isCheck[6] = 1
+                    } else{
+                        rdbAriston.isChecked = false
+                        isCheck[6] = 0
+                    }
+                    isCheckedSharoit(rdbAriston)
+                }
+                R.id.rdbTelevizor -> {
+                    if (isCheck[7] == 0) {
+                        rdbTelevizor.isChecked = true
+                        isCheck[7] = 1
+                    } else{
+                        rdbTelevizor.isChecked = false
+                        isCheck[7] = 0
+                    }
+                    isCheckedSharoit(rdbTelevizor)
+                }
+                R.id.rdbKonditsioner -> {
+                    if (isCheck[8] == 0) {
+                        rdbKonditsioner.isChecked = true
+                        isCheck[8] = 1
+                    } else{
+                        rdbKonditsioner.isChecked = false
+                        isCheck[8] = 0
+                    }
+                    isCheckedSharoit(rdbKonditsioner)
+                }
+                R.id.rdbVanna -> {
+                    if (isCheck[9] == 0) {
+                        rdbVanna.isChecked = true
+                        isCheck[9] = 1
+                    } else{
+                        rdbVanna.isChecked = false
+                        isCheck[9] = 0
+                    }
+                    isCheckedSharoit(rdbVanna)
+                }
+                R.id.rdbKatyol -> {
+                    if (isCheck[10] == 0) {
+                        rdbKatyol.isChecked = true
+                        isCheck[10] = 1
+                    } else{
+                        rdbKatyol.isChecked = false
+                        isCheck[10] = 0
+                    }
+                    isCheckedSharoit(rdbKatyol)
+                }
+                R.id.rdbTitan -> {
+                    if (isCheck[11] == 0) {
+                        rdbTitan.isChecked = true
+                        isCheck[11] = 1
+                    } else{
+                        rdbTitan.isChecked = false
+                        isCheck[11] = 0
+                    }
+                    isCheckedSharoit(rdbTitan)
                 }
             }
         }
     }
 
-
-        fun isNetworkAvialable():Boolean {
-            val conManager =
-                context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val internetInfo = conManager.activeNetworkInfo
-
-            return internetInfo != null && internetInfo.isConnected
+    private fun isChecked(rdb: RadioButton) {
+        if (rdb.isChecked) {
+            qurilishTuri = rdb.text.toString()
+            Toast.makeText(requireActivity(), qurilishTuri, Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun isCheckedSharoit(rdb: RadioButton) {
+            if (rdb.isChecked) {
+                if (!sharoitlari.contains(rdb.text.toString())) {
+                    sharoitlari.add(rdb.text.toString())
+                    Toast.makeText(requireActivity(), sharoitlari.toString(), Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                sharoitlari.remove(rdb.text.toString())
+                Toast.makeText(requireActivity(), sharoitlari.toString(), Toast.LENGTH_SHORT).show()
+            }
+
+    }
+
+}

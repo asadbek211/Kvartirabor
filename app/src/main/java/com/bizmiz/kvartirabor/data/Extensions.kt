@@ -22,18 +22,12 @@ fun TextInputEditText.showError(error: String) {
     this.showSoftKeyboard()
 
 }
-fun threeCheckRadioButton(rdb1:RadioButton,rdb2:RadioButton,rdb3:RadioButton){
+fun fiveCheckRadioButton(rdb1:RadioButton,rdb2:RadioButton,rdb3:RadioButton,rdb4:RadioButton,rdb5:RadioButton){
     rdb1.isChecked = true
     rdb2.isChecked = false
     rdb3.isChecked = false
+    rdb4.isChecked = false
+    rdb5.isChecked = false
 
 }
-fun twoCheckRadioButton(rdb1:RadioButton,rdb2:RadioButton){
-    rdb1.isChecked = true
-    rdb2.isChecked = false
 
-}
-fun radioButtonOnClick(rdb:RadioButton){
-    rdb.isChecked = !(rdb.isChecked)
-
-}

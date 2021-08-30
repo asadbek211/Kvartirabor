@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 
 class BolimAdapter : RecyclerView.Adapter<BolimAdapter.Myholder>() {
     val image: ArrayList<Int> =
-        arrayListOf(R.drawable.logotip_play, R.drawable.house_sale,R.drawable.for_rent,R.drawable.almashuv)
+        arrayListOf(R.drawable.logotip_play, R.drawable.for_rent,R.drawable.house_sale,R.drawable.almashuv)
 
     inner class Myholder(private val binding: BolimlarItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

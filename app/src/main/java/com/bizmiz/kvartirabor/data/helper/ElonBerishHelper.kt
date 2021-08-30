@@ -1,13 +1,10 @@
 package com.bizmiz.kvartirabor.data.helper
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.net.ConnectivityManager
-import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
+import android.widget.Spinner
+import android.widget.TextView
+import com.bizmiz.kvartirabor.R
 import com.bizmiz.kvartirabor.data.Adapters.ImageAdapter
 import com.bizmiz.kvartirabor.data.Constant
-import com.bizmiz.kvartirabor.data.ResourceState
 import com.bizmiz.kvartirabor.data.checkIsEmpty
 import com.bizmiz.kvartirabor.data.showError
 import com.google.android.material.textfield.TextInputEditText
@@ -20,34 +17,50 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
     fun setElonData(
         adapter: ImageAdapter,
         sarlavha: TextInputEditText,
-        manzil: TextInputEditText,
-        telNomer: TextInputEditText,
-        narx: TextInputEditText,
-        type: String,
-        prefs: SharedPreferences,
+        bolim: Spinner,
+        uyQavatliligi: TextInputEditText,
+        umumiyMaydon: TextInputEditText,
+        oshxonaMaydoni: TextInputEditText,
+        uyTamiri: Spinner,
+        yashashMaydoni: TextInputEditText,
+        narxi: TextInputEditText,
+        yashashQavati: TextInputEditText,
+        xonaSoni: TextInputEditText,
+        tavsif: TextInputEditText,
+        joyNomi: TextView,
+        telRaqam: TextInputEditText,
+        type: Spinner,
+        mebel: Spinner,
+        kelishuv: Spinner,
+        sharoitlari: ArrayList<String>,
+        qurilishTuri: String,
+        latitude: Double,
+        longitude: Double,
         onSuccess: (succes: String?) -> Unit,
         onFailure: (msg: String?) -> Unit,
         check: (msg: String?) -> Unit
     ) {
         val imgUrl: ArrayList<String> = arrayListOf()
         val uuid = UUID.randomUUID().toString()
-        if (validate(sarlavha, manzil, telNomer, narx)) {
+        if (validate(
+                adapter,
+                sarlavha,
+                bolim,
+                uyQavatliligi,
+                umumiyMaydon,
+                oshxonaMaydoni,
+                uyTamiri,
+                yashashMaydoni,
+                narxi,
+                yashashQavati,
+                xonaSoni,
+                tavsif,
+                joyNomi,
+                telRaqam,
+                onFailure
+            )
+        ) {
             check.invoke("validate")
-            if (adapter.models.isNullOrEmpty()) {
-                setData(
-                    sarlavha.text.toString(),
-                    manzil.text.toString(),
-                    telNomer.text.toString(),
-                    narx.text.toString(),
-                    type,
-                    imgUrl,
-                    uuid,
-                    prefs,
-                    onSuccess,
-                    onFailure,
-                    check
-                )
-            }
             for (i in 0 until adapter.models.size) {
                 val storeRef = FirebaseStorage.getInstance().reference.child("${uuid}/image$i")
                 storeRef.putFile(adapter.models[i]!!)
@@ -56,16 +69,29 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
                             it.result.metadata?.reference?.downloadUrl?.addOnSuccessListener { uri ->
                                 imgUrl.add(uri.toString())
                                 //map
-                                if (i == adapter.models.size - 1) {
+                                if (imgUrl.size == adapter.models.size) {
                                     setData(
                                         sarlavha.text.toString(),
-                                        manzil.text.toString(),
-                                        telNomer.text.toString(),
-                                        narx.text.toString(),
-                                        type,
+                                        bolim.selectedItem.toString(),
+                                        uyQavatliligi.text.toString(),
+                                        umumiyMaydon.text.toString(),
+                                        oshxonaMaydoni.text.toString(),
+                                        uyTamiri.selectedItem.toString(),
+                                        yashashMaydoni.text.toString(),
+                                        narxi.text.toString(),
+                                        yashashQavati.text.toString(),
+                                        xonaSoni.text.toString(),
+                                        tavsif.text.toString(),
+                                        telRaqam.text.toString(),
+                                        type.selectedItem.toString(),
+                                        mebel.selectedItem.toString(),
+                                        kelishuv.selectedItem.toString(),
+                                        sharoitlari,
+                                        qurilishTuri,
                                         imgUrl,
                                         uuid,
-                                        prefs,
+                                        latitude,
+                                        longitude,
                                         onSuccess,
                                         onFailure,
                                         check
@@ -79,22 +105,32 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
                     .addOnFailureListener {
                         onFailure.invoke(it.localizedMessage)
                     }
-
             }
         }
-
-
     }
 
     private fun setData(
         sarlavha: String,
-        manzil: String,
-        telNomer: String,
-        narx: String,
+        bolim: String,
+        uyQavatliligi: String,
+        umumiyMaydon: String,
+        oshxonaMaydoni: String,
+        uyTamiri: String,
+        yashashMaydoni: String,
+        narxi: String,
+        yashashQavati: String,
+        xonaSoni: String,
+        tavsif: String,
+        telRaqam: String,
         type: String,
+        mebel: String,
+        kelishuv: String,
+        sharoitlari: ArrayList<String>,
+        qurilishTuri: String,
         imgUrl: ArrayList<String>,
         uuid: String,
-        prefs: SharedPreferences,
+        latitude: Double,
+        longitude: Double,
         onSuccess: (succes: String?) -> Unit,
         onFailure: (msg: String?) -> Unit,
         check: (msg: String?) -> Unit
@@ -105,13 +141,25 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
         map["imageUrlList"] = imgUrl
         map["uid"] = mAuth.currentUser?.uid.toString()
         map["sarlavha"] = sarlavha
-        map["manzil"] = manzil
-        map["telefon_raqam"] = telNomer
-        map["narxi"] = narx
-        map["createdDate"] = System.currentTimeMillis()
+        map["bolim"] = bolim
+        map["uyQavatliligi"] = uyQavatliligi
+        map["umumiyMaydon"] = umumiyMaydon
+        map["oshxonaMaydoni"] = oshxonaMaydoni
+        map["uyTamiri"] = uyTamiri
+        map["yashashMaydoni"] = yashashMaydoni
+        map["narxi"] = narxi
+        map["yashashQavati"] = yashashQavati
+        map["xonaSoni"] = xonaSoni
+        map["tavsif"] = tavsif
+        map["telRaqam"] = telRaqam
         map["type"] = type
-        map["latitude"] = prefs.getFloat("position1", 46.3434f)
-        map["longitude"] = prefs.getFloat("position2", 46.3434f)
+        map["mebel"] = mebel
+        map["kelishuv"] = kelishuv
+        map["sharoitlari"] = sharoitlari
+        map["qurilishTuri"] = qurilishTuri
+        map["createdDate"] = System.currentTimeMillis()
+        map["latitude"] = latitude
+        map["longitude"] = longitude
         db.collection(Constant.BASE_COLLECTION).document(map["id"].toString()).set(map)
             .addOnSuccessListener {
                 onSuccess.invoke("success")
@@ -124,28 +172,83 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
     }
 
     private fun validate(
+        adapter: ImageAdapter,
         sarlavha: TextInputEditText,
-        manzil: TextInputEditText,
-        telNomer: TextInputEditText,
-        narx: TextInputEditText
+        bolim: Spinner,
+        uyQavatliligi: TextInputEditText,
+        umumiyMaydon: TextInputEditText,
+        oshxonaMaydoni: TextInputEditText,
+        uyTamiri: Spinner,
+        yashashMaydoni: TextInputEditText,
+        narxi: TextInputEditText,
+        yashashQavati: TextInputEditText,
+        xonaSoni: TextInputEditText,
+        tavsif: TextInputEditText,
+        joyNomi: TextView,
+        telRaqam: TextInputEditText,
+        onFailure: (msg: String?) -> Unit
     ): Boolean {
         return when {
+            adapter.models.isNullOrEmpty() -> {
+                onFailure.invoke("E'loningizga rasm qo'shing")
+                false
+            }
             sarlavha.checkIsEmpty() -> {
-                sarlavha.showError("Field Required")
+                sarlavha.showError("To'ldirish majburiy")
                 false
             }
-            manzil.checkIsEmpty() -> {
-                manzil.showError("Field Required")
+            bolim.selectedItemPosition == 0 -> {
+                bolim.setBackgroundResource(R.drawable.shape_stroke_error)
+                onFailure.invoke("Bo'lim tanlang")
                 false
             }
-            telNomer.checkIsEmpty() -> {
-                telNomer.showError("Field Required")
+            uyQavatliligi.checkIsEmpty() -> {
+                uyQavatliligi.showError("To'ldirish majburiy")
                 false
             }
-            narx.checkIsEmpty() -> {
-                narx.showError("Field Required")
+            umumiyMaydon.checkIsEmpty() -> {
+                umumiyMaydon.showError("To'ldirish majburiy")
                 false
             }
+            oshxonaMaydoni.checkIsEmpty() -> {
+                oshxonaMaydoni.showError("To'ldirish majburiy")
+                false
+            }
+            uyTamiri.selectedItemPosition == 0 -> {
+                uyTamiri.setBackgroundResource(R.drawable.shape_stroke_error)
+                onFailure.invoke("Uy tamirini tanlang")
+                false
+            }
+            yashashMaydoni.checkIsEmpty() -> {
+                yashashMaydoni.showError("To'ldirish majburiy")
+                false
+            }
+            narxi.checkIsEmpty() -> {
+                narxi.showError("To'ldirish majburiy")
+                false
+            }
+            yashashQavati.checkIsEmpty() -> {
+                yashashQavati.showError("To'ldirish majburiy")
+                false
+            }
+            xonaSoni.checkIsEmpty() -> {
+                xonaSoni.showError("To'ldirish majburiy")
+                false
+            }
+            tavsif.checkIsEmpty() -> {
+                tavsif.showError("To'ldirish majburiy")
+                false
+            }
+            joyNomi.text == "Joylashish manzili" -> {
+                joyNomi.setBackgroundResource(R.drawable.shape_stroke_error)
+                onFailure.invoke("Joylashuvni tanlang")
+                false
+            }
+            telRaqam.checkIsEmpty() -> {
+                telRaqam.showError("To'ldirish majburiy")
+                false
+            }
+
             else -> true
 
         }

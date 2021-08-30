@@ -12,5 +12,6 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="nomer">raqamiga tasdiqlash kodi yuborildi iltimos uni pastdagi maydonga kiriting</string>
-    <string name="metrKvadrat">m²</string>
+    <string name="metrKvadrat">Umumiy maydon (m²)</string>
+    <string name="metrKvadratOshxona">Oshxona maydoni (m²)</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.bizmiz.kvartirabor.ui.elon.ElonBerish
 
-import android.content.SharedPreferences
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,20 +18,58 @@ class ElonBerishViewModel(private val elonBerishHelper: ElonBerishHelper) : View
     fun setElonData(
         adapter: ImageAdapter,
         sarlavha: TextInputEditText,
-        manzil: TextInputEditText,
-        telNomer: TextInputEditText,
-        narx: TextInputEditText,
-        type: String,
-        prefs: SharedPreferences
+        bolim: Spinner,
+        uyQavatliligi: TextInputEditText,
+        umumiyMaydon: TextInputEditText,
+        oshxonaMaydoni: TextInputEditText,
+        uyTamiri: Spinner,
+        yashashMaydoni: TextInputEditText,
+        narxi: TextInputEditText,
+        yashashQavati: TextInputEditText,
+        xonaSoni: TextInputEditText,
+        tavsif: TextInputEditText,
+        joyNomi: TextView,
+        telRaqam: TextInputEditText,
+        type: Spinner,
+        mebel: Spinner,
+        kelishuv: Spinner,
+        sharoitlari: ArrayList<String>,
+        qurilishTuri: String,
+        latitude: Double,
+        longitude: Double
     ) {
         setElonList.value = Resource.loading()
-        elonBerishHelper.setElonData(adapter,sarlavha, manzil, telNomer, narx, type, prefs, {succes->
-          setElonList.value = Resource.success(succes)
-        }, {failure->
-          setElonList.value = Resource.error(failure)
-        }, {check->
-           setElonList.value = Resource.check(check)
-        })
+        elonBerishHelper.setElonData(
+            adapter,
+            sarlavha,
+            bolim,
+            uyQavatliligi,
+            umumiyMaydon,
+            oshxonaMaydoni,
+            uyTamiri,
+            yashashMaydoni,
+            narxi,
+            yashashQavati,
+            xonaSoni,
+            tavsif,
+            joyNomi,
+            telRaqam,
+            type,
+            mebel,
+            kelishuv,
+            sharoitlari,
+            qurilishTuri,
+            latitude,
+            longitude,
+            { succes ->
+                setElonList.value = Resource.success(succes)
+            },
+            { failure ->
+                setElonList.value = Resource.error(failure)
+            },
+            { check ->
+                setElonList.value = Resource.check(check)
+            })
     }
 
 }

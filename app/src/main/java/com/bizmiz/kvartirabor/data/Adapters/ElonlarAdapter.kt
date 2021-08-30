@@ -66,10 +66,6 @@ class ElonlarAdapter(var models: ArrayList<ElonData>, var filterType: Boolean) :
     fun setOnClickListener(onClick:(position:Int,data:ElonData)->Unit){
         this.onClick = onClick
     }
-    var dataElon:(data:ElonData)->Unit = {}
-    fun getData(data:(data:ElonData)->Unit){
-        this.dataElon = data
-    }
 
     @ExperimentalStdlibApi
     override fun getFilter(): Filter {

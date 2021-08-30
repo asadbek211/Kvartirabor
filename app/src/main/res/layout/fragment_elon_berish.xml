@@ -9,1007 +9,268 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/exit"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_baseline_close_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:text="E'lon berish"
-            android:textColor="@color/black"
-            android:textSize="30dp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/exit" />
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
-
-            <ImageView
-                android:id="@+id/ImageAdd"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/image_add"
-                android:visibility="visible"
-                tools:ignore="RtlSymmetry" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ImageLinear"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="10dp"
-                android:background="#F4F3F3"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/rasmlar"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="#E1DFDF"
-                    android:padding="5dp"
-                    android:text="Rasmlar"
-                    app:layout_constraintBottom_toTopOf="@+id/imageRecView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <ImageView
-                    android:id="@+id/imgClear"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
-                    android:layout_marginEnd="5dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_baseline_cancel_24"
-                    app:layout_constraintBottom_toBottomOf="@+id/rasmlar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/rasmlar" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/imageRecView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rasmlar" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </RelativeLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="30dp"
-            android:hint="E'lon sarlavhasini kiriting"
-            android:maxWidth="50dp"
-            android:minWidth="10dp"
-            app:counterMaxLength="200"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etSarlavha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLength="200"
-                android:textSize="@dimen/standartDp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textFieldManzil"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            android:hint="Tavsif yozing"
-            android:maxWidth="50dp"
-            android:minWidth="10dp"
-            android:visibility="visible"
-            app:counterEnabled="true"
-            app:counterMaxLength="200"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_map">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_manzil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLength="200"
-                android:textSize="@dimen/standartDp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_map"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/elonberish"
-            android:drawableStart="@drawable/ic_baseline_location_on_24"
-            android:paddingStart="20dp"
-            android:paddingEnd="40dp"
-            android:text="Joylashuvni yuklash"
-            android:textAllCaps="false"
-            android:textColor="@color/standart_rang"
-            android:textSize="18dp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textField" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            android:hint="Telefon raqam kiriting"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textFieldManzil">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_tel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:maxLength="13"
-                android:textSize="@dimen/standartDp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout3"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:hint="Narxni kiriting"
-            android:visibility="visible"
-            app:layout_constraintEnd_toStartOf="@+id/pulBirligi"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etNarx"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:maxLength="19"
-                android:textSize="16sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Spinner
-            android:id="@+id/pulBirligi"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/shape_stroke"
-            android:paddingEnd="10dp"
-            android:spinnerMode="dropdown"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="0.4"
-            app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
-            app:layout_constraintTop_toTopOf="@+id/textInputLayout3" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/drop_down"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/pulBirligi"
-            app:layout_constraintEnd_toEndOf="@+id/pulBirligi"
-            app:layout_constraintHorizontal_bias="0.97"
-            app:layout_constraintStart_toStartOf="@+id/pulBirligi"
-            app:layout_constraintTop_toTopOf="@+id/pulBirligi" />
-
-        <TextView
-            android:gravity="center"
-            android:id="@+id/qoshimchaMalumot"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:text="Qo'shimcha ma'lumot"
-            android:textColor="@color/black"
-            android:textSize="@dimen/standartDp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/pulBirligi"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/AsosiyConsLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/qoshimchaMalumot"
-            tools:visibility="visible">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/exit"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_baseline_close_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
+                android:text="E'lon berish"
+                android:textColor="@color/black"
+                android:textSize="30dp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
+                app:layout_constraintTop_toBottomOf="@+id/exit" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_stroke"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/rdbKopQavat"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Ko'p qavatli"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp" />
-
-                    <RadioButton
-                        android:id="@+id/rdbYerJoy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Yer joy"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_stroke"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/rdbSotiladi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Sotiladi"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp" />
-
-                    <RadioButton
-                        android:id="@+id/rdbIjaraBerish"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Ijaraga beriladi"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lay2"
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/shape_stroke"
-                android:orientation="vertical"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/xonalarSoni"
-                tools:visibility="visible">
+                app:layout_constraintTop_toBottomOf="@+id/textView">
 
-                <TextView
+                <ImageView
+                    android:id="@+id/ImageAdd"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="To'lov usuli"
-                    android:textColor="#474747"
-                    android:textSize="@dimen/standartDp" />
-
-                <RelativeLayout
-                    android:id="@+id/lay1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:id="@+id/rdbYakkaTolash"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Yakka to'lash"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp" />
-
-                    <RadioButton
-                        android:id="@+id/rdbUmumiyTolash"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Umumiy to'lash"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lay3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/shape_stroke"
-                android:orientation="vertical"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lay2"
-                tools:visibility="visible">
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Kvartira turi"
-                    android:textColor="#474747"
-                    android:textSize="@dimen/standartDp" />
+                    android:layout_height="100dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_add"
+                    android:visibility="visible"
+                    tools:ignore="RtlSymmetry" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/lay4"
+                    android:id="@+id/ImageLinear"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="130dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#F4F3F3"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                    <RadioButton
-                        android:id="@+id/rdbDoimiy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Doimiy"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/rdbKelishimli"
-                        app:layout_constraintHorizontal_bias="0.5"
+                    <TextView
+                        android:id="@+id/rasmlar"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:background="#E1DFDF"
+                        android:padding="5dp"
+                        android:text="Rasmlar"
+                        app:layout_constraintBottom_toTopOf="@+id/imageRecView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
 
-                    <RadioButton
-                        android:id="@+id/rdbKelishimli"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Kelishiladi"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/rdbKunlik"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/rdbDoimiy"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+                        android:id="@+id/imgClear"
+                        android:layout_width="35dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="5dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_baseline_cancel_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/rasmlar"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/rasmlar" />
 
-                    <RadioButton
-                        android:id="@+id/rdbKunlik"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Kunlik"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/imageRecView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/rdbKelishimli"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lay5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/shape_stroke"
-                android:orientation="vertical"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lay3"
-                tools:visibility="visible">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center_horizontal"
-                    android:text="Kommunal to'lovlar"
-                    android:textColor="@color/standart_rang"
-                    android:textSize="16dp" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/lay6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:id="@+id/rdbNarxIchida"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text=" Narxni\n ichida"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/rdbKelishiladi"
-                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <RadioButton
-                        android:id="@+id/rdbKelishiladi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Kelishiladi"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/rdbNarxTashqari"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/rdbNarxIchida"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <RadioButton
-                        android:id="@+id/rdbNarxTashqari"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text=" Narxdan\n tashqari"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/rdbKelishiladi"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/rasmlar" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
+
+
+            </RelativeLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout6"
+                android:id="@+id/textField"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:hint="Maydonni kiriting"
-                android:visibility="gone"
-                app:layout_constraintEnd_toStartOf="@+id/mKvadrat"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_weight="1"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:maxWidth="50dp"
+                android:minWidth="10dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etMaydon"
+                    android:id="@+id/etSarlavha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLength="19"
-                    android:textSize="16sp" />
+                    android:maxLength="200"
+                    android:textSize="@dimen/standartDp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/mKvadrat"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/shape_stroke"
-                android:gravity="center"
-                android:text="@string/metrKvadrat"
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E'lon sarlavhasi"
                 android:textColor="@color/standart_rang"
-                android:textSize="@dimen/standartDp"
-                app:layout_constraintBottom_toBottomOf="@+id/textInputLayout6"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_weight="0.4"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayout6"
-                app:layout_constraintTop_toTopOf="@+id/textInputLayout6" />
+                android:textSize="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/textField"
+                app:layout_constraintEnd_toEndOf="@+id/textField"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textField" />
 
             <Spinner
-                android:id="@+id/xonalarSoni"
+                android:id="@+id/spBolimlar"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/shape_stroke"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
                 android:paddingEnd="10dp"
                 android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toStartOf="@+id/xona"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_weight="0.5"
+                android:text="Bo'limni tanlash"
+                android:textColor="@color/standart_rang"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+                app:layout_constraintTop_toBottomOf="@+id/textField"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imageView8"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/drop_down"
-                app:layout_constraintBottom_toBottomOf="@+id/xonalarSoni"
-                app:layout_constraintEnd_toEndOf="@+id/xonalarSoni"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/spBolimlar"
+                app:layout_constraintEnd_toEndOf="@+id/spBolimlar"
                 app:layout_constraintHorizontal_bias="0.97"
-                app:layout_constraintStart_toStartOf="@+id/xonalarSoni"
-                app:layout_constraintTop_toTopOf="@+id/xonalarSoni" />
+                app:layout_constraintStart_toStartOf="@+id/spBolimlar"
+                app:layout_constraintTop_toTopOf="@+id/spBolimlar" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spBolimlar">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etQavatliligi"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/standartDp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/xona"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/shape_stroke"
-                android:gravity="center"
-                android:text="xonali"
                 android:textColor="@color/standart_rang"
-                android:textSize="@dimen/standartDp"
-                app:layout_constraintBottom_toBottomOf="@+id/xonalarSoni"
-                app:layout_constraintEnd_toStartOf="@+id/rdbQoshimchaXona"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_weight="0.5"
-                app:layout_constraintStart_toEndOf="@+id/xonalarSoni"
-                app:layout_constraintTop_toTopOf="@+id/xonalarSoni" />
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Uy qavatliligi"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout" />
 
-            <RadioButton
-                android:id="@+id/rdbQoshimchaXona"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/shape_stroke"
-                android:buttonTint="@color/colorPrimary"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:text="qo'shimcha xona"
-                android:textColor="@color/standart_rang"
-                android:textSize="@dimen/standartDp"
-                app:layout_constraintBottom_toBottomOf="@+id/xonalarSoni"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@+id/xona"
-                app:layout_constraintTop_toTopOf="@+id/xonalarSoni" />
-
-            <LinearLayout
-                android:id="@+id/lay7"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/shape_stroke"
-                android:orientation="vertical"
-                android:visibility="gone"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lay5"
-                tools:visibility="visible">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
-                <TextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMaydoni"
+                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Ijarachilar turi"
-                    android:textColor="#474747"
-                    android:textSize="16dp" />
+                    android:textSize="@dimen/standartDp"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/lay8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <RadioButton
-                        android:id="@+id/rdbOilaviy"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Oilaviy"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toTopOf="@+id/rdbIshchi"
-                        app:layout_constraintEnd_toStartOf="@+id/rdbStudent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <RadioButton
-
-                        android:id="@+id/rdbStudent"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Student"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toTopOf="@+id/rdbAbiturient"
-                        app:layout_constraintEnd_toStartOf="@+id/rdbOgilBola"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/rdbOilaviy"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <RadioButton
-                        android:id="@+id/rdbOgilBola"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="O'g'il bola"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toTopOf="@+id/rdbQizBola"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/rdbStudent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <RadioButton
-                        android:id="@+id/rdbIshchi"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Ishchi"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/rdbAbiturient"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rdbOilaviy" />
-
-                    <RadioButton
-                        android:id="@+id/rdbAbiturient"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Abiturient"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/rdbQizBola"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/rdbIshchi"
-                        app:layout_constraintTop_toBottomOf="@+id/rdbStudent" />
-
-                    <RadioButton
-                        android:id="@+id/rdbQizBola"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="Qiz bola"
-                        android:textColor="@color/standart_rang"
-                        android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/rdbAbiturient"
-                        app:layout_constraintTop_toBottomOf="@+id/rdbOgilBola" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/consa2"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/shape_stroke"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lay7"
-                tools:visibility="visible">
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:text="Uy qavatliligi"
-                    android:textColor="#474747"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView7"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:text="Sizni qavatingiz"
-                    android:textColor="#474747"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/textView8"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Spinner
-                    android:id="@+id/uyQavatliligi"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/shape_stroke"
-                    android:paddingEnd="10dp"
-                    android:spinnerMode="dropdown"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/sizniQavat"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/drop_down"
-                    app:layout_constraintBottom_toBottomOf="@+id/uyQavatliligi"
-                    app:layout_constraintEnd_toEndOf="@+id/uyQavatliligi"
-                    app:layout_constraintHorizontal_bias="0.97"
-                    app:layout_constraintStart_toStartOf="@+id/uyQavatliligi"
-                    app:layout_constraintTop_toTopOf="@+id/uyQavatliligi" />
-
-                <Spinner
-                    android:id="@+id/sizniQavat"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/shape_stroke"
-                    android:paddingEnd="10dp"
-                    android:spinnerMode="dropdown"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/uyQavatliligi"
-                    app:layout_constraintTop_toTopOf="@+id/uyQavatliligi" />
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/drop_down"
-                    app:layout_constraintBottom_toBottomOf="@+id/sizniQavat"
-                    app:layout_constraintEnd_toEndOf="@+id/sizniQavat"
-                    app:layout_constraintHorizontal_bias="0.97"
-                    app:layout_constraintStart_toStartOf="@+id/sizniQavat"
-                    app:layout_constraintTop_toTopOf="@+id/sizniQavat" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/consa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/shape_stroke"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/consa2"
-                tools:visibility="visible">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:text="Yangi ijarachilar soni"
-                    android:textColor="#474747"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView5"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:text="Ijaradagilar soni"
-                    android:textColor="#474747"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/textView6"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Spinner
-                    android:id="@+id/yangiIjarachilarSoni"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/shape_stroke"
-                    android:paddingEnd="10dp"
-                    android:spinnerMode="dropdown"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ijaradagilarSoni"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/drop_down"
-                    app:layout_constraintBottom_toBottomOf="@+id/yangiIjarachilarSoni"
-                    app:layout_constraintEnd_toEndOf="@+id/yangiIjarachilarSoni"
-                    app:layout_constraintHorizontal_bias="0.97"
-                    app:layout_constraintStart_toStartOf="@+id/yangiIjarachilarSoni"
-                    app:layout_constraintTop_toTopOf="@+id/yangiIjarachilarSoni" />
-
-                <Spinner
-                    android:id="@+id/ijaradagilarSoni"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/shape_stroke"
-                    android:paddingEnd="10dp"
-                    android:spinnerMode="dropdown"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/yangiIjarachilarSoni"
-                    app:layout_constraintTop_toTopOf="@+id/yangiIjarachilarSoni" />
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/drop_down"
-                    app:layout_constraintBottom_toBottomOf="@+id/ijaradagilarSoni"
-                    app:layout_constraintEnd_toEndOf="@+id/ijaradagilarSoni"
-                    app:layout_constraintHorizontal_bias="0.97"
-                    app:layout_constraintStart_toStartOf="@+id/ijaradagilarSoni"
-                    app:layout_constraintTop_toTopOf="@+id/ijaradagilarSoni" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:text="@string/metrKvadrat"
+                android:textColor="@color/standart_rang"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout4" />
 
             <LinearLayout
                 android:id="@+id/lay9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/shape_stroke"
                 android:orientation="vertical"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/consa"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
                 tools:visibility="visible">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center_horizontal"
                     android:text="Sharoitlari"
                     android:textColor="#474747"
@@ -1022,10 +283,8 @@
 
                     <RadioButton
                         android:id="@+id/rdbWiFi"
-                        android:layout_width="0dp"
+                        android:layout_width="165dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="20dp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Wi-fi"
                         android:textColor="@color/standart_rang"
@@ -1038,15 +297,13 @@
 
                     <RadioButton
                         android:id="@+id/rdbTelevizor"
-                        android:layout_width="0dp"
+                        android:layout_width="165dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="20dp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Televizor"
                         android:textColor="@color/standart_rang"
                         android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/rdbKatyol"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/rdbBalkon"
@@ -1054,10 +311,8 @@
 
                     <RadioButton
                         android:id="@+id/rdbAriston"
-                        android:layout_width="0dp"
+                        android:layout_width="165dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="20dp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Ariston"
                         android:textColor="@color/standart_rang"
@@ -1070,10 +325,8 @@
 
                     <RadioButton
                         android:id="@+id/rdbMuzlatgich"
-                        android:layout_width="0dp"
+                        android:layout_width="165dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="20dp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Muzlatgich"
                         android:textColor="@color/standart_rang"
@@ -1086,10 +339,8 @@
 
                     <RadioButton
                         android:id="@+id/rdbOshxona"
-                        android:layout_width="0dp"
+                        android:layout_width="166dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Oshxona"
                         android:textColor="@color/standart_rang"
@@ -1102,15 +353,13 @@
 
                     <RadioButton
                         android:id="@+id/rdbBalkon"
-                        android:layout_width="0dp"
+                        android:layout_width="166dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Balkon"
                         android:textColor="@color/standart_rang"
                         android:textSize="@dimen/standartDp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/rdbKonditsioner"
                         app:layout_constraintEnd_toStartOf="@+id/rdbTelevizor"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
@@ -1118,10 +367,8 @@
 
                     <RadioButton
                         android:id="@+id/rdbGilam"
-                        android:layout_width="0dp"
+                        android:layout_width="166dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Gilam"
                         android:textColor="@color/standart_rang"
@@ -1134,10 +381,8 @@
 
                     <RadioButton
                         android:id="@+id/rdbKirMashina"
-                        android:layout_width="0dp"
+                        android:layout_width="166dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Kir yuvish mashinasi"
                         android:textColor="@color/standart_rang"
@@ -1148,31 +393,676 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/rdbGilam" />
 
+                    <RadioButton
+                        android:id="@+id/rdbKonditsioner"
+                        android:layout_width="166dp"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="Konditsioner"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="@dimen/standartDp"
+                        app:layout_constraintBottom_toTopOf="@+id/rdbVanna"
+                        app:layout_constraintEnd_toStartOf="@+id/rdbKatyol"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rdbBalkon" />
+
+                    <RadioButton
+                        android:id="@+id/rdbKatyol"
+                        android:layout_width="166dp"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="Katyol"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="@dimen/standartDp"
+                        app:layout_constraintBottom_toTopOf="@+id/rdbTitan"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/rdbKonditsioner"
+                        app:layout_constraintTop_toBottomOf="@+id/rdbTelevizor" />
+
+                    <RadioButton
+                        android:id="@+id/rdbVanna"
+                        android:layout_width="166dp"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="Vanna"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="@dimen/standartDp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/rdbTitan"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rdbKonditsioner" />
+
+                    <RadioButton
+                        android:id="@+id/rdbTitan"
+                        android:layout_width="166dp"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="Titan(Suv isitgich)"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="@dimen/standartDp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/rdbVanna"
+                        app:layout_constraintTop_toBottomOf="@+id/rdbKatyol" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout5"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lay9">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etOshxonaMaydoni"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="@dimen/standartDp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/metrKvadratOshxona"
+                android:textColor="@color/standart_rang"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout5"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout5" />
+
+            <Spinner
+                android:id="@+id/spUyTamiri"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/shape_stroke"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/standart_rang"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/drop_down"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/spUyTamiri"
+                app:layout_constraintEnd_toEndOf="@+id/spUyTamiri"
+                app:layout_constraintHorizontal_bias="0.97"
+                app:layout_constraintStart_toStartOf="@+id/spUyTamiri"
+                app:layout_constraintTop_toTopOf="@+id/spUyTamiri" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Uyning ta'miri"
+                android:textColor="@color/standart_rang"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/spUyTamiri"
+                app:layout_constraintEnd_toEndOf="@+id/spUyTamiri"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/spUyTamiri" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout6"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spUyTamiri">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etYashashMaydoni"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="@dimen/standartDp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yashash maydoni (m²)"
+                android:textColor="@color/standart_rang"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout6"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout6" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Mebel bormi?"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
+
+            <Spinner
+                android:id="@+id/spMebel"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/shape_stroke"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/standart_rang"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView12"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toTopOf="@+id/textView12"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/drop_down"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/spMebel"
+                app:layout_constraintEnd_toEndOf="@+id/spMebel"
+                app:layout_constraintHorizontal_bias="0.97"
+                app:layout_constraintStart_toStartOf="@+id/spMebel"
+                app:layout_constraintTop_toTopOf="@+id/spMebel" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/pulBirligi"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spMebel">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNarx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="19"
+                    android:textSize="16sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/pulBirligi"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/shape_stroke"
+                android:paddingEnd="10dp"
+                android:spinnerMode="dropdown"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/textInputLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="0.4"
+                app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
+                app:layout_constraintTop_toTopOf="@+id/textInputLayout3"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/drop_down"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/pulBirligi"
+                app:layout_constraintEnd_toEndOf="@+id/pulBirligi"
+                app:layout_constraintHorizontal_bias="0.97"
+                app:layout_constraintStart_toStartOf="@+id/pulBirligi"
+                app:layout_constraintTop_toTopOf="@+id/pulBirligi" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Narxi"
+                android:textColor="@color/standart_rang"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout3" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Narx kelishiladimi?"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+
+            <Spinner
+                android:id="@+id/spNarxKelishish"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/shape_stroke"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/standart_rang"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView13"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:layout_constraintTop_toTopOf="@+id/textView13"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/drop_down"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/spNarxKelishish"
+                app:layout_constraintEnd_toEndOf="@+id/spNarxKelishish"
+                app:layout_constraintHorizontal_bias="0.97"
+                app:layout_constraintStart_toStartOf="@+id/spNarxKelishish"
+                app:layout_constraintTop_toTopOf="@+id/spNarxKelishish" />
+
+            <LinearLayout
+                android:id="@+id/lay11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/shape_stroke"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13"
+                tools:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="Qurilish turi"
+                    android:textColor="#474747"
+                    android:textSize="16dp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lay12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:checked="true"
+                        android:id="@+id/rdbGishtli"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="G'ishtli"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="@dimen/standartDp"
+                        app:layout_constraintBottom_toTopOf="@+id/rdbMonolitli"
+                        app:layout_constraintEnd_toStartOf="@+id/rdbPanelli"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RadioButton
+                        android:id="@+id/rdbPanelli"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="Panelli"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="@dimen/standartDp"
+                        app:layout_constraintBottom_toTopOf="@+id/rdbYogoch"
+                        app:layout_constraintEnd_toStartOf="@+id/rdbBlokli"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/rdbGishtli"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RadioButton
+                        android:id="@+id/rdbMonolitli"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="Monolitli"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="@dimen/standartDp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/rdbYogoch"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rdbGishtli" />
+
+                    <RadioButton
+                        android:id="@+id/rdbBlokli"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="Blokli"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="@dimen/standartDp"
+                        app:layout_constraintBottom_toTopOf="@+id/rdbYogoch2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/rdbPanelli"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RadioButton
+                        android:id="@+id/rdbYogoch"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="Yog'och"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="@dimen/standartDp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/rdbYogoch2"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/rdbMonolitli"
+                        app:layout_constraintTop_toBottomOf="@+id/rdbPanelli" />
+
+                    <RadioButton
+                        android:id="@+id/rdbYogoch2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:buttonTint="@color/colorPrimary"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="@dimen/standartDp"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/rdbYogoch"
+                        app:layout_constraintTop_toBottomOf="@+id/rdbBlokli" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout7"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lay11">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etQavati"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="@dimen/standartDp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:textColor="@color/standart_rang"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yashash qavatingiz"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout7"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout7"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout7" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout8"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etXonaSoni"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="@dimen/standartDp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:textColor="@color/standart_rang"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xonalar soni"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout8"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout8"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout8" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textFieldManzil"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:maxWidth="50dp"
+                android:minWidth="10dp"
+                android:visibility="visible"
+                app:counterEnabled="true"
+                app:counterMaxLength="9000"
+                app:helperText="E'loningizni tavsiflab bering :)"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTavsif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="200"
+                    android:textSize="@dimen/standartDp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:textColor="@color/standart_rang"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tavsif"
+                app:layout_constraintBottom_toTopOf="@+id/textFieldManzil"
+                app:layout_constraintEnd_toEndOf="@+id/textFieldManzil"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textFieldManzil" />
+
+            <RelativeLayout
+                android:background="@drawable/shape_map"
+                android:layout_marginTop="20dp"
+                android:id="@+id/mapRel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textFieldManzil">
+
+                <TextView
+                    android:id="@+id/txtMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/shape_stroke"
+                    android:drawableStart="@drawable/ic_baseline_location_on_24"
+                    android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Joylashish manzili"
+                    android:textSize="18dp" />
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/shape_map"
+                    android:visibility="gone"
+                    android:padding="8dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_baseline_close_24"
+                    android:id="@+id/nextBack"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"/>
+                <ImageView
+                    android:layout_margin="5dp"
+                    android:id="@+id/mapImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_below="@id/txtMap"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mapRel">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:maxLength="13"
+                    android:textSize="@dimen/standartDp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:textColor="@color/standart_rang"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telefon raqami"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout2" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/elonJoylash"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/elonberish"
+                android:text="E'lon joylashtirish"
+                android:textAllCaps="false"
+                android:textColor="@color/standart_rang"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/MapContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/mapView"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/elonJoylash"
+            android:id="@+id/MapLoc"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/elonberish"
-            android:text="E'lon joylashtirish"
-            android:textAllCaps="false"
-            android:textColor="@color/standart_rang"
-            android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/AsosiyConsLayout" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape1"
+            android:text="Joylashuvni saqlash"
+            android:textColor="#8BF8FF"
+            android:textSize="16dp" />
+    </RelativeLayout>
     <RelativeLayout
         android:background="#7C050505"
         android:id="@+id/loading"

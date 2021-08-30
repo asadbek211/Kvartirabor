@@ -6,9 +6,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.bizmiz.kvartirabor.ui.MainActivity
 import com.bizmiz.kvartirabor.R
 import com.bizmiz.kvartirabor.databinding.FragmentAuthUserBinding
+import com.bizmiz.kvartirabor.ui.MainActivity
 import com.bizmiz.kvartirabor.ui.auth.UserReg.AuthRegFragment
 import com.google.firebase.auth.FirebaseAuth
 
@@ -39,7 +39,7 @@ class AuthUserFragment : Fragment(R.layout.fragment_auth_user) {
             binding.loading.visibility = View.VISIBLE
             val navController: NavController =
                 Navigation.findNavController(requireActivity(), R.id.mainFragmentContener)
-            navController.navigate(R.id.elonBerishFragment)
+            navController.navigate(R.id.action_profilFragment_to_elonBerishFragment)
             (activity as MainActivity).visibility(true)
         }
     }

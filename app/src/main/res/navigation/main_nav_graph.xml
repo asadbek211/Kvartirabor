@@ -25,11 +25,7 @@
         tools:layout="@layout/fragment_elon_berish"
         android:id="@+id/elonBerishFragment"
         android:name="com.bizmiz.kvartirabor.ui.elon.ElonBerish.ElonBerishFragment"
-        android:label="ElonBerishFragment" >
-        <action
-            android:id="@+id/action_elonBerishFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
-    </fragment>
+        android:label="ElonBerishFragment" />
     <fragment
         tools:layout="@layout/fragment_login"
         android:id="@+id/loginFragment"
@@ -42,17 +38,6 @@
             app:exitAnim="@anim/slide_wait"
             app:popEnterAnim="@anim/slide_wait"
             app:popExitAnim="@anim/slide_right"/>
-    </fragment>
-    <fragment
-        tools:layout="@layout/fragment_map"
-        android:id="@+id/mapFragment"
-        android:name="com.bizmiz.kvartirabor.ui.map.MapFragment"
-        android:label="MapFragment" >
-        <action
-            android:id="@+id/action_mapFragment_to_elonBerishFragment"
-            app:destination="@id/elonBerishFragment"
-            app:popUpTo="@id/elonBerishFragment"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_s_m_s"
@@ -76,6 +61,9 @@
             app:exitAnim="@anim/slide_wait"
             app:popEnterAnim="@anim/slide_wait"
             app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_profilFragment_to_elonBerishFragment"
+            app:destination="@id/elonBerishFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_mening_elonlarim"
