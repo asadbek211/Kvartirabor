@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Qidirish turi"
+        android:textColor="@color/bottom_color"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+        android:id="@+id/rdbSarlavhaOrqali"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_weight="1"
+        android:buttonTint="@color/colorPrimary"
+        android:text="Sarlavha orqali"
+        android:textColor="@color/bottom_color"
+        android:textSize="@dimen/standartDp"
+        app:layout_constraintEnd_toStartOf="@+id/rdbTavsifOrqali"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text1" />
+
+    <RadioButton
+        android:id="@+id/rdbTavsifOrqali"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_weight="1"
+        android:buttonTint="@color/colorPrimary"
+        android:text="Tavsif orqali"
+        android:textColor="@color/bottom_color"
+        android:textSize="@dimen/standartDp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rdbSarlavhaOrqali"
+        app:layout_constraintTop_toTopOf="@+id/rdbSarlavhaOrqali" />
+
+    <Spinner
+        android:id="@+id/spViloyatlar"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="#EFECEC"
+        android:gravity="center_vertical"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:spinnerMode="dropdown"
+        android:text="Bo'limni tanlash"
+        android:textColor="@color/standart_rang"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spBolimlar"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/spViloyatlar"
+        android:layout_alignTop="@+id/spViloyatlar"
+        android:layout_alignEnd="@+id/spViloyatlar"
+        android:layout_alignBottom="@+id/spViloyatlar"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/drop_down"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/spViloyatlar"
+        app:layout_constraintEnd_toEndOf="@+id/spViloyatlar"
+        app:layout_constraintTop_toTopOf="@+id/spViloyatlar" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="Hudud"
+        android:textColor="@color/standart_rang"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/spViloyatlar"
+        app:layout_constraintStart_toStartOf="@+id/spViloyatlar" />
+
+    <Spinner
+        android:id="@+id/spBolimlar"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="#EFECEC"
+        android:gravity="center_vertical"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:spinnerMode="dropdown"
+        android:text="Bo'limni tanlash"
+        android:textColor="@color/standart_rang"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rdbSarlavhaOrqali"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/spBolimlar"
+        android:layout_alignTop="@+id/spBolimlar"
+        android:layout_alignEnd="@+id/spBolimlar"
+        android:layout_alignBottom="@+id/spBolimlar"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/drop_down"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/spBolimlar"
+        app:layout_constraintEnd_toEndOf="@+id/spBolimlar"
+        app:layout_constraintTop_toTopOf="@+id/spBolimlar" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="Bo'lim"
+        android:textColor="@color/standart_rang"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/spBolimlar"
+        app:layout_constraintStart_toStartOf="@+id/spBolimlar" />
+
+    <TextView
+        android:id="@+id/narxTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Narx orqali saralash"
+        android:textColor="@color/bottom_color"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/spValyuta"
+        app:layout_constraintTop_toBottomOf="@+id/spValyuta" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchView"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:thumb="@drawable/custom_thumb"
+        app:layout_constraintBottom_toBottomOf="@+id/narxTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/narxTitle"
+        app:layout_constraintTop_toTopOf="@+id/narxTitle"
+        app:track="@drawable/custom_track" />
+
+    <Spinner
+        android:id="@+id/spValyuta"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="40dp"
+        android:background="#EFECEC"
+        android:gravity="center_vertical"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:spinnerMode="dropdown"
+        android:text="Bo'limni tanlash"
+        android:textColor="@color/standart_rang"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/spViloyatlar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/spViloyatlar"
+        app:layout_constraintTop_toBottomOf="@+id/spViloyatlar"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/valyutaDrop"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/spValyuta"
+        android:layout_alignTop="@+id/spValyuta"
+        android:layout_alignEnd="@+id/spValyuta"
+        android:layout_alignBottom="@+id/spValyuta"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/drop_down"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/spValyuta"
+        app:layout_constraintEnd_toEndOf="@+id/spValyuta"
+        app:layout_constraintTop_toTopOf="@+id/spValyuta" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="Valyuta"
+        android:textColor="@color/standart_rang"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/spValyuta"
+        app:layout_constraintStart_toStartOf="@+id/spValyuta" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="Boshlang'ich narx"
+        android:textColor="@color/standart_rang"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/etStartNarx"
+        app:layout_constraintStart_toStartOf="@+id/etStartNarx" />
+
+    <EditText
+        android:id="@+id/etStartNarx"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:background="#EFECEC"
+        android:enabled="false"
+        android:inputType="number"
+        android:maxLength="9"
+        android:maxLines="1"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:textSize="16dp"
+        android:theme="@style/editTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/narxTitle"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/etStartNarx"
+        android:layout_marginStart="20dp"
+        android:text="dan"
+        android:textColor="@color/bottom_color"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etStartNarx"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/etStartNarx"
+        app:layout_constraintTop_toTopOf="@+id/etStartNarx" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="Oxirgi narx"
+        android:textColor="@color/standart_rang"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/etEndNarx"
+        app:layout_constraintStart_toStartOf="@+id/etEndNarx" />
+
+    <EditText
+        android:id="@+id/etEndNarx"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:background="#EFECEC"
+        android:enabled="false"
+        android:inputType="number"
+        android:maxLength="9"
+        android:maxLines="1"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:textSize="16dp"
+        android:theme="@style/editTextStyle"
+        app:layout_constraintEnd_toEndOf="@+id/etStartNarx"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etStartNarx"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="gacha"
+        android:textColor="@color/bottom_color"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etEndNarx"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="@+id/etEndNarx" />
+
+    <TextView
+        android:id="@+id/txtSaqlash"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/etStartNarx"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape1"
+        android:gravity="center"
+        android:text="Saqlash"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEndNarx"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

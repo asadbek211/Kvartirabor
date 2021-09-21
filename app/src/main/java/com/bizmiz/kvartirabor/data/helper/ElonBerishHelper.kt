@@ -36,6 +36,7 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
         qurilishTuri: String,
         latitude: Double,
         longitude: Double,
+        txtVil:TextView,
         onSuccess: (succes: String?) -> Unit,
         onFailure: (msg: String?) -> Unit,
         check: (msg: String?) -> Unit
@@ -47,16 +48,15 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
                 sarlavha,
                 bolim,
                 uyQavatliligi,
-                umumiyMaydon,
-                oshxonaMaydoni,
                 uyTamiri,
-                yashashMaydoni,
                 narxi,
                 yashashQavati,
                 xonaSoni,
                 tavsif,
                 joyNomi,
                 telRaqam,
+                txtVil,
+                latitude,
                 onFailure
             )
         ) {
@@ -92,6 +92,7 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
                                         uuid,
                                         latitude,
                                         longitude,
+                                        txtVil.text.toString(),
                                         onSuccess,
                                         onFailure,
                                         check
@@ -131,6 +132,7 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
         uuid: String,
         latitude: Double,
         longitude: Double,
+        txtVil: String,
         onSuccess: (succes: String?) -> Unit,
         onFailure: (msg: String?) -> Unit,
         check: (msg: String?) -> Unit
@@ -160,6 +162,7 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
         map["createdDate"] = System.currentTimeMillis()
         map["latitude"] = latitude
         map["longitude"] = longitude
+        map["viloyat"] = txtVil
         db.collection(Constant.BASE_COLLECTION).document(map["id"].toString()).set(map)
             .addOnSuccessListener {
                 onSuccess.invoke("success")
@@ -176,16 +179,15 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
         sarlavha: TextInputEditText,
         bolim: Spinner,
         uyQavatliligi: TextInputEditText,
-        umumiyMaydon: TextInputEditText,
-        oshxonaMaydoni: TextInputEditText,
         uyTamiri: Spinner,
-        yashashMaydoni: TextInputEditText,
         narxi: TextInputEditText,
         yashashQavati: TextInputEditText,
         xonaSoni: TextInputEditText,
         tavsif: TextInputEditText,
         joyNomi: TextView,
         telRaqam: TextInputEditText,
+        txtVil: TextView,
+        latitude: Double,
         onFailure: (msg: String?) -> Unit
     ): Boolean {
         return when {
@@ -206,21 +208,9 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
                 uyQavatliligi.showError("To'ldirish majburiy")
                 false
             }
-            umumiyMaydon.checkIsEmpty() -> {
-                umumiyMaydon.showError("To'ldirish majburiy")
-                false
-            }
-            oshxonaMaydoni.checkIsEmpty() -> {
-                oshxonaMaydoni.showError("To'ldirish majburiy")
-                false
-            }
             uyTamiri.selectedItemPosition == 0 -> {
                 uyTamiri.setBackgroundResource(R.drawable.shape_stroke_error)
                 onFailure.invoke("Uy tamirini tanlang")
-                false
-            }
-            yashashMaydoni.checkIsEmpty() -> {
-                yashashMaydoni.showError("To'ldirish majburiy")
                 false
             }
             narxi.checkIsEmpty() -> {
@@ -239,13 +229,22 @@ class ElonBerishHelper(private val mAuth: FirebaseAuth, private val db: Firebase
                 tavsif.showError("To'ldirish majburiy")
                 false
             }
-            joyNomi.text == "Joylashish manzili" -> {
+            txtVil.text=="Kvartira manzili" -> {
+                txtVil.setBackgroundResource(R.drawable.shape_stroke_error)
+                onFailure.invoke("Manzilni tanlang")
+                false
+            }
+            latitude ==0.0 -> {
                 joyNomi.setBackgroundResource(R.drawable.shape_stroke_error)
                 onFailure.invoke("Joylashuvni tanlang")
                 false
             }
             telRaqam.checkIsEmpty() -> {
                 telRaqam.showError("To'ldirish majburiy")
+                false
+            }
+            telRaqam.text?.length !=13 -> {
+                telRaqam.showError("Raqam to'liq emas")
                 false
             }
 

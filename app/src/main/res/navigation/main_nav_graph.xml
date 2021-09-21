@@ -15,12 +15,28 @@
         <argument
             android:name="position"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_elonlarFragment_to_barchaElonlarFragment"
+            app:destination="@id/barchaElonlarFragment" />
+        <action
+            android:id="@+id/action_elonlarFragment_to_ijaraElonlarFragment"
+            app:destination="@id/ijaraElonlarFragment" />
+        <action
+            android:id="@+id/action_elonlarFragment_to_sotishElonlarFragment"
+            app:destination="@id/sotishElonlarFragment" />
+        <action
+            android:id="@+id/action_elonlarFragment_to_ayrboshlashElonlarFragment"
+            app:destination="@id/ayrboshlashElonlarFragment" />
     </fragment>
     <fragment
         android:id="@+id/saralanganlarFragment"
         android:name="com.bizmiz.kvartirabor.ui.favourite.SaralanganlarFragment"
         android:label="SaralanganlarFragment"
-        tools:layout="@layout/fragment_saralanganlar" />
+        tools:layout="@layout/fragment_saralanganlar" >
+        <action
+            android:id="@+id/action_saralanganlarFragment_to_elonFullFragment"
+            app:destination="@id/elonFullFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_elon_berish"
         android:id="@+id/elonBerishFragment"
@@ -33,11 +49,7 @@
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_SMSFragment"
-            app:destination="@id/SMSFragment"
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/slide_wait"
-            app:popEnterAnim="@anim/slide_wait"
-            app:popExitAnim="@anim/slide_right"/>
+            app:destination="@id/SMSFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_s_m_s"
@@ -55,15 +67,20 @@
         android:name="com.bizmiz.kvartirabor.ui.auth.profil.ProfilFragment"
         android:label="ProfilFragment" >
         <action
-            android:id="@+id/action_profilFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/slide_wait"
-            app:popEnterAnim="@anim/slide_wait"
-            app:popExitAnim="@anim/slide_right"/>
-        <action
             android:id="@+id/action_profilFragment_to_elonBerishFragment"
             app:destination="@id/elonBerishFragment" />
+        <argument
+            android:name="data"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_profilFragment_to_meningElonlarimFragment"
+            app:destination="@id/meningElonlarimFragment" />
+        <action
+            android:id="@+id/action_profilFragment_to_elonBerishFragment2"
+            app:destination="@id/elonBerishFragment" />
+        <action
+            android:id="@+id/action_profilFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_mening_elonlarim"
@@ -73,12 +90,83 @@
         <action
             android:id="@+id/action_meningElonlarimFragment_to_elonFullFragment"
             app:destination="@id/elonFullFragment" />
+        <argument
+            android:name="data"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_meningElonlarimFragment_to_elonTahrirlashFragment"
+            app:destination="@id/elonTahrirlashFragment" />
     </fragment>
     <fragment
         android:id="@+id/elonFullFragment"
         android:name="com.bizmiz.kvartirabor.ui.elon.ElonFull.ElonFullFragment"
         android:label="fragment_elon_full"
         tools:layout="@layout/fragment_elon_full" />
+    <fragment
+        tools:layout="@layout/fragment_elon_tahrirlash"
+        android:id="@+id/elonTahrirlashFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.ElonTahrirlash.ElonTahrirlashFragment"
+        android:label="ElonTahrirlashFragment" />
+    <fragment
+        android:id="@+id/barchaElonlarFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.Elonlar.barchaElonlar.BarchaElonlarFragment"
+        android:label="fragment_barcha_elonlar"
+        tools:layout="@layout/fragment_barcha_elonlar" >
+        <action
+            android:id="@+id/action_barchaElonlarFragment_to_elonFullFragment"
+            app:destination="@id/elonFullFragment" />
+        <action
+            android:id="@+id/action_barchaElonlarFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ijaraElonlarFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.Elonlar.ijaraElonlar.IjaraElonlarFragment"
+        android:label="fragment_ijara_elonlar"
+        tools:layout="@layout/fragment_ijara_elonlar" >
+        <action
+            android:id="@+id/action_ijaraElonlarFragment_to_elonFullFragment"
+            app:destination="@id/elonFullFragment" />
+        <action
+            android:id="@+id/action_ijaraElonlarFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sotishElonlarFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.Elonlar.sotishElonlar.SotishElonlarFragment"
+        android:label="fragment_sotish_elonlar"
+        tools:layout="@layout/fragment_sotish_elonlar" >
+        <action
+            android:id="@+id/action_sotishElonlarFragment_to_elonFullFragment"
+            app:destination="@id/elonFullFragment" />
+        <action
+            android:id="@+id/action_sotishElonlarFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ayrboshlashElonlarFragment"
+        android:name="com.bizmiz.kvartirabor.ui.elon.Elonlar.ayrboshlashElonlar.AyrboshlashElonlarFragment"
+        android:label="fragment_ayrboshlash_elonlar"
+        tools:layout="@layout/fragment_ayrboshlash_elonlar" >
+        <action
+            android:id="@+id/action_ayrboshlashElonlarFragment_to_elonFullFragment"
+            app:destination="@id/elonFullFragment" />
+        <action
+            android:id="@+id/action_ayrboshlashElonlarFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_search"
+        android:id="@+id/searchFragment"
+        android:name="com.bizmiz.kvartirabor.ui.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_elonFullFragment"
+            app:destination="@id/elonFullFragment" />
+        <argument
+            android:name="data"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>

@@ -119,18 +119,18 @@
 
                 <TextView
                     android:id="@+id/xonaSoni"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shape_stroke"
-                    android:paddingStart="15dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
+                    android:paddingEnd="8dp"
                     android:paddingBottom="5dp"
                     android:text="Xonalar soni:"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -140,135 +140,152 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/shape_stroke"
-                    android:paddingStart="15dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
+                    android:paddingEnd="8dp"
                     android:paddingBottom="5dp"
                     android:text="Umumiy maydon:"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/xonaSoni"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/yashashMaydon"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shape_stroke"
-                    android:paddingStart="15dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
+                    android:paddingEnd="8dp"
                     android:paddingBottom="5dp"
                     android:text="Yashash maydoni:"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/xonaSoni" />
+                    app:layout_constraintTop_toBottomOf="@+id/xonaSoni"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/oshxonaMaydon"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shape_stroke"
-                    android:paddingStart="15dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
+                    android:paddingEnd="8dp"
                     android:paddingBottom="5dp"
                     android:text="Oshxona maydoni:"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
-                    app:layout_constraintStart_toStartOf="@+id/yashashMaydon"
-                    app:layout_constraintTop_toBottomOf="@+id/yashashMaydon" />
+                    android:textSize="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/qavati"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/qavati"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/shape_stroke"
-                    android:paddingStart="15dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
+                    android:paddingEnd="8dp"
                     android:paddingBottom="5dp"
                     android:text="Qavati:"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/yashashMaydon"
-                    app:layout_constraintTop_toTopOf="@+id/yashashMaydon" />
+                    app:layout_constraintTop_toBottomOf="@+id/xonaSoni" />
 
                 <TextView
                     android:id="@+id/uyQavatliligi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/shape_stroke"
-                    android:paddingStart="15dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
+                    android:paddingEnd="8dp"
                     android:paddingBottom="5dp"
                     android:text="Uy qavatliligi:"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/oshxonaMaydon"
-                    app:layout_constraintTop_toTopOf="@+id/oshxonaMaydon" />
+                    app:layout_constraintTop_toBottomOf="@+id/qavati" />
 
                 <TextView
                     android:id="@+id/uyTamiri"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/shape_stroke"
-                    android:paddingStart="15dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
+                    android:paddingEnd="8dp"
                     android:paddingBottom="5dp"
                     android:text="Uy tamiri:"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/mebel"
-                    app:layout_constraintTop_toBottomOf="@+id/mebel" />
+                    app:layout_constraintTop_toBottomOf="@+id/mebel"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/mebel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shape_stroke"
-                    android:paddingStart="15dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
+                    android:paddingEnd="8dp"
                     android:paddingBottom="5dp"
                     android:text="Mebel:"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
-                    app:layout_constraintStart_toStartOf="@+id/oshxonaMaydon"
-                    app:layout_constraintTop_toBottomOf="@+id/oshxonaMaydon" />
+                    android:textSize="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/uyQavatliligi" />
 
                 <TextView
                     android:id="@+id/qurilishTuri"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/shape_stroke"
-                    android:paddingStart="15dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
+                    android:paddingEnd="8dp"
                     android:paddingBottom="5dp"
                     android:text="Qurilish turi:"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/mebel"
@@ -283,20 +300,23 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/shape_stroke"
-                    android:paddingStart="15dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
+                    android:paddingEnd="8dp"
                     android:paddingBottom="5dp"
                     android:text="Sharoitlari:"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/uyTamiri"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:visibility="visible" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
@@ -413,49 +433,49 @@
                     android:id="@+id/area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="10dp"
                     android:textColor="@color/black"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                    app:layout_constraintEnd_toStartOf="@+id/cardView"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/imageView4"
                     app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
-                <TextView
-                    android:id="@+id/subArea"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    app:layout_constraintStart_toStartOf="@+id/area"
-                    app:layout_constraintTop_toBottomOf="@+id/area" />
-
-                <ImageView
-                    android:scaleType="centerCrop"
-                    android:id="@+id/xarita"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_marginStart="30dp"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="130dp"
+                    android:layout_height="90dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
-                    android:src="#ff00"
+                    app:cardCornerRadius="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/subArea"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/xarita"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_map"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/mape" />
+                </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
     <RelativeLayout
-        android:background="@color/splashColor"
         android:id="@+id/titleRt"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/splashColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/exit"
         android:layout_width="50dp"
@@ -478,12 +498,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/titleRt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/scNested" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fullImageCl"
-        android:visibility="gone"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/splashColor"
-        android:layout_height="match_parent">
+        android:visibility="gone">
+
         <com.synnapps.carouselview.CarouselView
             android:id="@+id/fullCourserView"
             android:layout_width="match_parent"
@@ -499,10 +521,31 @@
             app:strokeWidth="1dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.fragment.app.FragmentContainerView
-        android:visibility="gone"
         android:id="@+id/mapView"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        android:id="@+id/mapClose"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Yopish"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/titleRt"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

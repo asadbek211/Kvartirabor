@@ -11,14 +11,13 @@ class ElonlarViewModel(private val elonlarHelper: ElonlarHelper) : ViewModel() {
     private val elonlarList: MutableLiveData<Resource<ArrayList<ElonData>>> = MutableLiveData()
     val elon: LiveData<Resource<ArrayList<ElonData>>>
         get() = elonlarList
-
     fun getElonlarData() {
         elonlarList.value = Resource.loading()
         elonlarHelper.getElonlarData({
-             elonlarList.value = Resource.success(it)
-        },{
-          elonlarList.value = Resource.error(it)
+
+            elonlarList.value = Resource.success(it)
+        }, {
+            elonlarList.value = Resource.error(it)
         })
     }
-
 }

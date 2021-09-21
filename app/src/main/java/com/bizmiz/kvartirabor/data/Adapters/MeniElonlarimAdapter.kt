@@ -46,29 +46,28 @@ class MeniElonlarimAdapter :
 
 
             binding.layTouch.setOnClickListener {
-                Toast.makeText(
-                    itemView.context,
-                    "Buning ustida hali ishlanyabdi",
-                    Toast.LENGTH_SHORT
-                ).show()
+              onClick.invoke(data)
             }
             binding.cardDelete.setOnClickListener {
-                Toast.makeText(
-                    itemView.context,
-                    "$position - elon o'chirildi",
-                    Toast.LENGTH_SHORT
-                ).show()
+                delete.invoke(data)
             }
             binding.cardEdit.setOnClickListener {
-                Toast.makeText(
-                    itemView.context,
-                    "$position - elon tahrirlanyabdi",
-                    Toast.LENGTH_SHORT
-                ).show()
+                update.invoke(data)
             }
         }
     }
-
+      var delete:(data:ElonlarimData)->Unit = {}
+    fun itemDelete(delete:(data:ElonlarimData)->Unit){
+        this.delete = delete
+    }
+    var update:(data:ElonlarimData)->Unit = {}
+    fun itemUpdate(update:(data:ElonlarimData)->Unit){
+        this.update = update
+    }
+    var onClick:(data:ElonlarimData)->Unit = {}
+    fun setOnClickListener(onClick:(data:ElonlarimData)->Unit){
+        this.onClick = onClick
+    }
     var models: MutableList<ElonlarimData> = mutableListOf()
         set(value) {
             field = value

@@ -2,183 +2,165 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#F6F5F5"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
- <androidx.cardview.widget.CardView
-     android:id="@+id/etLiner"
-     android:layout_width="0dp"
-     android:layout_height="50dp"
-     app:cardCornerRadius="5dp"
-     android:layout_marginStart="15dp"
-     android:layout_marginTop="10dp"
-     app:layout_constraintEnd_toStartOf="@+id/imgFilter"
-     app:layout_constraintHorizontal_bias="0.0"
-     app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toTopOf="parent">
-
-  <androidx.appcompat.widget.SearchView
-      android:background="#8A8989"
-      android:id="@+id/et_search"
-      app:queryBackground="@color/transparent"
-      android:theme="@style/editTextStyle"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:iconifiedByDefault="false"
-      app:layout_constraintEnd_toStartOf="@+id/imgFilter"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:queryHint="qidirish..."
-      app:searchIcon="@drawable/ic_baseline_search_24" />
- </androidx.cardview.widget.CardView>
-
- <ImageView
-     android:id="@+id/imgFilter"
-     android:layout_width="50dp"
-     android:layout_height="50dp"
-     android:layout_marginTop="10dp"
-     android:layout_marginEnd="10dp"
-     android:padding="9dp"
-     android:rotation="90"
-     android:src="@drawable/ic_filter"
-     app:layout_constraintEnd_toEndOf="parent"
-     app:layout_constraintTop_toTopOf="parent" />
-
- <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-     android:id="@+id/swipeContainer"
-     android:layout_width="0dp"
-     android:layout_height="0dp"
-     android:layout_marginTop="15dp"
-     app:layout_constraintBottom_toBottomOf="parent"
-     app:layout_constraintEnd_toEndOf="parent"
-     app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toBottomOf="@+id/etLiner">
-
-  <androidx.core.widget.NestedScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bolimlar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
+    android:layout_height="match_parent"
+    android:background="@color/splashColor">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-     <TextView
-         android:id="@+id/bolimTitle"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginStart="20dp"
-         android:layout_marginTop="20dp"
-         android:text="Bo'limlar"
-         android:textColor="@color/standart_rang"
-         android:textSize="20dp"
-         android:textStyle="bold"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintHorizontal_bias="0.0"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toTopOf="parent" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-     <ImageView
-         android:id="@+id/imageView9"
-         android:layout_width="0dp"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="15dp"
-         android:layout_marginEnd="20dp"
-         android:src="@drawable/ic_line"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintStart_toStartOf="@+id/bolimTitle"
-         app:layout_constraintTop_toBottomOf="@+id/bolimTitle" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-     <androidx.recyclerview.widget.RecyclerView
-         android:id="@+id/rvBolim"
-         android:layout_width="0dp"
-         android:layout_height="160dp"
-         android:layout_marginTop="10dp"
-         android:layout_marginBottom="10dp"
-         android:orientation="horizontal"
-         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/imageView9"
-         app:layout_constraintVertical_bias="0.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/bolimlar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recView"
+                    <TextView
+                        android:id="@+id/bolimTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="30dp"
+                        android:text="Bo'limlar"
+                        android:textColor="@color/standart_rang"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/ic_line"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/bolimTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/bolimTitle" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvBolim"
+                        android:layout_width="0dp"
+                        android:layout_height="160dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView9"
+                        app:layout_constraintVertical_bias="0.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/namunaliElonlar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Tanlangan"
+                    android:textColor="@color/standart_rang"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bolimlar" />
+
+                <ImageView
+                    android:id="@+id/namunaliElonlarInfo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="2dp"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_info"
+                    app:layout_constraintBottom_toBottomOf="@+id/namunaliElonlar"
+                    app:layout_constraintStart_toEndOf="@+id/namunaliElonlar"
+                    app:layout_constraintTop_toTopOf="@+id/namunaliElonlar" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/namunaliElonlar"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <RelativeLayout
+        android:id="@+id/loading"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="0dp"
+        android:background="#7C050505"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bolimlar"
-        app:layout_constraintVertical_bias="0.0" />
-   </androidx.constraintlayout.widget.ConstraintLayout>
-  </androidx.core.widget.NestedScrollView>
- </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        app:layout_constraintTop_toTopOf="parent">
 
- <RelativeLayout
-     android:id="@+id/loading"
-     android:layout_width="0dp"
-     android:layout_height="0dp"
-     android:background="#7C050505"
-     android:visibility="visible"
-     app:layout_constraintBottom_toBottomOf="parent"
-     app:layout_constraintEnd_toEndOf="parent"
-     app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toTopOf="parent">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
 
-  <androidx.cardview.widget.CardView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
-      android:layout_gravity="center"
-      android:orientation="vertical"
-      app:cardCornerRadius="10dp"
-      app:cardElevation="5dp"
-      app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/white"
+                android:gravity="center"
+                android:orientation="vertical">
 
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_gravity="center"
-       android:layout_margin="10dp"
-       android:backgroundTint="@color/white"
-       android:gravity="center"
-       android:orientation="vertical">
+                <ProgressBar
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:backgroundTintMode="src_atop"
+                    android:indeterminateTint="@color/black"
+                    android:indeterminateTintMode="src_atop" />
 
-    <ProgressBar
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTintMode="src_atop"
-        android:indeterminateTint="@color/black"
-        android:indeterminateTintMode="src_atop" />
-
-    <TextView
-        android:id="@+id/tv_progress_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10dp"
-        android:text="Loading..."
-        android:textColor="@color/design_default_color_primary_dark"
-        tools:ignore="MissingPrefix" />
-   </LinearLayout>
-  </androidx.cardview.widget.CardView>
- </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_progress_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:text="Loading..."
+                    android:textColor="@color/design_default_color_primary_dark"
+                    tools:ignore="MissingPrefix" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

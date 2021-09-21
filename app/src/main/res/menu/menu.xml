@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/elonlarFragment"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/home_item"
         android:title="E'lonlar" />
     <item
-        android:id="@+id/saralanganlarFragment"
-        android:icon="@drawable/saralangan"
-        android:title="Saralanganlar" />
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/search_item"
+        android:title="Qidirish" />
     <item
-        android:id="@+id/meningElonlarimFragment"
-        android:icon="@drawable/ic_elonlarim"
-        android:title="E'lonlarim" />
+        android:id="@+id/navigation_empty"
+        android:enabled="false"
+        android:title="" />
+    <item
+        android:id="@+id/saralanganlarFragment"
+        android:icon="@drawable/favourite_item"
+        android:title="Saralangan" />
     <item
         android:id="@+id/profilFragment"
-        android:icon="@drawable/profil"
+        android:icon="@drawable/person_item"
         android:title="Profilim" />
 
 </menu>

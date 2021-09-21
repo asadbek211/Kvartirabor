@@ -143,4 +143,8 @@ class SMSFragment : Fragment(R.layout.fragment_s_m_s) {
         }
          time.start()
     }
+    override fun onDestroyView() {
+        a = true
+        super.onDestroyView()
+    }
 }

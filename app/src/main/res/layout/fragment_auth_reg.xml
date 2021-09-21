@@ -11,18 +11,20 @@
         android:id="@+id/imageView"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/bakground" />
 
     <TextView
         android:id="@+id/title1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Kvartiraborga xush kelibsiz!"
         android:textColor="@color/black"
         android:textSize="27sp"
@@ -48,15 +50,17 @@
         app:layout_constraintTop_toBottomOf="@+id/title1"
         app:layout_constraintVertical_bias="0.085" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:textAllCaps="false"
+    <TextView
+        android:gravity="center"
         android:id="@+id/kirish_ochish"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/shape1"
         android:text="Kiring yoki profil oching"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -65,45 +69,8 @@
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title2"
-        app:layout_constraintVertical_bias="0.016" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/sozlama"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sozlamalar"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/kirish_ochish"
-        app:layout_constraintTop_toBottomOf="@+id/kirish_ochish"
-        app:layout_constraintVertical_bias="0.082" />
-
-    <EditText
-        android:id="@+id/tema"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:drawableStart="@drawable/tema"
-        android:drawableEnd="@drawable/onga"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="textPersonName"
-        android:text="Mavzu"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/kirish_ochish"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/kirish_ochish"
-        app:layout_constraintTop_toBottomOf="@+id/sozlama"
-        app:layout_constraintVertical_bias="0.109"
-        tools:ignore="Deprecated" />
     <RelativeLayout
         android:id="@+id/loading"
         android:layout_width="match_parent"

@@ -36,7 +36,8 @@ class ElonBerishViewModel(private val elonBerishHelper: ElonBerishHelper) : View
         sharoitlari: ArrayList<String>,
         qurilishTuri: String,
         latitude: Double,
-        longitude: Double
+        longitude: Double,
+        txtVil: TextView
     ) {
         setElonList.value = Resource.loading()
         elonBerishHelper.setElonData(
@@ -61,6 +62,7 @@ class ElonBerishViewModel(private val elonBerishHelper: ElonBerishHelper) : View
             qurilishTuri,
             latitude,
             longitude,
+            txtVil,
             { succes ->
                 setElonList.value = Resource.success(succes)
             },

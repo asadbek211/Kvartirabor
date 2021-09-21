@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splashColor">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/etLiner"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:paddingStart="7dp"
+                android:theme="@style/defaultButton"
+                android:id="@+id/imgBack"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_baseline_arrow_back" />
+
+            <EditText
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:textColor="@color/bottom_color"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:id="@+id/et_search"
+                android:textColorHint="@color/bottom_color"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:hint="@string/search_query"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:singleLine="true"
+                android:theme="@style/editTextStyle"
+                app:queryBackground="@color/transparent"
+                app:searchIcon="@drawable/ic_baseline_search_24" />
+
+            <ImageView
+                android:theme="@style/defaultButton"
+                android:id="@+id/imgFilter"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:padding="11dp"
+                android:rotation="90"
+                android:src="@drawable/ic_filter" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txtEslatma"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="Qidiruv natijalari shu yerda ko'rinadi"
+        android:textColor="@color/bottom_color"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etLiner" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:background="@color/white"
+        android:visibility="gone"
+        android:id="@+id/recView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etLiner" />
+
+    <LinearLayout
+        android:id="@+id/vilLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/viloyatClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_baseline_arrow_back" />
+
+        <TextView
+            android:id="@+id/vilNomi"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
+            android:text="O'zbekiston"
+            android:textColor="@color/standart_rang"
+            android:textSize="16dp"
+            tools:layout_editor_absoluteX="113dp"
+            tools:layout_editor_absoluteY="47dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/ic_line_vil" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/vilRecView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

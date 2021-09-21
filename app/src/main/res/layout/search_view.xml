@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+        <TextView
+            android:id="@+id/text1"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Qidirish turi"
+            android:textColor="@color/standart_rang"
+            android:textSize="18dp" />
+
+        <LinearLayout
+            android:id="@+id/liner"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/text1"
+            android:weightSum="2">
+
+            <RadioButton
+                android:id="@+id/rdbSarlavhaOrqali"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/colorPrimary"
+                android:text="Sarlavha orqali"
+                android:textColor="@color/standart_rang"
+                android:textSize="@dimen/standartDp" />
+
+            <RadioButton
+                android:id="@+id/rdbTavsifOrqali"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/colorPrimary"
+                android:text="Tavsif orqali"
+                android:textColor="@color/standart_rang"
+                android:textSize="@dimen/standartDp" />
+        </LinearLayout>
+    <TextView
+        android:id="@+id/txtSaqlash"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/liner"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/shape1"
+        android:gravity="center"
+        android:text="Saqlash"
+        android:textColor="@color/white" />
+</RelativeLayout>

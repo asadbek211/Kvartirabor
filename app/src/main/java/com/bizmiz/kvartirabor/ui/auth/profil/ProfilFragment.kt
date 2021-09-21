@@ -1,5 +1,6 @@
 package com.bizmiz.kvartirabor.ui.auth.profil
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -17,7 +18,13 @@ class ProfilFragment : Fragment(R.layout.fragment_profil) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).visibility(false)
         binding = FragmentProfilBinding.bind(view)
-        requireActivity().window.statusBarColor = ContextCompat.getColor(requireActivity(),R.color.colorPrimaryDark)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireActivity(),
+                R.color.splashColor
+            )
+        }else{
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.marshmallow)
+        }
         val mAuth = FirebaseAuth.getInstance()
         if (mAuth.currentUser != null) {
             val authUserFragment = AuthUserFragment()

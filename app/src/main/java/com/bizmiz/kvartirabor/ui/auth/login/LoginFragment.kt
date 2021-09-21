@@ -56,8 +56,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 }else{
                     Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT).show()
                 }
-
-
             }
         }
         }
@@ -65,7 +63,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val conManager =
             context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val internetInfo = conManager.activeNetworkInfo
-
         return internetInfo != null && internetInfo.isConnected
     }
 }

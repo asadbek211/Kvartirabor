@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bizmiz.kvartirabor.R
 import com.bizmiz.kvartirabor.data.model.ElonData
 import com.bizmiz.kvartirabor.databinding.ElonlarItemBinding
 import com.bumptech.glide.Glide
@@ -12,21 +14,27 @@ import com.bumptech.glide.request.RequestOptions
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import android.content.Context.MODE_PRIVATE
+
+import android.content.SharedPreferences
+import com.bizmiz.kvartirabor.data.Constant
+import android.content.Context.MODE_PRIVATE
+import com.google.android.material.snackbar.Snackbar
 
 
-class ElonlarAdapter(var models: ArrayList<ElonData>, var filterType: Boolean) :
-    RecyclerView.Adapter<ElonlarAdapter.MyViewHolder>(),
-    Filterable {
-    var filterList: ArrayList<ElonData> = arrayListOf()
-
-    init {
-        filterList = models
-    }
+class ElonlarAdapter:
+    RecyclerView.Adapter<ElonlarAdapter.MyViewHolder>(){
+    var models: ArrayList<ElonData> = arrayListOf()
+       set(value) {
+           field = value
+           notifyDataSetChanged()
+       }
 
     inner class MyViewHolder(private val binding: ElonlarItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        fun funksiya(data: ElonData, position: Int) {
+        private val prefs: SharedPreferences = binding.root.context.getSharedPreferences(Constant.PREFS, MODE_PRIVATE)
+        private val editor: SharedPreferences.Editor =prefs.edit()
+        fun funksiya(data: ElonData) {
             binding.apply {
                 txtSarlavha.text = data.sarlavha
                 txtNarxi.text = data.narxi
@@ -35,8 +43,8 @@ class ElonlarAdapter(var models: ArrayList<ElonData>, var filterType: Boolean) :
             }
             if (data.imageUrlList.isNotEmpty()) {
                 val options: RequestOptions = RequestOptions()
-                    .placeholder(com.bizmiz.kvartirabor.R.drawable.elon_img)
-                    .error(com.bizmiz.kvartirabor.R.drawable.elon_img)
+                    .placeholder(R.drawable.elon_img)
+                    .error(R.drawable.elon_img)
                 data.imageUrlList.forEach {
                     if (it.contains("image0")) {
                         val firstImageUrl = it
@@ -48,65 +56,40 @@ class ElonlarAdapter(var models: ArrayList<ElonData>, var filterType: Boolean) :
                 }
             } else {
                 Glide.with(itemView.context)
-                    .load(com.bizmiz.kvartirabor.R.drawable.elon_img)
+                    .load(R.drawable.elon_img)
                     .into(binding.image)
             }
-                val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
-                val dateString = simpleDateFormat.format(data.createdDate)
-                binding.txtData.text = String.format("%s", dateString)
-
+            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
+            val dateString = simpleDateFormat.format(data.createdDate)
+            binding.txtData.text = String.format("%s", dateString)
+            if (prefs.contains(data.id)){
+                binding.imgFavourite.setImageResource(R.drawable.ic_baseline_favorite_24)
+            }else{
+                binding.imgFavourite.setImageResource(R.drawable.ic_baseline_favorite)
+            }
 
             binding.layTouch.setOnClickListener {
-               onClick.invoke(position,data)
+                onClick.invoke(data)
 
+            }
+            binding.imgFavourite.setOnClickListener {
+                if (prefs.contains(data.id)){
+                    binding.imgFavourite.setImageResource(R.drawable.ic_baseline_favorite)
+                    editor.remove(data.id).apply()
+                    Snackbar.make(binding.root,"Saralanganlardan o'chirildi",Snackbar.LENGTH_SHORT).show()
+                }else{
+                    binding.imgFavourite.setImageResource(R.drawable.ic_baseline_favorite_24)
+                    editor.putBoolean(data.id,true).apply()
+                    Snackbar.make(binding.root,"Saralanganlarga qo'shildi",Snackbar.LENGTH_SHORT).show()
+                }
             }
         }
     }
-    var onClick:(position:Int,data:ElonData)->Unit = {position: Int, data: ElonData ->  }
-    fun setOnClickListener(onClick:(position:Int,data:ElonData)->Unit){
+
+    var onClick: (data: ElonData) -> Unit = {}
+    fun setOnClickListener(onClick: (data: ElonData) -> Unit) {
         this.onClick = onClick
     }
-
-    @ExperimentalStdlibApi
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charSearch = constraint.toString()
-                if (charSearch.isEmpty()) {
-                    filterList = models
-                } else {
-                    val resultList = ArrayList<ElonData>()
-                    for (row in models) {
-                        if (filterType) {
-                            if (row.sarlavha.lowercase(Locale.ROOT)
-                                    .contains(charSearch.lowercase(Locale.ROOT))
-                            ) {
-                                resultList.add(row)
-                            }
-                        } else {
-                            if (row.narxi.lowercase(Locale.ROOT)
-                                    .contains(charSearch.lowercase(Locale.ROOT))
-                            ) {
-                                resultList.add(row)
-                            }
-                        }
-                    }
-                    filterList = resultList
-                }
-                val filterResults = FilterResults()
-                filterResults.values = filterList
-                return filterResults
-            }
-
-            @Suppress("UNCHECKED_CAST")
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filterList = results?.values as ArrayList<ElonData>
-                notifyDataSetChanged()
-            }
-
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemBinding =
             ElonlarItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -114,8 +97,8 @@ class ElonlarAdapter(var models: ArrayList<ElonData>, var filterType: Boolean) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.funksiya(filterList[position],position)
+        holder.funksiya(models[position])
     }
 
-    override fun getItemCount(): Int = filterList.size
+    override fun getItemCount(): Int = models.size
 }

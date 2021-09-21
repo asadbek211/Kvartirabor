@@ -1,6 +1,7 @@
 package com.bizmiz.kvartirabor.ui.auth.UserSignIn
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -23,15 +24,29 @@ class AuthUserFragment : Fragment(R.layout.fragment_auth_user) {
         mAuth = FirebaseAuth.getInstance()
         binding = FragmentAuthUserBinding.bind(view)
         binding.title1.text = "Salom, ${mAuth.currentUser?.phoneNumber}"
-        binding.raqam.setText(mAuth.currentUser?.phoneNumber.toString())
+        binding.raqam.text = mAuth.currentUser?.phoneNumber.toString()
         binding.signOut.setOnClickListener {
-            mAuth.signOut()
-            val authUserFragment = AuthUserFragment()
-            val authRegFragment = AuthRegFragment()
-            requireActivity().supportFragmentManager.beginTransaction().remove(authUserFragment)
-                .commit()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.profil_container, authRegFragment).commit()
+            val message = AlertDialog.Builder(requireActivity())
+            message.setTitle("Kvartirabor")
+                .setMessage("Tizimdan chiqishni istaysizmi?")
+                .setCancelable(false)
+                .setPositiveButton("Ha") { message, _ ->
+                    mAuth.signOut()
+                    val authUserFragment = AuthUserFragment()
+                    val authRegFragment = AuthRegFragment()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .remove(authUserFragment)
+                        .commit()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.profil_container, authRegFragment).commit()
+                }.setNegativeButton("Yo'q") { message, _ ->
+                    message.dismiss()
+                }.create().show()
+        }
+        binding.etElonlarim.setOnClickListener {
+            val navController: NavController =
+                Navigation.findNavController(requireActivity(), R.id.mainFragmentContener)
+            navController.navigate(R.id.action_profilFragment_to_meningElonlarimFragment)
         }
         binding.kirishOchish.setOnClickListener {
             binding.kirishOchish.isEnabled = false

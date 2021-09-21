@@ -1,43 +1,81 @@
 package com.bizmiz.kvartirabor.ui.elon.ElonFull
 
-import android.location.Geocoder
+import android.content.Context.MODE_PRIVATE
+import android.content.Intent
+import android.content.SharedPreferences
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bizmiz.kvartirabor.R
+import com.bizmiz.kvartirabor.data.Adapters.ElonlarAdapter
+import com.bizmiz.kvartirabor.data.Constant
+import com.bizmiz.kvartirabor.data.ResourceState
 import com.bizmiz.kvartirabor.databinding.FragmentElonFullBinding
 import com.bizmiz.kvartirabor.ui.MainActivity
+import com.bizmiz.kvartirabor.ui.elon.Elonlar.ElonlarViewModel
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.synnapps.carouselview.ImageListener
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
-import java.util.*
-import com.google.android.gms.maps.model.CameraPosition
-
-
-
 
 class ElonFullFragment : Fragment(R.layout.fragment_elon_full) {
+    private val viewModel: ElonlarViewModel by viewModel()
     private lateinit var mapFragment: SupportMapFragment
     private lateinit var mMap: GoogleMap
+    private lateinit var elonlarAdapter: ElonlarAdapter
     private lateinit var binding: FragmentElonFullBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setObservers()
         binding = FragmentElonFullBinding.bind(view)
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireActivity(),
+                R.color.splashColor
+            )
+        }else{
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.marshmallow)
+        }
+        val id = requireArguments().getString("id")
+         val prefs: SharedPreferences = binding.root.context.getSharedPreferences(Constant.PREFS, MODE_PRIVATE)
+         val editor: SharedPreferences.Editor =prefs.edit()
+        if (prefs.contains(id)) {
+            binding.imgFavourite.setImageResource(R.drawable.ic_baseline_favorite_24)
+        } else {
+            binding.imgFavourite.setImageResource(R.drawable.ic_baseline_favorite)
+        }
+        binding.imgFavourite.setOnClickListener {
+            if (prefs.contains(id)) {
+                binding.imgFavourite.setImageResource(R.drawable.ic_baseline_favorite)
+                editor.remove(id).apply()
+            } else {
+                binding.imgFavourite.setImageResource(R.drawable.ic_baseline_favorite_24)
+                editor.putBoolean(id,true).apply()
+            }
+        }
         (activity as MainActivity).visibility(true)
         binding.apply {
             titleRt.alpha = 0.0F
             xarita.setOnClickListener {
                 mapView.visibility = View.VISIBLE
+                mapClose.visibility = View.VISIBLE
+            }
+            mapClose.setOnClickListener {
+                mapView.visibility = View.GONE
+                mapClose.visibility = View.GONE
             }
             val imageUrl = requireArguments().getStringArrayList("imageUrlList")
             courserView.setImageListener(imageListener)
@@ -67,17 +105,39 @@ class ElonFullFragment : Fragment(R.layout.fragment_elon_full) {
             txtSarlavha.text = requireArguments().getString("sarlavha")
             txtTavsif.text = requireArguments().getString("tavsif")
             xonaSoni.text = "${xonaSoni.text} ${requireArguments().getString("xonaSoni")}"
-            umumiyMaydon.text = "${umumiyMaydon.text} ${requireArguments().getString("umumiyMaydon")} m²"
-            yashashMaydon.text = "${yashashMaydon.text} ${requireArguments().getString("yashashMaydoni")} m²"
-            oshxonaMaydon.text = "${oshxonaMaydon.text} ${requireArguments().getString("oshxonaMaydoni")} m²"
+            if (!requireArguments().getString("umumiyMaydon").isNullOrEmpty()) {
+                umumiyMaydon.visibility = View.VISIBLE
+                umumiyMaydon.text =
+                    "${umumiyMaydon.text} ${requireArguments().getString("umumiyMaydon")} m²"
+            }
+            if (!requireArguments().getString("yashashMaydoni").isNullOrEmpty()) {
+                yashashMaydon.visibility = View.VISIBLE
+                yashashMaydon.text =
+                    "${yashashMaydon.text} ${requireArguments().getString("yashashMaydoni")} m²"
+            }
+            if (!requireArguments().getString("oshxonaMaydoni").isNullOrEmpty()) {
+                oshxonaMaydon.visibility = View.VISIBLE
+                oshxonaMaydon.text =
+                    "${oshxonaMaydon.text} ${requireArguments().getString("oshxonaMaydoni")} m²"
+            }
             qavati.text = "${qavati.text} ${requireArguments().getString("yashashQavati")}"
-            uyQavatliligi.text = "${uyQavatliligi.text} ${requireArguments().getString("uyQavatliligi")}"
+            uyQavatliligi.text =
+                "${uyQavatliligi.text} ${requireArguments().getString("uyQavatliligi")}"
             uyTamiri.text = "${uyTamiri.text} ${requireArguments().getString("uyTamiri")}"
             mebel.text = "${mebel.text} ${requireArguments().getString("mebel")}"
-            qurilishTuri.text = "${qurilishTuri.text} ${requireArguments().getString("qurilishTuri")}"
-            val sharoit = requireArguments().getStringArrayList("sharoitlari")?.toString()
-            val sgaroiti = sharoit!!.replace("[","").replace("]","")
-            sharoitlari.text = "${sharoitlari.text} $sgaroiti"
+            qurilishTuri.text =
+                "${qurilishTuri.text} ${requireArguments().getString("qurilishTuri")}"
+            telQilish.setOnClickListener {
+                val phone = telNumber.text.toString()
+                val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
+                startActivity(intent)
+            }
+            val sharoit = requireArguments().getStringArrayList("sharoitlari")
+            if (sharoit!!.isNotEmpty()) {
+                sharoitlari.visibility = View.VISIBLE
+                val sharoiti = sharoit.toString().replace("[", "").replace("]", "")
+                sharoitlari.text = "${sharoitlari.text} $sharoiti"
+            }
             telNumber.text = requireArguments().getString("telRaqam")
             val kelishuvi = requireArguments().getString("kelishuv")
             if (kelishuvi!!.contains("Ha")) txtKelishish.text = "Kelishiladi"
@@ -106,61 +166,45 @@ class ElonFullFragment : Fragment(R.layout.fragment_elon_full) {
                 }
             })
         }
-       map()
+        map()
     }
-
     var imageListener =
         ImageListener { position, imageView ->
             val image = requireArguments().getStringArrayList("imageUrlList")
             Glide.with(imageView).load(image!![position]).into(imageView)
         }
-
+    private fun setObservers() {
+        viewModel.elon.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                ResourceState.SUCCESS -> {
+                    elonlarAdapter = ElonlarAdapter()
+                    elonlarAdapter.models = it.data!!
+                }
+                ResourceState.ERROR -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
     private fun map() {
         val lat = requireArguments().getDouble("latitude")
         val long = requireArguments().getDouble("longitude")
-
+        val viloyat = requireArguments().getString("viloyat")
         mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         mapFragment.getMapAsync { googleMap ->
             mMap = googleMap
-            mMap.uiSettings.isMyLocationButtonEnabled = true
             mMap.uiSettings.isZoomControlsEnabled
-            mMap.uiSettings.isMapToolbarEnabled
-                val markerOptions = MarkerOptions()
-                markerOptions.position(LatLng(lat,long))
-                markerOptions.title("$lat : $long")
-                mMap.addMarker(markerOptions)
+            binding.area.text = viloyat
+            val markerOptions = MarkerOptions()
+            markerOptions.position(LatLng(lat, long))
+            markerOptions.title("$viloyat")
+            mMap.addMarker(markerOptions)
             val myPosition = CameraPosition.Builder()
-                .target(LatLng(lat,long)).zoom(17f).bearing(90f).tilt(30f).build()
+                .target(LatLng(lat, long)).zoom(17f).bearing(90f).tilt(30f).build()
             googleMap.animateCamera(
-                CameraUpdateFactory.newCameraPosition(myPosition));
-            val geoCoder = Geocoder(requireContext(), Locale.getDefault())
-                try {
-                      val address = geoCoder.getFromLocation(lat,long, 1)
-                     binding.area.text = address[0].subAdminArea
-                     val respublika = address[0].adminArea
-                     binding.subArea.text = respublika.replace("Respublikasi","").replace("Republic of","")
-                    mMap.setOnMapClickListener {
-                        binding.mapView.visibility = View.GONE
-                        mMap.snapshot { bitmap ->
-                            binding.xarita.setImageBitmap(bitmap)
-                        }
-                    }
-
-                } catch (e: NumberFormatException) {
-                    Toast.makeText(requireActivity(), e.localizedMessage, Toast.LENGTH_SHORT).show()
-                }
-
-
-
+                CameraUpdateFactory.newCameraPosition(myPosition)
+            )
         }
-
-//        val geoCoder = Geocoder(requireContext(), Locale.getDefault())
-//        try {
-
-////
-//        } catch (e: NumberFormatException) {
-//            Toast.makeText(requireActivity(), e.localizedMessage, Toast.LENGTH_SHORT).show()
-//        }
     }
 
 }

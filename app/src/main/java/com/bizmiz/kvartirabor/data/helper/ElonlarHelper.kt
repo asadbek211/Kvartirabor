@@ -8,21 +8,25 @@ import java.util.*
 
 class ElonlarHelper(private val db: FirebaseFirestore) {
 
-    fun getElonlarData(onSuccess: (listElon: ArrayList<ElonData>) -> Unit, onFailure: (msg: String?) -> Unit) {
+    fun getElonlarData(
+        onSuccess: (listElon: ArrayList<ElonData>) -> Unit,
+        onFailure: (msg: String?) -> Unit
+    ) {
         val list: ArrayList<ElonData> = arrayListOf()
-        db.collection(Constant.BASE_COLLECTION).addSnapshotListener { value, error ->
-            if (error != null) {
-                onFailure.invoke(error.localizedMessage)
-                return@addSnapshotListener
-            }
-            db.collection(Constant.BASE_COLLECTION).orderBy("createdDate", Query.Direction.DESCENDING).get().addOnSuccessListener {
+        db.collection(Constant.BASE_COLLECTION)
+            .orderBy("createdDate", Query.Direction.DESCENDING).get().addOnSuccessListener {
                 it.documents.forEach { doc ->
                     val model = doc.toObject(ElonData::class.java)
-                    if (model != null) list.add(model)
+                    if (model != null && model.umumiyMaydon.isNotEmpty()
+                        && model.oshxonaMaydoni.isNotEmpty()
+                        && model.yashashMaydoni.isNotEmpty()
+                    ) {
+                        list.add(model)
+                    }
                 }
                 onSuccess.invoke(list)
+            }.addOnFailureListener {
+                onFailure.invoke(it.localizedMessage)
             }
-        }
-
     }
 }

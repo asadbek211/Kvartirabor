@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.net.ConnectivityManager
@@ -15,19 +14,16 @@ import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.RadioButton
-import android.widget.SpinnerAdapter
-import android.widget.Toast
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bizmiz.kvartirabor.R
+import com.bizmiz.kvartirabor.data.*
 import com.bizmiz.kvartirabor.data.Adapters.ImageAdapter
-import com.bizmiz.kvartirabor.data.ResourceState
-import com.bizmiz.kvartirabor.data.fiveCheckRadioButton
+import com.bizmiz.kvartirabor.data.Adapters.ViloyatlarAdapter
 import com.bizmiz.kvartirabor.databinding.FragmentElonBerishBinding
 import com.bizmiz.kvartirabor.ui.MainActivity
 import com.google.android.gms.location.*
@@ -47,30 +43,17 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
     private lateinit var mMap: GoogleMap
     private val elonBerishViewModel: ElonBerishViewModel by viewModel()
     private lateinit var adapter: ImageAdapter
+    private lateinit var vilAdapter: ViloyatlarAdapter
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private val mAuth = FirebaseAuth.getInstance()
-    private val pulBirlik: Array<String> = arrayOf("So'm", "$")
-    private val mebel: Array<String> = arrayOf("Ha", "Yo'q")
-    private var sharoitlari: ArrayList<String> = arrayListOf()
-    private var qurilishTuri = "G'ishtli"
-    private val bolimlar: Array<String> =
-        arrayOf("Bo'lim tanlang", "Ijaraga berish", "Sotish", "Ayirboshlash")
-    private val tamiri: Array<String> = arrayOf(
-        "Ta'miri",
-        "Mualliflik loyixasi",
-        "Evrota'mir",
-        "O'rtacha",
-        "Ta'mir talab",
-        "Qora suvoq",
-        "Tozalashdan avvalgi pardoz"
-    )
     lateinit var binding: FragmentElonBerishBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).visibility(true)
         binding = FragmentElonBerishBinding.bind(view)
         adapter = ImageAdapter()
+        vilAdapter = ViloyatlarAdapter()
         binding.apply {
             imageRecView.adapter = adapter
             rdbGishtli.setOnClickListener(this@ElonBerishFragment)
@@ -95,21 +78,27 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     Navigation.findNavController(requireActivity(), R.id.mainFragmentContener)
                 navController.popBackStack()
             }
-            MapLoc.setOnClickListener {
-                MapContainer.visibility = View.GONE
-                mapImage.visibility = View.VISIBLE
-                nextBack.visibility = View.VISIBLE
-            }
             nextBack.setOnClickListener {
                 mapImage.visibility = View.GONE
                 nextBack.visibility = View.GONE
-                txtMap.text = "Joylashish manzili"
+                lat = 0.0
+                long = 0.0
             }
             imgClear.setOnClickListener {
                 ImageLinear.visibility = View.GONE
                 ImageAdd.visibility = View.VISIBLE
                 adapter.models.clear()
                 adapter.notifyDataSetChanged()
+            }
+            txtViloyatlar.setOnClickListener {
+                binding.vilRecView.adapter = vilAdapter
+                vilLayout.visibility = View.VISIBLE
+                scrollView.visibility = View.GONE
+            }
+            viloyatClose.setOnClickListener {
+                vilLayout.visibility = View.GONE
+                scrollView.visibility = View.VISIBLE
+                txtViloyatlar.text = "Kvartira manzili"
             }
             fusedLocationProviderClient =
                 LocationServices.getFusedLocationProviderClient(requireContext())
@@ -122,7 +111,12 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
             spMebel.adapter = adapter(mebel)
             spNarxKelishish.adapter = adapter(mebel)
             txtMap.setOnClickListener {
-                getLastLocation()
+                if (isNetworkAvialable()) {
+                    getLastLocation()
+                } else {
+                    Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT)
+                        .show()
+                }
 
 
             }
@@ -134,6 +128,11 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                 adapter.models.clear()
                 picImageIntent()
             }
+            vilAdapter.onClickItemListener { vilNomi ->
+                vilLayout.visibility = View.GONE
+                scrollView.visibility = View.VISIBLE
+                txtViloyatlar.text = vilNomi
+            }
             elonJoylash.setOnClickListener {
                 if (spBolimlar.selectedItemPosition != 0) {
                     spBolimlar.setBackgroundResource(R.drawable.shape_stroke)
@@ -141,7 +140,10 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                 if (spUyTamiri.selectedItemPosition != 0) {
                     spUyTamiri.setBackgroundResource(R.drawable.shape_stroke)
                 }
-                if (txtMap.text == "Joylashish manzili") {
+                if (txtViloyatlar.text != "Kvartira manzili") {
+                    txtViloyatlar.setBackgroundResource(R.drawable.shape_stroke)
+                }
+                if (lat != 0.0) {
                     txtMap.setBackgroundResource(R.drawable.shape_stroke)
                 }
                 if (isNetworkAvialable()) {
@@ -167,6 +169,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                         qurilishTuri,
                         lat,
                         long,
+                        txtViloyatlar
                     )
                 } else {
                     Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT)
@@ -174,6 +177,12 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                 }
 
 
+            }
+            mapBack.setOnClickListener {
+                (activity as MainActivity).check = false
+                binding.MapContainer.visibility = View.GONE
+                lat = 0.0
+                long = 0.0
             }
             elonBerishViewModel.elonList.observe(viewLifecycleOwner, Observer {
                 when (it.status) {
@@ -216,6 +225,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         return adapter
     }
+
     private fun getLastLocation() {
         if (checkPermission()) {
             if (isGPSEnable()) {
@@ -225,6 +235,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                         newLocationData()
                     } else {
                         binding.MapContainer.visibility = View.VISIBLE
+                        (activity as MainActivity).check = true
                         map()
                     }
                 }
@@ -244,7 +255,9 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
             mMap.uiSettings.isMyLocationButtonEnabled = true
             mMap.uiSettings.isZoomControlsEnabled
             mMap.uiSettings.isMapToolbarEnabled
-            mMap.setOnMapClickListener {
+            mMap.setOnMapClickListener { it ->
+                binding.MapLoc.setBackgroundResource(R.color.colorPrimary)
+                binding.MapLoc.setTextColor(resources.getColor(R.color.white))
                 val markerOptions = MarkerOptions()
                 markerOptions.position(it)
                 lat = it.latitude
@@ -252,15 +265,13 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                 markerOptions.title("$lat : $long")
                 mMap.clear()
                 mMap.addMarker(markerOptions)
-                val geoCoder = Geocoder(requireContext(), Locale.getDefault())
-                try {
-                    val address = geoCoder.getFromLocation(lat, long, 1)
-                    binding.txtMap.text = "${address[0].adminArea},${address[0].subAdminArea}"
+                binding.MapLoc.setOnClickListener {
+                    binding.MapContainer.visibility = View.GONE
+                    binding.mapImage.visibility = View.VISIBLE
+                    binding.nextBack.visibility = View.VISIBLE
                     mMap.snapshot { bitmap ->
                         binding.mapImage.setImageBitmap(bitmap)
                     }
-                } catch (e: NumberFormatException) {
-                    Toast.makeText(requireActivity(), e.localizedMessage, Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -279,14 +290,6 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
             LocationServices.getFusedLocationProviderClient(requireContext())
         val locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-                val lat = locationResult.lastLocation.latitude
-                val long = locationResult.lastLocation.longitude
-                Toast.makeText(
-                    requireContext(),
-                    "Latitute: $lat\nLongitute: $long",
-                    Toast.LENGTH_LONG
-                ).show()
-
             }
         }
         if (checkPermission()) fusedLocationProviderClient.requestLocationUpdates(
@@ -401,7 +404,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[0] == 0) {
                         rdbGilam.isChecked = true
                         isCheck[0] = 1
-                    } else{
+                    } else {
                         rdbGilam.isChecked = false
                         isCheck[0] = 0
                     }
@@ -411,7 +414,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[1] == 0) {
                         rdbKirMashina.isChecked = true
                         isCheck[1] = 1
-                    } else{
+                    } else {
                         rdbKirMashina.isChecked = false
                         isCheck[1] = 0
                     }
@@ -421,7 +424,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[2] == 0) {
                         rdbOshxona.isChecked = true
                         isCheck[2] = 1
-                    } else{
+                    } else {
                         rdbOshxona.isChecked = false
                         isCheck[2] = 0
                     }
@@ -431,7 +434,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[3] == 0) {
                         rdbBalkon.isChecked = true
                         isCheck[3] = 1
-                    } else{
+                    } else {
                         rdbBalkon.isChecked = false
                         isCheck[3] = 0
                     }
@@ -441,7 +444,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[4] == 0) {
                         rdbWiFi.isChecked = true
                         isCheck[4] = 1
-                    } else{
+                    } else {
                         rdbWiFi.isChecked = false
                         isCheck[4] = 0
                     }
@@ -451,7 +454,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[5] == 0) {
                         rdbMuzlatgich.isChecked = true
                         isCheck[5] = 1
-                    } else{
+                    } else {
                         rdbMuzlatgich.isChecked = false
                         isCheck[5] = 0
                     }
@@ -461,7 +464,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[6] == 0) {
                         rdbAriston.isChecked = true
                         isCheck[6] = 1
-                    } else{
+                    } else {
                         rdbAriston.isChecked = false
                         isCheck[6] = 0
                     }
@@ -471,7 +474,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[7] == 0) {
                         rdbTelevizor.isChecked = true
                         isCheck[7] = 1
-                    } else{
+                    } else {
                         rdbTelevizor.isChecked = false
                         isCheck[7] = 0
                     }
@@ -481,7 +484,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[8] == 0) {
                         rdbKonditsioner.isChecked = true
                         isCheck[8] = 1
-                    } else{
+                    } else {
                         rdbKonditsioner.isChecked = false
                         isCheck[8] = 0
                     }
@@ -491,7 +494,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[9] == 0) {
                         rdbVanna.isChecked = true
                         isCheck[9] = 1
-                    } else{
+                    } else {
                         rdbVanna.isChecked = false
                         isCheck[9] = 0
                     }
@@ -501,7 +504,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[10] == 0) {
                         rdbKatyol.isChecked = true
                         isCheck[10] = 1
-                    } else{
+                    } else {
                         rdbKatyol.isChecked = false
                         isCheck[10] = 0
                     }
@@ -511,7 +514,7 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
                     if (isCheck[11] == 0) {
                         rdbTitan.isChecked = true
                         isCheck[11] = 1
-                    } else{
+                    } else {
                         rdbTitan.isChecked = false
                         isCheck[11] = 0
                     }
@@ -524,21 +527,16 @@ class ElonBerishFragment : Fragment(R.layout.fragment_elon_berish), View.OnClick
     private fun isChecked(rdb: RadioButton) {
         if (rdb.isChecked) {
             qurilishTuri = rdb.text.toString()
-            Toast.makeText(requireActivity(), qurilishTuri, Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun isCheckedSharoit(rdb: RadioButton) {
-            if (rdb.isChecked) {
-                if (!sharoitlari.contains(rdb.text.toString())) {
-                    sharoitlari.add(rdb.text.toString())
-                    Toast.makeText(requireActivity(), sharoitlari.toString(), Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                sharoitlari.remove(rdb.text.toString())
-                Toast.makeText(requireActivity(), sharoitlari.toString(), Toast.LENGTH_SHORT).show()
+        if (rdb.isChecked) {
+            if (!sharoitlari.contains(rdb.text.toString())) {
+                sharoitlari.add(rdb.text.toString())
             }
-
+        } else {
+            sharoitlari.remove(rdb.text.toString())
+        }
     }
-
 }

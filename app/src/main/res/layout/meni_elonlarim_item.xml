@@ -37,44 +37,44 @@
 
             <TextView
                 android:id="@+id/txtSarlavha"
-                android:layout_width="0dp"
+                android:layout_width="212dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
                 android:padding="10dp"
                 android:text="Nukus 21 mkr 1/8 dom"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardEdit"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txtNarxi"
+                app:layout_constraintTop_toBottomOf="@+id/txtNarxi" />
 
             <TextView
                 android:id="@+id/txtData"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
                 android:text="Toshkent-11 avg"
                 android:textColor="@color/standart_rang"
                 android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtNarxi" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txtSarlavha"
+                app:layout_constraintTop_toBottomOf="@+id/txtSarlavha" />
 
             <TextView
                 android:id="@+id/txtNarxi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:paddingStart="10dp"
                 android:text="12300000"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtSarlavha" />
+                app:layout_constraintStart_toEndOf="@+id/image"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtType"
@@ -90,58 +90,55 @@
                 app:layout_constraintStart_toEndOf="@+id/txtNarxi"
                 app:layout_constraintTop_toTopOf="@+id/txtNarxi" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/elon_img"
+                android:src="@drawable/sold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
 
-            <com.google.android.material.card.MaterialCardView
+            <TextView
                 android:id="@+id/cardEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:checkable="true"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardCornerRadius="50dp"
-                app:cardElevation="4dp"
-                app:layout_constraintBottom_toTopOf="@+id/cardDelete"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image">
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/shape1"
+                android:gravity="center"
+                android:text="Tahrirlash"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintVertical_bias="0.0" />
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_baseline_edit_note_24" />
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
+            <TextView
                 android:id="@+id/cardDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:checkable="true"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardCornerRadius="50dp"
-                app:cardElevation="4dp"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_stroke"
+                android:gravity="center"
+                android:text="O'chirish"
+                android:textColor="@color/bottom_color"
+                android:textSize="16dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardEdit">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_baseline_delete_24" />
-            </com.google.android.material.card.MaterialCardView>
-
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/cardEdit"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
