@@ -25,6 +25,7 @@
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.2203125" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.13651315789473684" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_navigate_next_24.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.2203125" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2203125" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.21614583333333334" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/ic_bulut.xml" value="0.13651315789473684" />
@@ -57,6 +58,7 @@
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape1.xml" value="0.13651315789473684" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape2.xml" value="0.13651315789473684" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape3.xml" value="0.13651315789473684" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_bolim.xml" value="0.2203125" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_bootom_nav.xml" value="0.13651315789473684" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_edittext.xml" value="0.13651315789473684" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/drawable/shape_liner.xml" value="0.13651315789473684" />
@@ -77,7 +79,7 @@
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/activity_splash_screen.xml" value="0.12631578947368421" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/bolim_tanlash_item.xml" value="0.2" />
-        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/bolimlar_item.xml" value="0.5" />
+        <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/bolimlar_item.xml" value="0.22" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/efefefe.xml" value="0.2" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/elonlar_item.xml" value="0.33" />
         <entry key="..\:/proyektim_kvartirabor/Kvartirabor/app/src/main/res/layout/filter_view.xml" value="0.25" />

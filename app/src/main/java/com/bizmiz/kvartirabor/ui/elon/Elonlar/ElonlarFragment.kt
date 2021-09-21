@@ -1,6 +1,5 @@
 package com.bizmiz.kvartirabor.ui.elon.Elonlar
 
-import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Build
@@ -16,11 +15,9 @@ import androidx.navigation.Navigation
 import com.bizmiz.kvartirabor.R
 import com.bizmiz.kvartirabor.data.Adapters.BolimAdapter
 import com.bizmiz.kvartirabor.data.Adapters.ElonlarAdapter
-import com.bizmiz.kvartirabor.data.Constant
 import com.bizmiz.kvartirabor.data.ResourceState
 import com.bizmiz.kvartirabor.data.listBolim
 import com.bizmiz.kvartirabor.data.model.BolimModel
-import com.bizmiz.kvartirabor.data.model.ElonData
 import com.bizmiz.kvartirabor.databinding.FragmentElonlarBinding
 import com.bizmiz.kvartirabor.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,6 +31,7 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
         super.onCreate(savedInstanceState)
         viewModel.getElonlarData()
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentElonlarBinding.bind(view)
@@ -51,17 +49,17 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
         binding.recView.adapter = adapter
         binding.rvBolim.adapter = bolimAdapter
         setData()
-            setObservers()
-        binding.namunaliElonlarInfo.setOnClickListener {
-            val message = AlertDialog.Builder(requireActivity())
-            message.setTitle("Kvartirabor")
-                .setMessage("Barcha ma'lumotlari to'liq to'ldirilgan e'lonlar shu yerda joylashadi.")
-                .setCancelable(false)
-                .setPositiveButton("OK") { message, _ ->
-                    message.dismiss()
-                }
-                .create().show()
-        }
+        setObservers()
+//        binding.namunaliElonlarInfo.setOnClickListener {
+//            val message = AlertDialog.Builder(requireActivity())
+//            message.setTitle("Kvartirabor")
+//                .setMessage("Barcha ma'lumotlari to'liq to'ldirilgan e'lonlar shu yerda joylashadi.")
+//                .setCancelable(false)
+//                .setPositiveButton("OK") { message, _ ->
+//                    message.dismiss()
+//                }
+//                .create().show()
+//        }
         bolimAdapter.onClickListener { position ->
             when (position) {
                 0 -> {
@@ -78,16 +76,17 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
                 }
             }
         }
-        binding.swipeContainer.setOnRefreshListener {
-            if (isNetworkAvialable()) {
-                viewModel.getElonlarData()
-            } else {
-                binding.swipeContainer.isRefreshing = false
-                Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
+//        binding.swipeContainer.setOnRefreshListener {
+//            if (isNetworkAvialable()) {
+//                viewModel.getElonlarData()
+//            } else {
+//                binding.swipeContainer.isRefreshing = false
+//                Toast.makeText(requireActivity(), "Not Internet Connection", Toast.LENGTH_SHORT)
+//                    .show()
+//            }
+//        }
     }
+
     private fun setData() {
         val list: ArrayList<BolimModel> = arrayListOf()
         for (i in 0 until listBolim.size) {
@@ -95,17 +94,18 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
         }
         bolimAdapter.models = list
     }
+
     private fun setObservers() {
         viewModel.elon.observe(viewLifecycleOwner, Observer {
             (activity as MainActivity).visibility(false)
             when (it.status) {
                 ResourceState.LOADING -> {
-                    binding.swipeContainer.isRefreshing = false
+//                    binding.swipeContainer.isRefreshing = false
                 }
                 ResourceState.SUCCESS -> {
-                        adapter.models = it.data!!
+                    adapter.models = it.data!!
                     binding.loading.visibility = View.GONE
-                    binding.swipeContainer.isRefreshing = false
+//                    binding.swipeContainer.isRefreshing = false
                     adapter.setOnClickListener { data ->
                         val bundle = bundleOf(
                             "id" to data.id,

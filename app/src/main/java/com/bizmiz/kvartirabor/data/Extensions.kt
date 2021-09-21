@@ -59,7 +59,7 @@ var vilovatlar: ArrayList<String> = arrayListOf(
     "Xorazm viloyati"
 )
 val listBolim: ArrayList<String> =
-    arrayListOf("Barcha e'lonlar", "Ijaraga berish", "Sotish", "Ayirboshlash")
+    arrayListOf("Barchasi", "Ijara", "Sotish", "Ayirboshlash")
 val pulBirlik: Array<String> = arrayOf("So'm", "$")
 val pulBirlikSearch: Array<String> = arrayOf("None","So'm", "$")
 val mebel: Array<String> = arrayOf("Ha", "Yo'q")
