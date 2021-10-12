@@ -16,11 +16,9 @@ import androidx.navigation.Navigation
 import com.bizmiz.kvartirabor.R
 import com.bizmiz.kvartirabor.data.Adapters.BolimAdapter
 import com.bizmiz.kvartirabor.data.Adapters.ElonlarAdapter
-import com.bizmiz.kvartirabor.data.Constant
 import com.bizmiz.kvartirabor.data.ResourceState
 import com.bizmiz.kvartirabor.data.listBolim
 import com.bizmiz.kvartirabor.data.model.BolimModel
-import com.bizmiz.kvartirabor.data.model.ElonData
 import com.bizmiz.kvartirabor.databinding.FragmentElonlarBinding
 import com.bizmiz.kvartirabor.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,6 +32,7 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
         super.onCreate(savedInstanceState)
         viewModel.getElonlarData()
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentElonlarBinding.bind(view)
@@ -51,7 +50,7 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
         binding.recView.adapter = adapter
         binding.rvBolim.adapter = bolimAdapter
         setData()
-            setObservers()
+        setObservers()
         binding.namunaliElonlarInfo.setOnClickListener {
             val message = AlertDialog.Builder(requireActivity())
             message.setTitle("Kvartirabor")
@@ -88,6 +87,7 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
             }
         }
     }
+
     private fun setData() {
         val list: ArrayList<BolimModel> = arrayListOf()
         for (i in 0 until listBolim.size) {
@@ -95,6 +95,7 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
         }
         bolimAdapter.models = list
     }
+
     private fun setObservers() {
         viewModel.elon.observe(viewLifecycleOwner, Observer {
             (activity as MainActivity).visibility(false)
@@ -103,7 +104,7 @@ class ElonlarFragment : Fragment(R.layout.fragment_elonlar) {
                     binding.swipeContainer.isRefreshing = false
                 }
                 ResourceState.SUCCESS -> {
-                        adapter.models = it.data!!
+                    adapter.models = it.data!!
                     binding.loading.visibility = View.GONE
                     binding.swipeContainer.isRefreshing = false
                     adapter.setOnClickListener { data ->
